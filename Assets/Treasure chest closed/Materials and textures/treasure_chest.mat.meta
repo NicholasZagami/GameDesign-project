@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b595eb91a4fcd554ab0ca2a779489650
+timeCreated: 1464615116
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 72498
+  packageName: Treasure chest - PBR
+  packageVersion: 1.0
+  assetPath: Assets/Treasure chest closed/Materials and textures/treasure_chest.mat
+  uploadId: 139187

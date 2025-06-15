@@ -17,9 +17,6 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Cell> board;
 
-    public GameObject[] roomObjects; // list of prefabs to spawn
-    public int objectsPerRoom = 2;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,8 +40,6 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehavior>();
                     newRoom.UpdateRoom(currentCell.status);
-
-                    newRoom.PopulateRoom(roomObjects, objectsPerRoom);
 
                     newRoom.name += " " + i + "-" + j;
                 }
