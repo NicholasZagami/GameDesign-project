@@ -39620,7 +39620,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4252758515621260487}
-  - component: {fileID: 129268625186078912}
   m_Layer: 0
   m_Name: Dungeon
   m_TagString: Untagged
@@ -39675,22 +39674,6 @@ Transform:
   - {fileID: 6083680697887215033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &129268625186078912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254519291656539878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6474a52ccd7e04743af907e386d1eca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 10, y: 10}
-  startPos: 0
-  room: {fileID: 783612151037232917, guid: 54288052f361a2048888ef97d8bf8558, type: 3}
-  offset: {x: 6, y: 6}
 --- !u!1 &3257405386072155162
 GameObject:
   m_ObjectHideFlags: 0
