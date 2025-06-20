@@ -22,13 +22,27 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving;
     private bool isAttacking = false;
 
+    public GameObject inventoryUI;
+    private bool isInventoryOpen = false;
+
     void Awake()
     {
         inputActions = new InputSystem_Actions();
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         footstepAudio = GetComponent<AudioSource>();
-        //weaponAudio = transform.Find("WeaponSocket/Mace").GetComponent<AudioSource>();
+        Transform maceTransform = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/WeaponSocket/Mace");
+
+        if (maceTransform == null)
+        {
+            Debug.LogError("Mace non trovato! Controlla il percorso.");
+        }
+        else
+        {
+            weaponAudio = maceTransform.GetComponent<AudioSource>();
+            if (weaponAudio == null)
+                Debug.LogError("AudioSource mancante su Mace!");
+        }
     }
 
     void OnEnable() => inputActions.Enable();
@@ -36,6 +50,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Apertura/chiusura inventario
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            isInventoryOpen = !isInventoryOpen;
+            inventoryUI.SetActive(isInventoryOpen);
+
+            if (isInventoryOpen)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        // Se l'inventario è aperto, non permettere movimenti né rotazione
+        if (isInventoryOpen)
+        {
+            animator.SetBool("isMoving", false);
+            if (footstepAudio.isPlaying) footstepAudio.Stop();
+            return;
+        }
+
         // --- Input Mouse Look ---
         mouseDelta = inputActions.Player.Look.ReadValue<Vector2>();
         float mouseX = mouseDelta.x * mouseSensitivity;
@@ -73,7 +113,6 @@ public class PlayerMovement : MonoBehaviour
             if (attackClip != null && weaponAudio != null)
             {
                 weaponAudio.PlayOneShot(attackClip);
-                Debug.Log("Weapon Audio: " + weaponAudio);
             }
 
             StartCoroutine(AttackCooldown());
