@@ -2889,6 +2889,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9c33f225c6ee98243a57390a7235bd50, type: 3}
+--- !u!114 &127243211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127243203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35ecacb2464ab0448919ea3174b2867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &130846928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14531,6 +14543,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9c33f225c6ee98243a57390a7235bd50, type: 3}
+--- !u!114 &668790380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668790372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35ecacb2464ab0448919ea3174b2867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &673273245
 GameObject:
   m_ObjectHideFlags: 0
@@ -33754,6 +33778,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon
       objectReference: {fileID: 0}
+    - target: {fileID: 3423641578777973375, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_Name
+      value: LootEntrance1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423641578777973375, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3474761692378148056, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       propertyPath: 'doors.Array.data[1]'
       value: 
@@ -33769,6 +33801,14 @@ PrefabInstance:
     - target: {fileID: 3607398091258886769, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       propertyPath: 'walls.Array.data[0]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863934370225940643, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_Name
+      value: LootEntrance2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863934370225940643, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4078353337491648414, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       propertyPath: m_Name
@@ -33816,6 +33856,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4252758515621260487, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551080985801523037, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555505788555750737, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5077075660416187762, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
@@ -34269,6 +34317,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3863934370225940643, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       insertIndex: -1
       addedObject: {fileID: 127243207}
+    - targetCorrespondingSourceObject: {fileID: 3863934370225940643, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 127243211}
     - targetCorrespondingSourceObject: {fileID: 3773864317060201997, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       insertIndex: -1
       addedObject: {fileID: 835132474}
@@ -34668,6 +34719,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3423641578777973375, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       insertIndex: -1
       addedObject: {fileID: 668790376}
+    - targetCorrespondingSourceObject: {fileID: 3423641578777973375, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 668790380}
     - targetCorrespondingSourceObject: {fileID: 840209514007757033, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1024854768}
