@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject inventoryUI;
     private bool isInventoryOpen = false;
 
+    [Header("Attack Settings")]
+    public float attackRange = 2f;
+    public float damageAmount = 20f;
+    public LayerMask enemyLayer;
+
+
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -109,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputActions.Player.Attack.triggered && !isAttacking)
         {
             animator.SetTrigger("Attack");
+            PerformAttack();
 
             if (attackClip != null && weaponAudio != null)
             {
@@ -125,4 +132,30 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.7f); // durata dell'attacco
         isAttacking = false;
     }
+
+    private void PerformAttack()
+    {
+        Vector3 attackCenter = transform.position + transform.forward * 1f + Vector3.up * 1.2f; // punto davanti al player
+        float radius = 1.2f;
+
+        Collider[] hits = Physics.OverlapSphere(attackCenter, radius, enemyLayer);
+
+        foreach (Collider hit in hits)
+        {
+            HealthBar enemyHealth = hit.GetComponent<HealthBar>();
+            if (enemyHealth == null)
+                enemyHealth = hit.GetComponentInParent<HealthBar>();
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damageAmount);
+                Debug.Log("Nemico colpito!");
+                break; // solo un colpo alla volta
+            }
+        }
+
+        // Solo per debug: mostra sfera nel scene view
+        Debug.DrawRay(attackCenter, Vector3.up * 0.2f, Color.green, 1f);
+    }
+
 }
