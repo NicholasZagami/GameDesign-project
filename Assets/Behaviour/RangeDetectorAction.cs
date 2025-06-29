@@ -11,12 +11,10 @@ public partial class RangeDetectorAction : Action
     [SerializeReference] public BlackboardVariable<RangeDetector> Detector;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
 
-
     protected override Status OnUpdate()
     {
-        Target.Value = Detector.Value.UpdateDetector();
-        return Detector.Value.UpdateDetector() == null ? Status.Failure : Status.Success;
+        GameObject detectedTarget = Detector.Value.UpdateDetector();
+        Target.Value = detectedTarget;
+        return detectedTarget == null ? Status.Failure : Status.Success;
     }
-
 }
-

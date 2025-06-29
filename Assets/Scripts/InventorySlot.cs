@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Image iconImage;
-
     private Item currentItem;
 
     public void AddItem(Item newItem)
