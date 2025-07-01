@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class HealthBar : MonoBehaviour
 {
     [Header("UI")]
-    public Slider healthSlider; // Assegnato solo per il player
+    public Slider healthSlider; // Solo per il player
     public bool hasUI = true;
 
     [Header("Stats")]
@@ -13,9 +13,10 @@ public class HealthBar : MonoBehaviour
     public float health;
     private float lerpSpeed = 0.05f;
 
-    private Animator animator; // AGGIUNGI QUESTA
+    private Animator animator;
     private bool isDead = false;
 
+    public GameObject gameOverPanel;
 
     void Start()
     {
@@ -27,22 +28,18 @@ public class HealthBar : MonoBehaviour
             healthSlider.value = health;
         }
 
-        // Prova a trovare l'Animator (può essere nel figlio)
         animator = GetComponent<Animator>();
         if (animator == null)
-        {
             animator = GetComponentInChildren<Animator>();
-        }
     }
 
     void Update()
     {
         if (hasUI && healthSlider != null)
         {
-            healthSlider.value = Mathf.Lerp(healthSlider.value, health, lerpSpeed);
+            healthSlider.value = health;
         }
 
-        // Debug input solo per test player
 #if UNITY_EDITOR
         if (hasUI && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -53,8 +50,25 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
+
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth);
+
+        if (animator != null && health > 0)
+        {
+            string hitTrigger = hasUI ? "PlayerHit" : "Hit";
+
+            if (HasParameter(animator, hitTrigger))
+            {
+                animator.SetTrigger(hitTrigger);
+            }
+
+            if (!hasUI && HasParameter(animator, "SpeedMagnitude"))
+            {
+                animator.SetFloat("SpeedMagnitude", 0.01f);
+            }
+        }
 
         if (health <= 0)
         {
@@ -64,22 +78,48 @@ public class HealthBar : MonoBehaviour
 
     private void Die()
     {
-        if (!hasUI)
+        isDead = true;
+
+        if (animator != null)
         {
-            Animator animator = GetComponent<Animator>();
-            if (animator != null && HasParameter(animator, "IsDied"))
+            string deathParam = hasUI ? "PlayerIsDied" : "IsDied";
+
+            if (HasParameter(animator, deathParam))
             {
-                animator.SetBool("IsDied", true);
+                animator.SetBool(deathParam, true);
             }
+        }
+
+        if (hasUI)
+        {
+            Debug.Log("Il giocatore Ã¨ morto");
+            StartCoroutine(ShowGameOverPanelAfterDelay(2f));
         }
         else
         {
-            Debug.Log("Il giocatore è morto");
-            // Aggiungi qui logica di game over
+            Destroy(gameObject, 3f);
+        }
+    }
+
+    private System.Collections.IEnumerator ShowGameOverPanelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
-        Destroy(gameObject, 3f);
+        // Disattiva i controlli del giocatore dopo la morte
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement != null)
+        {
+            movement.enabled = false;
+        }
     }
+
 
     private bool HasParameter(Animator animator, string paramName)
     {
@@ -90,6 +130,4 @@ public class HealthBar : MonoBehaviour
         }
         return false;
     }
-
-
 }

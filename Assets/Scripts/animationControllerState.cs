@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource footstepAudio;
     private AudioSource weaponAudio;
     public AudioClip attackClip;
+    public AudioClip hitClip;
+
     private bool isMoving;
     private bool isAttacking = false;
 
@@ -74,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Se l'inventario � aperto, non permettere movimenti n� rotazione
+        // Se l'inventario è aperto, non permettere movimenti né rotazione
         if (isInventoryOpen)
         {
             animator.SetBool("isMoving", false);
@@ -117,11 +119,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Attack");
             PerformAttack();
 
-            if (attackClip != null && weaponAudio != null)
-            {
-                weaponAudio.PlayOneShot(attackClip);
-            }
-
             StartCoroutine(AttackCooldown());
         }
     }
@@ -135,10 +132,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void PerformAttack()
     {
-        Vector3 attackCenter = transform.position + transform.forward * 1f + Vector3.up * 1.2f; // punto davanti al player
+        Vector3 attackCenter = transform.position + transform.forward * 1f + Vector3.up * 1.2f;
         float radius = 1.2f;
 
         Collider[] hits = Physics.OverlapSphere(attackCenter, radius, enemyLayer);
+
+        bool didHit = false;
 
         foreach (Collider hit in hits)
         {
@@ -150,11 +149,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 enemyHealth.TakeDamage(damageAmount);
                 Debug.Log("Nemico colpito!");
-                break; // solo un colpo alla volta
+
+                if (hitClip != null && weaponAudio != null)
+                {
+                    weaponAudio.PlayOneShot(hitClip); // 🔊 Suono del colpo andato a segno
+                }
+
+                didHit = true;
+                break; // Colpisce solo un nemico alla volta
             }
         }
 
-        // Solo per debug: mostra sfera nel scene view
+        if (!didHit)
+        {
+            // 🔊 Suono del colpo a vuoto
+            if (attackClip != null && weaponAudio != null)
+            {
+                weaponAudio.PlayOneShot(attackClip);
+            }
+        }
+
+        // Debug Sphere
         Debug.DrawRay(attackCenter, Vector3.up * 0.2f, Color.green, 1f);
     }
 
