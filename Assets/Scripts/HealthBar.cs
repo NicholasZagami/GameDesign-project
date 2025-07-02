@@ -11,7 +11,9 @@ public class HealthBar : MonoBehaviour
     [Header("Stats")]
     public float maxHealth = 100;
     public float health;
-    private float lerpSpeed = 0.05f;
+
+    [Header("Boss Settings")]
+    public bool isBoss = false;
 
     private Animator animator;
     private bool isDead = false;
@@ -39,13 +41,6 @@ public class HealthBar : MonoBehaviour
         {
             healthSlider.value = health;
         }
-
-#if UNITY_EDITOR
-        if (hasUI && Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            TakeDamage(10);
-        }
-#endif
     }
 
     public void TakeDamage(float damage)
@@ -57,7 +52,7 @@ public class HealthBar : MonoBehaviour
 
         if (animator != null && health > 0)
         {
-            string hitTrigger = hasUI ? "PlayerHit" : "Hit";
+            string hitTrigger = isBoss ? "Hit" : (hasUI ? "PlayerHit" : "Hit");
 
             if (HasParameter(animator, hitTrigger))
             {
@@ -82,7 +77,7 @@ public class HealthBar : MonoBehaviour
 
         if (animator != null)
         {
-            string deathParam = hasUI ? "PlayerIsDied" : "IsDied";
+            string deathParam = isBoss ? "IsDied" : (hasUI ? "PlayerIsDied" : "IsDied");
 
             if (HasParameter(animator, deathParam))
             {
@@ -90,7 +85,7 @@ public class HealthBar : MonoBehaviour
             }
         }
 
-        if (hasUI)
+        if (hasUI && !isBoss)
         {
             Debug.Log("Il giocatore è morto");
             StartCoroutine(ShowGameOverPanelAfterDelay(2f));
@@ -129,5 +124,20 @@ public class HealthBar : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    public void SetUIVisible(bool visible)
+    {
+        if (healthSlider != null)
+            healthSlider.gameObject.SetActive(visible);
+    }
+
+    void OnEnable()
+    {
+        if (hasUI && healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = health;
+        }
     }
 }

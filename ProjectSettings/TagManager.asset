@@ -15,7 +15,7 @@ TagManager:
   - DetectionLayer
   - Player
   - Enemy
-  - 
+  - Walkable
   - 
   - 
   - 

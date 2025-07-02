@@ -11,8 +11,6 @@ public class EnemyAttack : MonoBehaviour
     public AudioClip hitSound;             // Il suono da riprodurre quando colpisce
     private AudioSource audioSource;       // L'audio source da cui farlo partire
 
-    private float nextAttackTime = 0f;
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
