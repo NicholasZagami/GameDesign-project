@@ -132,11 +132,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void PerformAttack()
     {
-        Vector3 attackCenter = transform.position + transform.forward * 1f + Vector3.up * 1.2f;
-        float radius = 1.2f;
+        float radius = 1f;
+        Vector3 attackCenter = transform.position + transform.forward * 1.0f + Vector3.up * 1.2f;
+
 
         Collider[] hits = Physics.OverlapSphere(attackCenter, radius, enemyLayer);
-
         bool didHit = false;
 
         foreach (Collider hit in hits)
@@ -147,30 +147,39 @@ public class PlayerMovement : MonoBehaviour
 
             if (enemyHealth != null)
             {
+                Vector3 dirToEnemy = (hit.bounds.center - attackCenter);
+                float distToEnemy = dirToEnemy.magnitude;
+
+                // Raycast verso il nemico per verificare ostacoli
+                if (Physics.Raycast(attackCenter, dirToEnemy.normalized, out RaycastHit hitInfo, distToEnemy))
+                {
+                    if (hitInfo.collider != hit && !hitInfo.collider.CompareTag("Enemy"))
+                    {
+                        Debug.Log("Attacco bloccato da ostacolo: " + hitInfo.collider.name);
+                        Debug.DrawRay(attackCenter, dirToEnemy.normalized * distToEnemy, Color.red, 1f);
+                        continue; // ostacolo in mezzo → non colpisce
+                    }
+                }
+
+                // Nessun ostacolo → colpisci il nemico
                 enemyHealth.TakeDamage(damageAmount);
                 Debug.Log("Nemico colpito!");
 
                 if (hitClip != null && weaponAudio != null)
-                {
-                    weaponAudio.PlayOneShot(hitClip); // 🔊 Suono del colpo andato a segno
-                }
+                    weaponAudio.PlayOneShot(hitClip);
 
                 didHit = true;
-                break; // Colpisce solo un nemico alla volta
+                break; // colpisce solo un nemico
             }
         }
 
-        if (!didHit)
+        // Se non ha colpito nulla
+        if (!didHit && attackClip != null && weaponAudio != null)
         {
-            // 🔊 Suono del colpo a vuoto
-            if (attackClip != null && weaponAudio != null)
-            {
-                weaponAudio.PlayOneShot(attackClip);
-            }
+            weaponAudio.PlayOneShot(attackClip);
         }
 
-        // Debug Sphere
-        Debug.DrawRay(attackCenter, Vector3.up * 0.2f, Color.green, 1f);
+        // Ray per debug visuale (verde = tentativo valido)
+        Debug.DrawRay(attackCenter, transform.forward * radius, Color.green, 1f);
     }
-
 }

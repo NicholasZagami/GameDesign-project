@@ -26,23 +26,49 @@ public class EnemyAttack : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    public void ApplyAttackDamage() // Deve combaciare con Animation Event
+    public void ApplyAttackDamage()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+        Vector3 origin = transform.position + Vector3.up * 1.2f;
+        float radius = 1f;
+        float maxAttackAngle = 60f; // <-- angolo massimo per colpire (in gradi)
+
+        Collider[] hits = Physics.OverlapSphere(origin, attackRange, playerLayer);
         foreach (Collider hit in hits)
         {
             HealthBar playerHealth = hit.GetComponent<HealthBar>();
             if (playerHealth != null && playerHealth.hasUI)
             {
-                playerHealth.TakeDamage(attackDamage);
+                Vector3 direction = (hit.transform.position + Vector3.up * 1f) - origin;
+                float distance = direction.magnitude;
+                direction.Normalize();
 
-                // 🔊 Suono d'attacco quando colpisce il player
-                if (hitSound != null && audioSource != null)
+                // 🔄 Nuovo controllo: direzione dell'attacco
+                float angle = Vector3.Angle(transform.forward, direction);
+                if (angle > maxAttackAngle)
                 {
-                    audioSource.PlayOneShot(hitSound);
+                    Debug.Log("Giocatore fuori dal cono di attacco");
+                    continue;
                 }
 
-                break; // Colpisce solo una volta
+                // Raycast per verificare che non ci siano ostacoli
+                int mask = ~LayerMask.GetMask("Enemy");
+
+                if (Physics.Raycast(origin, direction, out RaycastHit rayHit, distance, mask))
+                {
+                    if (rayHit.collider.gameObject == hit.gameObject)
+                    {
+                        playerHealth.TakeDamage(attackDamage);
+
+                        if (hitSound != null && audioSource != null)
+                            audioSource.PlayOneShot(hitSound);
+
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("Attacco bloccato da: " + rayHit.collider.name);
+                    }
+                }
             }
         }
     }

@@ -24,6 +24,9 @@ public class HealthBar : MonoBehaviour
     public AudioSource combatMusic;
     public AudioSource backgroundMusic;
 
+    [Header("Muri da aprire alla morte del boss")]
+    public LootOpening[] lootEntrances;
+
     void Start()
     {
         health = maxHealth;
@@ -100,6 +103,23 @@ public class HealthBar : MonoBehaviour
             if (combatMusic != null) combatMusic.Stop();
             if (backgroundMusic != null && !backgroundMusic.isPlaying)
                 backgroundMusic.Play();
+
+            // Apertura muri del loot: solo se boss
+            if (lootEntrances != null && lootEntrances.Length > 0)
+            {
+                foreach (LootOpening loot in lootEntrances)
+                {
+                    if (loot != null)
+                    {
+                        loot.OpenWall();
+                        Debug.Log("Aperto muro: " + loot.gameObject.name);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Nessun muro da aprire assegnato nel boss.");
+            }
         }
 
         if (hasUI && !isBoss)
@@ -118,6 +138,7 @@ public class HealthBar : MonoBehaviour
             healthSlider.gameObject.SetActive(false); // disattiva tutto lo slider
             Debug.Log("Slider disattivato: " + healthSlider.gameObject.name);
         }
+
         GetComponent<PlayerDetector>()?.OnDeath();
     }
 
