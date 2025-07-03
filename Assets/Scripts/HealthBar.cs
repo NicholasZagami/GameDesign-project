@@ -20,6 +20,10 @@ public class HealthBar : MonoBehaviour
 
     public GameObject gameOverPanel;
 
+    [Header("Boss Music (opzionale)")]
+    public AudioSource combatMusic;
+    public AudioSource backgroundMusic;
+
     void Start()
     {
         health = maxHealth;
@@ -28,6 +32,9 @@ public class HealthBar : MonoBehaviour
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = health;
+
+            if (isBoss)
+                SetUIVisible(false); // barra visivamente nascosta ma attiva
         }
 
         animator = GetComponent<Animator>();
@@ -37,6 +44,8 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
+
         if (hasUI && healthSlider != null)
         {
             healthSlider.value = health;
@@ -85,6 +94,14 @@ public class HealthBar : MonoBehaviour
             }
         }
 
+        // Musica: stop combat, resume background
+        if (isBoss)
+        {
+            if (combatMusic != null) combatMusic.Stop();
+            if (backgroundMusic != null && !backgroundMusic.isPlaying)
+                backgroundMusic.Play();
+        }
+
         if (hasUI && !isBoss)
         {
             Debug.Log("Il giocatore è morto");
@@ -94,7 +111,16 @@ public class HealthBar : MonoBehaviour
         {
             Destroy(gameObject, 3f);
         }
+
+        if (hasUI && healthSlider != null)
+        {
+            SetUIVisible(false); // nasconde le parti interne
+            healthSlider.gameObject.SetActive(false); // disattiva tutto lo slider
+            Debug.Log("Slider disattivato: " + healthSlider.gameObject.name);
+        }
+        GetComponent<PlayerDetector>()?.OnDeath();
     }
+
 
     private System.Collections.IEnumerator ShowGameOverPanelAfterDelay(float delay)
     {
@@ -128,8 +154,25 @@ public class HealthBar : MonoBehaviour
 
     public void SetUIVisible(bool visible)
     {
+        if (isDead) return;
+
         if (healthSlider != null)
-            healthSlider.gameObject.SetActive(visible);
+        {
+            // Non disattivare tutto il gameObject
+            Transform background = healthSlider.transform.Find("Background");
+            Transform fill = healthSlider.transform.Find("Fill");
+
+            if (background != null)
+                background.gameObject.SetActive(visible);
+
+            if (fill != null)
+                fill.gameObject.SetActive(visible);
+
+            // Opzionale: handle
+            Transform handle = healthSlider.transform.Find("Handle Slide Area/Handle");
+            if (handle != null)
+                handle.gameObject.SetActive(visible);
+        }
     }
 
     void OnEnable()

@@ -1477,7 +1477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.6259, y: -393.6493}
+  m_AnchoredPosition: {x: 25.6259, y: -354}
   m_SizeDelta: {x: 451.8602, y: 127.3482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &662027822
@@ -1816,6 +1816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f5be6eb93aab40a7060f40e9c74d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSceneIndex: 1
 --- !u!1 &797581664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,7 +2953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.6259, y: -393.6493}
+  m_AnchoredPosition: {x: -23, y: -348}
   m_SizeDelta: {x: 451.8602, y: 127.3482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969764690
@@ -3001,12 +3002,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 768192097}
         m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
+        m_MethodName: LoadSceneByIndex
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3206,8 +3207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: 159}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: -7.5856, y: 91}
+  m_SizeDelta: {x: 1825.9419, y: 943.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1117307767
 MonoBehaviour:
@@ -3296,7 +3297,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30.341125, y: 0, z: 51.58081, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3659,7 +3660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278958856
@@ -3779,8 +3780,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: 142}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: -6.0684, y: 105.76}
+  m_SizeDelta: {x: 1810.7715, y: 871.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1460027848
 MonoBehaviour:
@@ -4378,8 +4379,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: 318}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -234.16565, y: 276}
+  m_SizeDelta: {x: 1216.4333, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1615789831
 MonoBehaviour:
@@ -4401,7 +4402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dungeon Explorer
+  m_text: Treasures of Elandor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c470f06d5ed97e54e8a62d1594aab232, type: 2}
   m_sharedMaterial: {fileID: -8637511811347129430, guid: c470f06d5ed97e54e8a62d1594aab232, type: 2}
@@ -5163,7 +5164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1828703808
@@ -5534,6 +5535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f5be6eb93aab40a7060f40e9c74d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSceneIndex: 1
 --- !u!1 &2079383870
 GameObject:
   m_ObjectHideFlags: 0
