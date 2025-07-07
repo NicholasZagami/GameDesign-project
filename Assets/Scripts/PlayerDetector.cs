@@ -112,10 +112,10 @@ public class PlayerDetector : MonoBehaviour
         isAttacking = true;
         agent.ResetPath();
 
-        animator.SetTrigger("Attack"); // Assicurati che esista il trigger nell'Animator
-
-        // Qui puoi infliggere danno, opzionale:
-        // player.GetComponent<HealthBar>()?.TakeDamage(danno);
+        // Seleziona un attacco casuale (supponiamo 3 attacchi: 0, 1, 2)
+        int randomAttackIndex = Random.Range(0, 3);
+        animator.SetInteger("AttackIndex", randomAttackIndex);
+        animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;

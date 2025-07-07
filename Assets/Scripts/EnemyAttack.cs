@@ -11,12 +11,20 @@ public class EnemyAttack : MonoBehaviour
     public AudioClip hitSound;             // Il suono da riprodurre quando colpisce
     private AudioSource audioSource;       // L'audio source da cui farlo partire
 
+    private Animator animator;
+    public int totalAttackAnimations = 9;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             Debug.LogWarning("AudioSource non trovato sul nemico. Aggiungilo per sentire il suono d'attacco.");
+        }
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator non trovato sul nemico.");
         }
     }
 
@@ -71,5 +79,16 @@ public class EnemyAttack : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TriggerRandomAttack()
+    {
+        if (animator == null) return;
+
+        int index = Random.Range(0, totalAttackAnimations);
+        animator.SetInteger("AttackIndex", index);
+        animator.SetTrigger("Attack");
+
+        Debug.Log($"{gameObject.name} → AttackIndex impostato a {index}");
     }
 }

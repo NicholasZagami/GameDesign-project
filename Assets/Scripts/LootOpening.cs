@@ -11,6 +11,10 @@ public class LootOpening : MonoBehaviour
     private Vector3 targetPos;
     private bool isOpening = false;
 
+    [Header("Audio")]
+    public AudioSource openingSound;
+
+
     void Start()
     {
         startPos = transform.position;
@@ -23,6 +27,9 @@ public class LootOpening : MonoBehaviour
         {
             StartCoroutine(MoveWall());
             isOpening = true;
+
+            if (openingSound != null)
+                openingSound.Play();
         }
     }
 
