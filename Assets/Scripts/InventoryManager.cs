@@ -1,395 +1,426 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System.Collections;
 
 public class InventoryManager : MonoBehaviour
 {
-    // Singleton pattern
     public static InventoryManager Instance { get; private set; }
     
     [Header("Inventory Configuration")]
-    public InventorySlot[] bagSlots;
+    public InventorySlot[] bagSlots; // 18 slot: 0-5 armi, 6-11 pozioni, 12-17 generici
     public InventorySlot[] equipmentSlots;
     
     [Header("Debug & Testing")]
-    public Item[] debugItems; // solo per test rapido
-    
-    [Header("Drop Settings")]
-    public float dropDistance = 2f; // How far from player to drop items
-    public Vector3 dropOffset = Vector3.up; // Height offset for dropped items
+    public Item[] debugItems;
     
     [Header("Events")]
     public UnityEvent<Item> OnItemAdded;
     public UnityEvent<Item> OnItemRemoved;
-    public UnityEvent<Item> OnItemDropped; // New event for when items are dropped
+    public UnityEvent<Item> OnItemDropped;
     public UnityEvent OnInventoryFull;
+    public UnityEvent<Item, string> OnItemRejected; // NUOVO: quando un item viene rifiutato per categoria
     
     [Header("Audio")]
     public AudioClip itemPickupSound;
     public AudioClip inventoryFullSound;
-    public AudioClip itemDropSound; // New sound for dropping items
+    public AudioClip itemDropSound;
+    public AudioClip itemRejectedSound; // NUOVO: suono per item rifiutato
     
     private AudioSource audioSource;
     
-    // NEW: Keep track of collected items and their original GameObjects
-    private Dictionary<Item, List<GameObject>> collectedItemObjects = new Dictionary<Item, List<GameObject>>();
-    
     private void Awake()
     {
-        Debug.Log($"InventoryManager Awake called - InstanceID: {GetInstanceID()}");
-        
-        // Singleton pattern implementation
+        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log($"InventoryManager Instance set - InstanceID: {GetInstanceID()}");
         }
         else if (Instance != this)
         {
-            Debug.LogWarning($"Duplicate InventoryManager found! Destroying InstanceID: {GetInstanceID()}, keeping InstanceID: {Instance.GetInstanceID()}");
             Destroy(gameObject);
             return;
-        }
-        
-        // Ensure the dictionary is initialized
-        if (collectedItemObjects == null)
-        {
-            collectedItemObjects = new Dictionary<Item, List<GameObject>>();
-            Debug.Log("Initialized collectedItemObjects dictionary in Awake");
         }
     }
     
     private void Start()
     {
-        Debug.Log($"InventoryManager Start called - InstanceID: {GetInstanceID()}");
-        Debug.Log($"Dictionary count at Start: {collectedItemObjects.Count}");
-        
+        InitializeComponents();
+        ValidateSlots();
+        LoadDebugItems();
+        InitializeCategoryVisuals();
+    }
+    
+    private void InitializeComponents()
+    {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
-        {
             audioSource = gameObject.AddComponent<AudioSource>();
+    }
+    
+    private void ValidateSlots()
+    {
+        if (bagSlots == null || bagSlots.Length != CategoryHelper.TOTAL_SLOTS)
+        {
+            Debug.LogError($"BagSlots deve avere esattamente {CategoryHelper.TOTAL_SLOTS} slot! Attualmente: {bagSlots?.Length ?? 0}");
+            return;
         }
         
-        // Test: aggiunge il primo oggetto nei primi slot
+        for (int i = 0; i < bagSlots.Length; i++)
+        {
+            if (bagSlots[i] == null)
+                Debug.LogError($"BagSlot {i} è NULL! Assegna tutti gli slot.");
+        }
+        
+        Debug.Log("=== CONFIGURAZIONE INVENTARIO ===");
+        Debug.Log($"Slot 0-5: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Weapon)}");
+        Debug.Log($"Slot 6-11: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Potion)}");
+        Debug.Log($"Slot 12-17: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Generic)}");
+    }
+    
+    private void InitializeCategoryVisuals()
+    {
+        // Applica colori di categoria agli slot (opzionale)
+        for (int i = 0; i < bagSlots.Length; i++)
+        {
+            if (bagSlots[i] != null)
+            {
+                ItemCategory category = CategoryHelper.GetCategoryForSlotIndex(i);
+                bagSlots[i].SetCategoryVisual(category);
+            }
+        }
+    }
+    
+    private void LoadDebugItems()
+    {
         if (debugItems.Length > 0)
         {
-            bagSlots[0].AddItem(debugItems[0]);
-            if (equipmentSlots.Length > 0)
-                equipmentSlots[0].AddItem(debugItems[0]);
+            foreach (Item item in debugItems)
+            {
+                if (item != null)
+                {
+                    bool added = AddItemToBag(item);
+                    Debug.Log($"Debug item {item.itemName} ({item.GetCategoryDisplayName()}): {(added ? "Aggiunto" : "Rifiutato")}");
+                }
+            }
         }
     }
 
+    /// <summary>
+    /// Aggiunge un item al bag rispettando le categorie
+    /// </summary>
     public bool AddItemToBag(Item item)
     {
-        // Find first empty slot
-        foreach (var slot in bagSlots)
+        if (bagSlots == null || item == null) return false;
+        
+        // Ottieni il range di slot validi per questa categoria
+        var (startIndex, endIndex) = item.GetValidSlotRange();
+        
+        Debug.Log($"Tentativo di aggiungere {item.itemName} (categoria: {item.GetCategoryDisplayName()}) negli slot {startIndex}-{endIndex}");
+        
+        // Cerca uno slot vuoto nella categoria appropriata
+        for (int i = startIndex; i <= endIndex; i++)
         {
-            if (slot.GetItem() == null)
+            if (i < bagSlots.Length && bagSlots[i] != null && bagSlots[i].GetItem() == null)
             {
-                slot.AddItem(item);
-                
-                // Play pickup sound
-                if (itemPickupSound != null && audioSource != null)
-                {
-                    audioSource.PlayOneShot(itemPickupSound);
-                }
-                
-                // Trigger event
+                bagSlots[i].AddItem(item);
+                PlaySound(itemPickupSound);
                 OnItemAdded?.Invoke(item);
-                
-                Debug.Log($"Added {item.itemName} to inventory");
+                Debug.Log($"✓ {item.itemName} aggiunto allo slot {i}");
                 return true;
             }
         }
         
-        // Inventory is full
-        Debug.Log("Inventario pieno.");
-        
-        // Play full inventory sound
-        if (inventoryFullSound != null && audioSource != null)
+        // Categoria piena - controlla se l'inventario generale è pieno
+        if (IsInventoryFull())
         {
-            audioSource.PlayOneShot(inventoryFullSound);
+            PlaySound(inventoryFullSound);
+            OnInventoryFull?.Invoke();
+            Debug.Log($"✗ Inventario completamente pieno per {item.itemName}");
         }
-        
-        // Trigger full inventory event
-        OnInventoryFull?.Invoke();
+        else
+        {
+            // Categoria specifica piena
+            PlaySound(itemRejectedSound);
+            string reason = $"Sezione {item.GetCategoryDisplayName()} piena!";
+            OnItemRejected?.Invoke(item, reason);
+            Debug.Log($"✗ {reason} - {item.itemName} non aggiunto");
+        }
         
         return false;
     }
-
-    // NEW: Method to register a collected item's GameObject
-    public void RegisterCollectedItem(Item item, GameObject itemObject)
+    
+    /// <summary>
+    /// Aggiunge un item forzatamente in uno slot specifico (per debug o riorganizzazione)
+    /// </summary>
+    public bool ForceAddItemToSlot(Item item, int slotIndex)
     {
-        Debug.Log($"=== REGISTERING ITEM ===");
-        Debug.Log($"InventoryManager InstanceID: {GetInstanceID()}");
-        Debug.Log($"Item: {item.itemName} (ID: {item.GetInstanceID()})");
-        Debug.Log($"GameObject: {itemObject.name}");
-        Debug.Log($"Dictionary current count: {collectedItemObjects.Count}");
+        if (bagSlots == null || item == null || slotIndex < 0 || slotIndex >= bagSlots.Length)
+            return false;
         
-        if (!collectedItemObjects.ContainsKey(item))
+        if (bagSlots[slotIndex] == null)
+            return false;
+        
+        // Verifica compatibilità categoria
+        if (!item.CanBeInSlot(slotIndex))
         {
-            collectedItemObjects[item] = new List<GameObject>();
-            Debug.Log($"Created new list for {item.itemName}");
+            Debug.LogWarning($"Item {item.itemName} ({item.GetCategoryDisplayName()}) non può essere posizionato nello slot {slotIndex} ({CategoryHelper.GetCategoryDisplayName(CategoryHelper.GetCategoryForSlotIndex(slotIndex))})");
+            return false;
         }
         
-        collectedItemObjects[item].Add(itemObject);
-        Debug.Log($"Added to list. New count for {item.itemName}: {collectedItemObjects[item].Count}");
-        Debug.Log($"Total dictionary count: {collectedItemObjects.Count}");
+        // Aggiungi allo slot se vuoto
+        if (bagSlots[slotIndex].GetItem() == null)
+        {
+            bagSlots[slotIndex].AddItem(item);
+            OnItemAdded?.Invoke(item);
+            return true;
+        }
+        
+        return false;
     }
     
     public bool RemoveItemFromBag(Item item)
     {
+        if (bagSlots == null) return false;
+        
         foreach (var slot in bagSlots)
         {
-            if (slot.GetItem() == item)
+            if (slot?.GetItem() == item)
             {
                 slot.ClearSlot();
                 OnItemRemoved?.Invoke(item);
-                Debug.Log($"Removed {item.itemName} from inventory");
                 return true;
             }
         }
         return false;
     }
     
-    // NEW: Drop item method that reactivates original GameObject
-    public bool DropItem(Item item)
-    {        
-        Debug.Log($"=== STARTING DROP PROCESS FOR: {item.itemName} ===");
-        Debug.Log($"InventoryManager InstanceID: {GetInstanceID()}");
-        Debug.Log($"Item reference: {item.GetInstanceID()}");
-        Debug.Log($"Total items in dictionary: {collectedItemObjects.Count}");
-        
-        // Debug: Show all items in dictionary
-        foreach (var kvp in collectedItemObjects)
+    /// <summary>
+    /// Droppa un item da uno slot specifico con validazione categoria
+    /// </summary>
+    public GameObject DropItemFromSlot(InventorySlot slot)
+    {
+        if (slot == null)
         {
-            Debug.Log($"Dictionary contains: {kvp.Key.itemName} (ID: {kvp.Key.GetInstanceID()}) with {kvp.Value.Count} objects");
-            
-            // Check if any of the GameObjects are null
-            for (int i = 0; i < kvp.Value.Count; i++)
-            {
-                GameObject obj = kvp.Value[i];
-                if (obj == null)
-                {
-                    Debug.LogWarning($"  - Object {i}: NULL (destroyed?)");
-                }
-                else
-                {
-                    Debug.Log($"  - Object {i}: {obj.name} (Active: {obj.activeInHierarchy})");
-                }
-            }
+            Debug.LogError("DropItemFromSlot: Slot is null!");
+            return null;
         }
         
-        // Try to find and reactivate an original GameObject for this item
-        if (collectedItemObjects.ContainsKey(item))
+        Item item = slot.GetItem();
+        if (item == null)
         {
-            Debug.Log($"✅ Found item in collected objects dictionary!");
-            Debug.Log($"Count for this item: {collectedItemObjects[item].Count}");
-            
-            if (collectedItemObjects[item].Count > 0)
-            {
-                // Get the first collected object of this type
-                GameObject originalObject = collectedItemObjects[item][0];
-                
-                Debug.Log($"Retrieved original object: {(originalObject != null ? originalObject.name : "NULL")}");
-                
-                if (originalObject != null)
-                {
-                    // Remove from list first
-                    collectedItemObjects[item].RemoveAt(0);
-                    Debug.Log($"Removed object from dictionary. Remaining count: {collectedItemObjects[item].Count}");
-                    
-                    // Remove item from inventory AFTER we confirm we have the original object
-                    if (!RemoveItemFromBag(item))
-                    {
-                        // If we can't remove from inventory, put the object back in the list
-                        collectedItemObjects[item].Insert(0, originalObject);
-                        Debug.Log($"❌ Cannot drop {item.itemName} - not found in inventory");
-                        return false;
-                    }
-                    
-                    // Position the object in front of the player
-                    Vector3 dropPosition = CalculateDropPosition();
-                    originalObject.transform.position = dropPosition;
-                    
-                    Debug.Log($"Setting drop position to: {dropPosition}");
-                    
-                    // Reactivate the object
-                    originalObject.SetActive(true);
-                    Debug.Log($"✅ SetActive(true) called on: {originalObject.name}");
-                    
-                    // Reset the CollectableItem component
-                    CollectableItem collectableComponent = originalObject.GetComponent<CollectableItem>();
-                    if (collectableComponent != null)
-                    {
-                        collectableComponent.ReactivateItem();
-                        Debug.Log($"✅ ReactivateItem() called");
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"❌ No CollectableItem component found on {originalObject.name}");
-                    }
-                    
-                    // Play drop sound
-                    if (itemDropSound != null && audioSource != null)
-                    {
-                        audioSource.PlayOneShot(itemDropSound);
-                    }
-                    
-                    // Trigger drop event
-                    OnItemDropped?.Invoke(item);
-                    
-                    Debug.Log($"🎉 REACTIVATED ORIGINAL OBJECT: {item.itemName} at {dropPosition}");
-                    return true;
-                }
-                else
-                {
-                    // Original object was destroyed, remove null reference
-                    collectedItemObjects[item].RemoveAt(0);
-                    Debug.LogWarning($"❌ Original object for {item.itemName} was destroyed!");
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"❌ No objects stored for {item.itemName}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"❌ Item {item.itemName} not found in collected objects dictionary");
-            Debug.LogWarning($"Available items in dictionary:");
-            foreach (var kvp in collectedItemObjects)
-            {
-                Debug.LogWarning($"  - {kvp.Key.itemName} (ID: {kvp.Key.GetInstanceID()})");
-            }
+            Debug.Log($"DropItemFromSlot: No item in slot to drop");
+            return null;
         }
         
-        Debug.Log($"⚠️ GOING TO FALLBACK - removing item from inventory first");
-        
-        // Remove item from inventory since we're going to drop it (fallback)
-        if (!RemoveItemFromBag(item))
+        if (item.itemPrefab == null)
         {
-            Debug.Log($"❌ Cannot drop {item.itemName} - not found in inventory");
-            return false;
+            Debug.LogError($"DropItemFromSlot: Item {item.itemName} has no prefab assigned!");
+            return null;
         }
         
-        // Fallback: Create new instance from prefab if no original object available
-        if (item.itemPrefab != null)
+        // Ottieni posizione di drop
+        Vector3 dropPosition = GetPlayerDropPosition();
+        if (dropPosition == Vector3.zero)
         {
-            Vector3 dropPosition = CalculateDropPosition();
-            GameObject droppedObject = Instantiate(item.itemPrefab, dropPosition, Quaternion.identity);
-            
-            // Play drop sound
-            if (itemDropSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(itemDropSound);
-            }
-            
-            // Trigger drop event
-            OnItemDropped?.Invoke(item);
-            
-            Debug.LogWarning($"⚠️ FALLBACK: Created new instance of {item.itemName} at {dropPosition} (original object not available)");
-            return true;
+            Debug.LogError("DropItemFromSlot: Cannot get player drop position!");
+            return null;
         }
         
-        Debug.LogError($"❌ Cannot drop {item.itemName} - no original object or prefab available");
-        return false;
+        Debug.Log($"=== DROPPING {item.itemName} ({item.GetCategoryDisplayName()}) ===");
+        
+        // Crea wrapper
+        GameObject wrapper = ColliderHelper.CreateDroppedObjectWrapper(item.itemPrefab, item, dropPosition);
+        
+        if (wrapper == null)
+        {
+            Debug.LogError($"DropItemFromSlot: Failed to create wrapper for {item.itemName}");
+            return null;
+        }
+        
+        // Clear slot PRIMA di gestire gli eventi
+        slot.ClearSlot();
+        
+        // Gestisci eventi
+        HandleItemDrop(item, slot);
+        
+        // Abilita collezione dopo delay
+        StartCoroutine(EnableCollectionAfterDelay(wrapper.GetComponent<CollectableItem>()));
+        
+        Debug.Log($"=== SUCCESSFULLY DROPPED {item.itemName} ===");
+        return wrapper;
     }
     
-    // NEW: Calculate where to drop items in front of the player
-    private Vector3 CalculateDropPosition()
+    public GameObject DropItemFromSlotIndex(int slotIndex)
+    {
+        if (bagSlots == null || slotIndex < 0 || slotIndex >= bagSlots.Length)
+            return null;
+            
+        return DropItemFromSlot(bagSlots[slotIndex]);
+    }
+    
+    private Vector3 GetPlayerDropPosition()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return Vector3.zero;
         
-        if (player != null)
-        {
-            // Drop in front of the player
-            Vector3 dropPosition = player.transform.position + player.transform.forward * dropDistance + dropOffset;
-            
-            // Optional: Raycast to ensure we're dropping on the ground
-            RaycastHit hit;
-            if (Physics.Raycast(dropPosition + Vector3.up * 5f, Vector3.down, out hit, 10f))
-            {
-                dropPosition = hit.point + dropOffset;
-            }
-            
-            return dropPosition;
-        }
-        
-        // Fallback: drop at origin with offset
-        return Vector3.zero + dropOffset;
+        Vector3 position = player.transform.position + player.transform.forward * 2f;
+        position.y = player.transform.position.y + 0.5f;
+        return position;
     }
     
-    public bool DropItemFromSlot(int slotIndex)
+    private IEnumerator EnableCollectionAfterDelay(CollectableItem collectable)
     {
-        if (slotIndex >= 0 && slotIndex < bagSlots.Length && bagSlots[slotIndex] != null)
+        yield return new WaitForSeconds(1.5f);
+        if (collectable != null)
+            collectable.enabled = true;
+    }
+    
+    public void HandleItemDrop(Item droppedItem, InventorySlot fromSlot)
+    {
+        PlaySound(itemDropSound);
+        OnItemDropped?.Invoke(droppedItem);
+    }
+    
+    public bool RemoveItemFromSlot(InventorySlot slot)
+    {
+        if (slot?.GetItem() != null)
         {
-            Item item = bagSlots[slotIndex].GetItem();
-            if (item != null)
-            {
-                return DropItem(item);
-            }
+            Item item = slot.GetItem();
+            slot.ClearSlot();
+            OnItemRemoved?.Invoke(item);
+            return true;
         }
-        
-        Debug.Log($"Cannot drop item from slot {slotIndex} - slot is empty or invalid");
         return false;
     }
+    
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+            audioSource.PlayOneShot(clip);
+    }
 
+    /// <summary>
+    /// Conta gli slot vuoti per categoria
+    /// </summary>
+    public int GetEmptySlotCountForCategory(ItemCategory category)
+    {
+        if (bagSlots == null) return 0;
+        
+        var (startIndex, endIndex) = CategoryHelper.GetSlotRangeForCategory(category);
+        int count = 0;
+        
+        for (int i = startIndex; i <= endIndex && i < bagSlots.Length; i++)
+        {
+            if (bagSlots[i]?.GetItem() == null)
+                count++;
+        }
+        
+        return count;
+    }
+    
+    /// <summary>
+    /// Conta gli slot vuoti totali
+    /// </summary>
     public int GetEmptySlotCount()
     {
-        int emptyCount = 0;
+        if (bagSlots == null) return 0;
+        
+        int count = 0;
         foreach (var slot in bagSlots)
         {
-            if (slot.GetItem() == null)
-                emptyCount++;
+            if (slot?.GetItem() == null)
+                count++;
         }
-        return emptyCount;
+        return count;
     }
     
-    public bool IsInventoryFull()
+    /// <summary>
+    /// Verifica se una categoria è piena
+    /// </summary>
+    public bool IsCategoryFull(ItemCategory category)
     {
-        return GetEmptySlotCount() == 0;
+        return GetEmptySlotCountForCategory(category) == 0;
     }
     
-    // NEW: Get all items of a specific type in inventory
+    public bool IsInventoryFull() => GetEmptySlotCount() == 0;
+    
+    /// <summary>
+    /// Ottiene tutti gli item di una categoria specifica
+    /// </summary>
+    public List<Item> GetItemsOfCategory(ItemCategory category)
+    {
+        List<Item> items = new List<Item>();
+        if (bagSlots == null) return items;
+        
+        var (startIndex, endIndex) = CategoryHelper.GetSlotRangeForCategory(category);
+        
+        for (int i = startIndex; i <= endIndex && i < bagSlots.Length; i++)
+        {
+            Item item = bagSlots[i]?.GetItem();
+            if (item != null)
+                items.Add(item);
+        }
+        
+        return items;
+    }
+    
     public List<Item> GetItemsOfType(Item itemType)
     {
         List<Item> items = new List<Item>();
+        if (bagSlots == null) return items;
+        
         foreach (var slot in bagSlots)
         {
-            if (slot.GetItem() == itemType)
-            {
+            if (slot?.GetItem() == itemType)
                 items.Add(slot.GetItem());
-            }
         }
         return items;
     }
     
-    // NEW: Debug method to show collected items
-    public void DebugShowCollectedItems()
+    public int GetSlotIndex(InventorySlot slot)
     {
-        Debug.Log("=== COLLECTED ITEMS DEBUG ===");
-        foreach (var kvp in collectedItemObjects)
+        if (bagSlots == null) return -1;
+        
+        for (int i = 0; i < bagSlots.Length; i++)
         {
-            Debug.Log($"{kvp.Key.itemName}: {kvp.Value.Count} objects stored");
-            for (int i = 0; i < kvp.Value.Count; i++)
+            if (bagSlots[i] == slot)
+                return i;
+        }
+        return -1;
+    }
+    
+    /// <summary>
+    /// Debug: Mostra lo stato dell'inventario per categoria
+    /// </summary>
+    [ContextMenu("Show Category Status")]
+    public void ShowCategoryStatus()
+    {
+        Debug.Log("=== STATO INVENTARIO PER CATEGORIA ===");
+        
+        foreach (ItemCategory category in System.Enum.GetValues(typeof(ItemCategory)))
+        {
+            var (startIndex, endIndex) = CategoryHelper.GetSlotRangeForCategory(category);
+            int emptySlots = GetEmptySlotCountForCategory(category);
+            int totalSlots = endIndex - startIndex + 1;
+            int usedSlots = totalSlots - emptySlots;
+            
+            Debug.Log($"{CategoryHelper.GetCategoryDisplayName(category)} (slot {startIndex}-{endIndex}): {usedSlots}/{totalSlots} utilizzati");
+            
+            // Mostra gli item in questa categoria
+            List<Item> categoryItems = GetItemsOfCategory(category);
+            if (categoryItems.Count > 0)
             {
-                GameObject obj = kvp.Value[i];
-                if (obj != null)
+                foreach (Item item in categoryItems)
                 {
-                    Debug.Log($"  - Object {i}: {obj.name} (Active: {obj.activeInHierarchy})");
-                }
-                else
-                {
-                    Debug.Log($"  - Object {i}: NULL (destroyed?)");
+                    Debug.Log($"  - {item.itemName}");
                 }
             }
-        }
-        
-        if (collectedItemObjects.Count == 0)
-        {
-            Debug.Log("No collected items registered!");
+            else
+            {
+                Debug.Log($"  - Vuota");
+            }
         }
     }
 }

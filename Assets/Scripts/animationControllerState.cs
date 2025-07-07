@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         footstepAudio = GetComponent<AudioSource>();
+
+        // Settiamo l'inventario a false per non averlo di mezzo allo startup della partita
+        inventoryUI.SetActive(false);
         Transform maceTransform = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/WeaponSocket/Mace");
 
         if (maceTransform == null)
