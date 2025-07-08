@@ -205,14 +205,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2359373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 643535282}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &7593607 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 955253547963122408, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -364,6 +368,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b31c62c35ced11c4383176ecffe930c9, type: 3}
+--- !u!1 &32686849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+  m_PrefabInstance: {fileID: 287959350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &32686850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32686849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1cd27c4a38fd84eb115bd081359932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: aa5ef337a345c5245b41aed39c1b4a6c, type: 2}
+  collectionRange: 2
+  requireInteraction: 1
+  interactionKey: 101
+  pickupSound: {fileID: 0}
+  pickupEffect: {fileID: 0}
 --- !u!1 &35885214
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,14 +477,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 35885214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1852917859}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &38664831
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,14 +883,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 103695127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 21858490}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &157892770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,14 +1409,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 257448751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1366234705}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &273942015 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
@@ -1401,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: aa5ef337a345c5245b41aed39c1b4a6c, type: 2}
   collectionRange: 2
-  requireInteraction: 0
+  requireInteraction: 1
   interactionKey: 101
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
@@ -1468,6 +1507,70 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 273942027}
+  m_SourcePrefab: {fileID: 100100000, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+--- !u!1001 &287959350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -1300868471997070199, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 70.16571
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922671887464563809, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      propertyPath: m_Name
+      value: Barrel_C (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 32686850}
   m_SourcePrefab: {fileID: 100100000, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
 --- !u!1 &295300737
 GameObject:
@@ -1558,11 +1661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1306114394}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &296874655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,7 +2189,7 @@ GameObject:
   - component: {fileID: 374041542}
   - component: {fileID: 374041544}
   - component: {fileID: 374041543}
-  - component: {fileID: 374041541}
+  - component: {fileID: 374041545}
   m_Layer: 5
   m_Name: Slot 3,6
   m_TagString: Untagged
@@ -2099,23 +2197,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &374041541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374041540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconImage: {fileID: 1767943115}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!224 &374041542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2174,6 +2255,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374041540}
   m_CullTransparentMesh: 1
+--- !u!114 &374041545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374041540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 1767943115}
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
+  dropKey: 113
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &375569283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,11 +2551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1167419354}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!64 &408458786
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2948,14 +3045,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 477375944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 38664833}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &487447158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2681853308401159315, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -3654,7 +3755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &637012497
 Transform:
   m_ObjectHideFlags: 0
@@ -4488,14 +4589,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 764013716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 999030124}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 1701945119}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &770334893
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,14 +5527,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 883679090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 237899096}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &884429828
 GameObject:
   m_ObjectHideFlags: 0
@@ -5614,14 +5723,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 893680157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1779669726}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!64 &895909986
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6007,11 +6120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1836711087}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!224 &953885313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6270,6 +6378,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999030122}
   m_CullTransparentMesh: 1
+--- !u!1001 &1017188653
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 191050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_Name
+      value: Potion_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 191050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 70.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 191050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1723210241}
+    - targetCorrespondingSourceObject: {fileID: 191050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1723210240}
+  m_SourcePrefab: {fileID: 100100000, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
 --- !u!64 &1024729231
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6692,11 +6879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 2059124935}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &1069490772
 GameObject:
   m_ObjectHideFlags: 0
@@ -7376,11 +7558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1692529940}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &1140719470 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3385931881979600385, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -7538,14 +7715,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1159939446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 836869800}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &1165091540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5521324772018074763, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -8693,14 +8874,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1289316265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1109944339}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &1293729829 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7077403897350767655, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -8814,14 +8999,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1295539051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1263897362}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &1303742159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8279798356686601708, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -9489,6 +9678,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2994531682042415193, guid: fd2de4bd876f4ac4980370e624362931, type: 3}
   m_PrefabInstance: {fileID: 1387408149}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1388623648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 161476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_Name
+      value: Potion_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8691201
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 70.16571
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.972457
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 161476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1461519500}
+  m_SourcePrefab: {fileID: 100100000, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
 --- !u!1 &1396612219
 GameObject:
   m_ObjectHideFlags: 0
@@ -9867,11 +10116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 734626003}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!114 &1420179050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10021,6 +10265,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9c33f225c6ee98243a57390a7235bd50, type: 3}
+--- !u!1 &1461519499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 161476, guid: 95df6f7f30e343db95014a0a7537ce7d, type: 3}
+  m_PrefabInstance: {fileID: 1388623648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1461519500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461519499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1cd27c4a38fd84eb115bd081359932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 2448adab4247d224897ee025f98e09fd, type: 2}
+  collectionRange: 2
+  requireInteraction: 0
+  interactionKey: 101
+  pickupSound: {fileID: 0}
+  pickupEffect: {fileID: 0}
 --- !u!1 &1471818275
 GameObject:
   m_ObjectHideFlags: 0
@@ -10107,14 +10374,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1471818275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 770334895}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!64 &1478146771
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10718,14 +10989,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1552205254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 2088932469}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1001 &1557671411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11005,11 +11280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1593007202}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &1588574259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8992203996792612469, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -11245,11 +11515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1069490774}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &1636910287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7094620311760461776, guid: d795ecf62053eb745964b087aeb03184, type: 3}
@@ -11606,14 +11871,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1686055172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1507349916}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &1692529938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11956,14 +12225,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1713083549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 727135229}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!64 &1714887324
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12030,6 +12303,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9c33f225c6ee98243a57390a7235bd50, type: 3}
+--- !u!1 &1723210239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 191050, guid: b5b903da71f948758cc8f65f59d30edc, type: 3}
+  m_PrefabInstance: {fileID: 1017188653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1723210240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723210239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1cd27c4a38fd84eb115bd081359932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
+  collectionRange: 3
+  requireInteraction: 0
+  interactionKey: 101
+  pickupSound: {fileID: 0}
+  pickupEffect: {fileID: 0}
+--- !u!64 &1723210241
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723210239}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 200b07446fa54985b592ae1f134bee25, type: 3}
 --- !u!1 &1729003064 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8805590597570852993, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -12443,11 +12761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 810300620}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!1 &1796977698
 GameObject:
   m_ObjectHideFlags: 0
@@ -13092,14 +13405,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1887424517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 449170530}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!4 &1901335068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3364569756340610742, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
@@ -13753,11 +14070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 2106831914}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!114 &1952551524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13864,6 +14176,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 0}
   inventoryManager: {fileID: 0}
+  enableDebugInput: 0
+  logMouseHoverInfo: 1
+  testWeapons: []
+  testPotions: []
+  testGenericItems: []
 --- !u!114 &1971420352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13963,10 +14280,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cb018f346e7734e9687312e2d91b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 0}
-  inputActions: {fileID: 0}
+  inventoryManager: {fileID: 1971420357}
+  inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   slotHighlight: {fileID: 0}
-  dropKey: 113
+  enableKeyboardSelection: 0
+  enableMouseHoverDebug: 1
+  useUltraSimpleSystem: 1
+  inventoryCanvas: {fileID: 1971420354}
+  uiCamera: {fileID: 1796977701}
 --- !u!114 &1971420357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13979,7 +14300,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddc0300f8e961344a8ae9c0cc9ed30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bagSlots: []
+  bagSlots:
+  - {fileID: 764013720}
+  - {fileID: 1471818279}
+  - {fileID: 103695131}
+  - {fileID: 1991904366}
+  - {fileID: 883679094}
+  - {fileID: 35885218}
+  - {fileID: 1295539055}
+  - {fileID: 1159939450}
+  - {fileID: 2359377}
+  - {fileID: 1887424521}
+  - {fileID: 477375948}
+  - {fileID: 257448755}
+  - {fileID: 893680161}
+  - {fileID: 1552205258}
+  - {fileID: 1289316269}
+  - {fileID: 1686055176}
+  - {fileID: 1713083553}
+  - {fileID: 374041545}
   equipmentSlots: []
   debugItems: []
   OnItemAdded:
@@ -13994,9 +14333,13 @@ MonoBehaviour:
   OnInventoryFull:
     m_PersistentCalls:
       m_Calls: []
+  OnItemRejected:
+    m_PersistentCalls:
+      m_Calls: []
   itemPickupSound: {fileID: 0}
   inventoryFullSound: {fileID: 0}
   itemDropSound: {fileID: 0}
+  itemRejectedSound: {fileID: 0}
 --- !u!1 &1979614149 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8685576731676303399, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -14137,14 +14480,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991904362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: df2fcacaa62bf0149b170d013347a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1804615447}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
+  backgroundImage: {fileID: 0}
+  borderImage: {fileID: 0}
   dropKey: 113
-  inventoryManager: {fileID: 0}
+  showCategoryColors: 1
+  categoryColorAlpha: 0.3
+  showHoverEffect: 1
+  hoverTintColor: {r: 1, g: 1, b: 1, a: 0.2}
+  enableMouseDebug: 1
 --- !u!1 &1993704196 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5251528564605790672, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -14542,11 +14889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 880165546}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!114 &2041453228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14876,11 +15218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd09858b8a27cc243b13106cd7bf2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 503759431}
-  currentItem: {fileID: 0}
-  isMouseOver: 0
-  dropKey: 113
-  inventoryManager: {fileID: 0}
 --- !u!114 &2071382767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16691,5 +17028,8 @@ SceneRoots:
   - {fileID: 1927919968}
   - {fileID: 95987295}
   - {fileID: 277410866}
+  - {fileID: 287959350}
   - {fileID: 637012497}
   - {fileID: 1971420355}
+  - {fileID: 1017188653}
+  - {fileID: 1388623648}

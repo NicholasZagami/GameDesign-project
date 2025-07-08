@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11961a91a9aa6554ea0f11e305973689, type: 3}
-  m_Name: barrel
+  m_Name: ManaPotion
   m_EditorClassIdentifier: 
-  itemName: barrel
-  icon: {fileID: 21300000, guid: 6b6a1ec666976824a843ab0cba0cfcaa, type: 3}
-  itemPrefab: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
-  category: 2
+  itemName: ManaPotion
+  icon: {fileID: 21300000, guid: 2e350bcef09f70943ba03de78d8c063a, type: 3}
+  itemPrefab: {fileID: 100000, guid: 26e0b54e2cda477084abc9479bb387ae, type: 3}
+  category: 1
   description: 
   value: 0
   weight: 1
