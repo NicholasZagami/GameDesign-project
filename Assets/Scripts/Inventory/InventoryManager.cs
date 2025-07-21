@@ -8,30 +8,23 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance { get; private set; }
     
     [Header("Inventory Configuration")]
-    public InventorySlot[] bagSlots; // 18 slot: 0-5 armi, 6-11 pozioni, 12-17 generici
+    public InventorySlot[] bagSlots;
     public InventorySlot[] equipmentSlots;
-    
-    [Header("Debug & Testing")]
-    public Item[] debugItems;
     
     [Header("Events")]
     public UnityEvent<Item> OnItemAdded;
     public UnityEvent<Item> OnItemRemoved;
     public UnityEvent<Item> OnItemDropped;
     public UnityEvent OnInventoryFull;
-    public UnityEvent<Item, string> OnItemRejected; // NUOVO: quando un item viene rifiutato per categoria
     
     [Header("Audio")]
     public AudioClip itemPickupSound;
-    public AudioClip inventoryFullSound;
-    public AudioClip itemDropSound;
-    public AudioClip itemRejectedSound; // NUOVO: suono per item rifiutato
+    public AudioClip itemRejectedSound;
     
     private AudioSource audioSource;
     
     private void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -48,7 +41,6 @@ public class InventoryManager : MonoBehaviour
     {
         InitializeComponents();
         ValidateSlots();
-        LoadDebugItems();
         InitializeCategoryVisuals();
     }
     
@@ -63,25 +55,18 @@ public class InventoryManager : MonoBehaviour
     {
         if (bagSlots == null || bagSlots.Length != CategoryHelper.TOTAL_SLOTS)
         {
-            Debug.LogError($"BagSlots deve avere esattamente {CategoryHelper.TOTAL_SLOTS} slot! Attualmente: {bagSlots?.Length ?? 0}");
             return;
         }
         
         for (int i = 0; i < bagSlots.Length; i++)
         {
             if (bagSlots[i] == null)
-                Debug.LogError($"BagSlot {i} è NULL! Assegna tutti gli slot.");
+                return;
         }
-        
-        Debug.Log("=== CONFIGURAZIONE INVENTARIO ===");
-        Debug.Log($"Slot 0-5: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Weapon)}");
-        Debug.Log($"Slot 6-11: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Potion)}");
-        Debug.Log($"Slot 12-17: {CategoryHelper.GetCategoryDisplayName(ItemCategory.Generic)}");
     }
     
     private void InitializeCategoryVisuals()
     {
-        // Applica colori di categoria agli slot (opzionale)
         for (int i = 0; i < bagSlots.Length; i++)
         {
             if (bagSlots[i] != null)
@@ -92,34 +77,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
     
-    private void LoadDebugItems()
-    {
-        if (debugItems.Length > 0)
-        {
-            foreach (Item item in debugItems)
-            {
-                if (item != null)
-                {
-                    bool added = AddItemToBag(item);
-                    Debug.Log($"Debug item {item.itemName} ({item.GetCategoryDisplayName()}): {(added ? "Aggiunto" : "Rifiutato")}");
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Aggiunge un item al bag rispettando le categorie
-    /// </summary>
     public bool AddItemToBag(Item item)
     {
         if (bagSlots == null || item == null) return false;
         
-        // Ottieni il range di slot validi per questa categoria
         var (startIndex, endIndex) = item.GetValidSlotRange();
         
-        Debug.Log($"Tentativo di aggiungere {item.itemName} (categoria: {item.GetCategoryDisplayName()}) negli slot {startIndex}-{endIndex}");
-        
-        // Cerca uno slot vuoto nella categoria appropriata
         for (int i = startIndex; i <= endIndex; i++)
         {
             if (i < bagSlots.Length && bagSlots[i] != null && bagSlots[i].GetItem() == null)
@@ -127,33 +90,22 @@ public class InventoryManager : MonoBehaviour
                 bagSlots[i].AddItem(item);
                 PlaySound(itemPickupSound);
                 OnItemAdded?.Invoke(item);
-                Debug.Log($"✓ {item.itemName} aggiunto allo slot {i}");
                 return true;
             }
         }
         
-        // Categoria piena - controlla se l'inventario generale è pieno
         if (IsInventoryFull())
         {
-            PlaySound(inventoryFullSound);
             OnInventoryFull?.Invoke();
-            Debug.Log($"✗ Inventario completamente pieno per {item.itemName}");
         }
         else
         {
-            // Categoria specifica piena
             PlaySound(itemRejectedSound);
-            string reason = $"Sezione {item.GetCategoryDisplayName()} piena!";
-            OnItemRejected?.Invoke(item, reason);
-            Debug.Log($"✗ {reason} - {item.itemName} non aggiunto");
         }
         
         return false;
     }
     
-    /// <summary>
-    /// Aggiunge un item forzatamente in uno slot specifico (per debug o riorganizzazione)
-    /// </summary>
     public bool ForceAddItemToSlot(Item item, int slotIndex)
     {
         if (bagSlots == null || item == null || slotIndex < 0 || slotIndex >= bagSlots.Length)
@@ -162,14 +114,11 @@ public class InventoryManager : MonoBehaviour
         if (bagSlots[slotIndex] == null)
             return false;
         
-        // Verifica compatibilità categoria
         if (!item.CanBeInSlot(slotIndex))
         {
-            Debug.LogWarning($"Item {item.itemName} ({item.GetCategoryDisplayName()}) non può essere posizionato nello slot {slotIndex} ({CategoryHelper.GetCategoryDisplayName(CategoryHelper.GetCategoryForSlotIndex(slotIndex))})");
             return false;
         }
         
-        // Aggiungi allo slot se vuoto
         if (bagSlots[slotIndex].GetItem() == null)
         {
             bagSlots[slotIndex].AddItem(item);
@@ -196,59 +145,28 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
     
-    /// <summary>
-    /// Droppa un item da uno slot specifico con validazione categoria
-    /// </summary>
     public GameObject DropItemFromSlot(InventorySlot slot)
     {
-        if (slot == null)
-        {
-            Debug.LogError("DropItemFromSlot: Slot is null!");
-            return null;
-        }
+        if (slot == null) return null;
         
         Item item = slot.GetItem();
-        if (item == null)
-        {
-            Debug.Log($"DropItemFromSlot: No item in slot to drop");
-            return null;
-        }
+        if (item == null) return null;
         
-        if (item.itemPrefab == null)
-        {
-            Debug.LogError($"DropItemFromSlot: Item {item.itemName} has no prefab assigned!");
-            return null;
-        }
+        if (item.itemPrefab == null) return null;
         
-        // Ottieni posizione di drop
         Vector3 dropPosition = GetPlayerDropPosition();
-        if (dropPosition == Vector3.zero)
-        {
-            Debug.LogError("DropItemFromSlot: Cannot get player drop position!");
-            return null;
-        }
+        if (dropPosition == Vector3.zero) return null;
         
-        Debug.Log($"=== DROPPING {item.itemName} ({item.GetCategoryDisplayName()}) ===");
-        
-        // Crea wrapper
         GameObject wrapper = ColliderHelper.CreateDroppedObjectWrapper(item.itemPrefab, item, dropPosition);
         
-        if (wrapper == null)
-        {
-            Debug.LogError($"DropItemFromSlot: Failed to create wrapper for {item.itemName}");
-            return null;
-        }
+        if (wrapper == null) return null;
         
-        // Clear slot PRIMA di gestire gli eventi
         slot.ClearSlot();
         
-        // Gestisci eventi
         HandleItemDrop(item, slot);
         
-        // Abilita collezione dopo delay
         StartCoroutine(EnableCollectionAfterDelay(wrapper.GetComponent<CollectableItem>()));
         
-        Debug.Log($"=== SUCCESSFULLY DROPPED {item.itemName} ===");
         return wrapper;
     }
     
@@ -279,7 +197,6 @@ public class InventoryManager : MonoBehaviour
     
     public void HandleItemDrop(Item droppedItem, InventorySlot fromSlot)
     {
-        PlaySound(itemDropSound);
         OnItemDropped?.Invoke(droppedItem);
     }
     
@@ -300,10 +217,7 @@ public class InventoryManager : MonoBehaviour
         if (clip != null && audioSource != null)
             audioSource.PlayOneShot(clip);
     }
-
-    /// <summary>
-    /// Conta gli slot vuoti per categoria
-    /// </summary>
+    
     public int GetEmptySlotCountForCategory(ItemCategory category)
     {
         if (bagSlots == null) return 0;
@@ -320,9 +234,6 @@ public class InventoryManager : MonoBehaviour
         return count;
     }
     
-    /// <summary>
-    /// Conta gli slot vuoti totali
-    /// </summary>
     public int GetEmptySlotCount()
     {
         if (bagSlots == null) return 0;
@@ -336,9 +247,6 @@ public class InventoryManager : MonoBehaviour
         return count;
     }
     
-    /// <summary>
-    /// Verifica se una categoria è piena
-    /// </summary>
     public bool IsCategoryFull(ItemCategory category)
     {
         return GetEmptySlotCountForCategory(category) == 0;
@@ -346,9 +254,6 @@ public class InventoryManager : MonoBehaviour
     
     public bool IsInventoryFull() => GetEmptySlotCount() == 0;
     
-    /// <summary>
-    /// Ottiene tutti gli item di una categoria specifica
-    /// </summary>
     public List<Item> GetItemsOfCategory(ItemCategory category)
     {
         List<Item> items = new List<Item>();
@@ -389,38 +294,5 @@ public class InventoryManager : MonoBehaviour
                 return i;
         }
         return -1;
-    }
-    
-    /// <summary>
-    /// Debug: Mostra lo stato dell'inventario per categoria
-    /// </summary>
-    [ContextMenu("Show Category Status")]
-    public void ShowCategoryStatus()
-    {
-        Debug.Log("=== STATO INVENTARIO PER CATEGORIA ===");
-        
-        foreach (ItemCategory category in System.Enum.GetValues(typeof(ItemCategory)))
-        {
-            var (startIndex, endIndex) = CategoryHelper.GetSlotRangeForCategory(category);
-            int emptySlots = GetEmptySlotCountForCategory(category);
-            int totalSlots = endIndex - startIndex + 1;
-            int usedSlots = totalSlots - emptySlots;
-            
-            Debug.Log($"{CategoryHelper.GetCategoryDisplayName(category)} (slot {startIndex}-{endIndex}): {usedSlots}/{totalSlots} utilizzati");
-            
-            // Mostra gli item in questa categoria
-            List<Item> categoryItems = GetItemsOfCategory(category);
-            if (categoryItems.Count > 0)
-            {
-                foreach (Item item in categoryItems)
-                {
-                    Debug.Log($"  - {item.itemName}");
-                }
-            }
-            else
-            {
-                Debug.Log($"  - Vuota");
-            }
-        }
     }
 }
