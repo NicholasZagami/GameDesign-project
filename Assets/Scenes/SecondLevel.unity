@@ -4434,35 +4434,15 @@ GameObject:
   - component: {fileID: 583608384}
   - component: {fileID: 583608383}
   - component: {fileID: 583608382}
-  - component: {fileID: 583608379}
   - component: {fileID: 583608386}
+  - component: {fileID: 583608387}
   m_Layer: 5
   m_Name: ChestInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &583608379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583608378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8cb018f346e7734e9687312e2d91b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 0}
-  inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  slotHighlight: {fileID: 0}
-  enableKeyboardSelection: 0
-  enableMouseHoverDebug: 1
-  useUltraSimpleSystem: 1
-  inventoryCanvas: {fileID: 583608384}
-  uiCamera: {fileID: 1796977701}
+  m_IsActive: 1
 --- !u!114 &583608382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4559,9 +4539,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645307ff5c20be3499b792ba70156763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestUISlots: []
+  chestUISlots:
+  - {fileID: 1956054538}
+  - {fileID: 679623381}
+  - {fileID: 103695131}
+  - {fileID: 1991904366}
+  - {fileID: 883679094}
+  - {fileID: 219289714}
   interactAction: {fileID: -2703805079847720519, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   selectedSlotIndex: 0
+--- !u!114 &583608387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583608378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bf6cc70c45889478907f7151b05681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestInventoryManager: {fileID: 583608386}
+  chestCanvas: {fileID: 583608384}
+  uiCamera: {fileID: 1796977701}
 --- !u!1 &599007056 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5195958852615310526, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -5074,10 +5075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450254d5f2f551245b99fc7673e14f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestItems:
+  initialItems:
   - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
   - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
-  maxChestSize: 10
   chestInventoryUI: {fileID: 583608378}
   chestInventoryManager: {fileID: 583608386}
   openSound: {fileID: 0}
@@ -14849,7 +14849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
   collectionRange: 3
-  requireInteraction: 0
+  requireInteraction: 1
   interactionKey: 101
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
@@ -17204,11 +17204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 1971420357}
-  inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  slotHighlight: {fileID: 0}
-  enableKeyboardSelection: 0
-  enableMouseHoverDebug: 0
-  useUltraSimpleSystem: 1
   inventoryCanvas: {fileID: 1971420354}
   uiCamera: {fileID: 1796977701}
 --- !u!114 &1971420357
@@ -17243,7 +17238,6 @@ MonoBehaviour:
   - {fileID: 1713083553}
   - {fileID: 374041545}
   equipmentSlots: []
-  debugItems: []
   OnItemAdded:
     m_PersistentCalls:
       m_Calls: []
@@ -17256,12 +17250,7 @@ MonoBehaviour:
   OnInventoryFull:
     m_PersistentCalls:
       m_Calls: []
-  OnItemRejected:
-    m_PersistentCalls:
-      m_Calls: []
   itemPickupSound: {fileID: 0}
-  inventoryFullSound: {fileID: 0}
-  itemDropSound: {fileID: 0}
   itemRejectedSound: {fileID: 0}
 --- !u!1 &1978916968
 GameObject:

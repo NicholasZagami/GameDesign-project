@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class ChestController : MonoBehaviour
 {
     [Header("Chest Configuration")]
-    public List<Item> chestItems = new List<Item>();
-    public int maxChestSize = 10;
+    public Item[] initialItems; // Items to load into chest slots on start
     
     [Header("UI References")]
     public GameObject chestInventoryUI;
@@ -32,6 +31,31 @@ public class ChestController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+    }
+    
+    private void LoadInitialItemsOnce()
+    {
+        if (initialItems != null && initialItems.Length > 0)
+        {
+            // Find or create chest inventory manager
+            if (chestInventoryManager == null)
+            {
+                GameObject chestUI = GameObject.Find("ChestInventory");
+                if (chestUI != null)
+                {
+                    chestInventoryManager = chestUI.GetComponent<ChestInventoryManager>();
+                    if (chestInventoryManager == null)
+                    {
+                        chestInventoryManager = chestUI.AddComponent<ChestInventoryManager>();
+                    }
+                }
+            }
+            
+            if (chestInventoryManager != null)
+            {
+                chestInventoryManager.LoadItemsIntoChest(initialItems);
+            }
+        }
     }
     
     private void Start()
@@ -66,6 +90,7 @@ public class ChestController : MonoBehaviour
         }
         
         SetupInputAction();
+        LoadInitialItemsOnce(); // Load items only once
     }
     
     private void SetupInputAction()
@@ -142,7 +167,6 @@ public class ChestController : MonoBehaviour
             
             if (chestInventoryManager != null)
             {
-                chestInventoryManager.DisplayChestItems(chestItems);
                 chestInventoryManager.SetupChestSlotClickHandlers(this);
                 chestInventoryManager.SetActive(true);
             }
@@ -165,7 +189,6 @@ public class ChestController : MonoBehaviour
             
             if (chestInventoryManager != null)
             {
-                chestInventoryManager.ClearAllChestSlots();
                 chestInventoryManager.SetActive(false);
             }
         }
@@ -197,30 +220,37 @@ public class ChestController : MonoBehaviour
     
     public bool AddItemToChest(Item item)
     {
-        if (item == null) return false;
-        
-        if (chestItems.Count >= maxChestSize)
+        if (chestInventoryManager != null)
         {
-            return false;
+            return chestInventoryManager.AddItemToChest(item);
         }
-        
-        chestItems.Add(item);
-        return true;
+        return false;
     }
     
     public bool RemoveItemFromChest(Item item)
     {
-        return chestItems.Remove(item);
+        if (chestInventoryManager != null)
+        {
+            return chestInventoryManager.RemoveItemFromChest(item);
+        }
+        return false;
     }
     
     public List<Item> GetChestItems()
     {
-        return new List<Item>(chestItems);
+        if (chestInventoryManager != null)
+        {
+            return chestInventoryManager.GetChestItems();
+        }
+        return new List<Item>();
     }
     
     public void ClearChest()
     {
-        chestItems.Clear();
+        if (chestInventoryManager != null)
+        {
+            chestInventoryManager.ClearChest();
+        }
     }
     
     public bool IsOpen()
