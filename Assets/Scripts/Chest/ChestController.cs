@@ -25,7 +25,10 @@ public class ChestController : MonoBehaviour
     private AudioSource audioSource;
     private InventoryManager inventoryManager;
     private float interactionRange = 3f;
-    
+
+    [Header("UI Interazione")]
+    public GameObject interactPromptUI;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -272,6 +275,32 @@ public class ChestController : MonoBehaviour
         {
             Gizmos.color = isChestOpen ? Color.green : Color.red;
             Gizmos.DrawWireCube(transform.position + Vector3.up * 2f, Vector3.one * 0.5f);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var movement = other.GetComponent<PlayerMovement>();
+            if (movement != null)
+                movement.SetNearChest(true);
+
+            if (interactPromptUI != null)
+                interactPromptUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var movement = other.GetComponent<PlayerMovement>();
+            if (movement != null)
+                movement.SetNearChest(false);
+
+            if (interactPromptUI != null)
+                interactPromptUI.SetActive(false);
         }
     }
 }

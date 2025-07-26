@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     public float damageAmount = 20f;
     public LayerMask enemyLayer;
 
+    private bool isNearChest = false;
+
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -83,21 +85,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Apertura/chiusura chest con tasto E (solo se siamo vicini)
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.eKey.wasPressedThisFrame && isNearChest)
         {
             isChestOpen = !isChestOpen;
             if (chestUI != null) chestUI.SetActive(isChestOpen);
 
-            if (isChestOpen)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            Cursor.lockState = isChestOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isChestOpen;
         }
 
         // Se l'inventario è aperto O una chest è aperta, non permettere movimenti né rotazione
@@ -204,5 +198,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Ray per debug visuale (verde = tentativo valido)
         Debug.DrawRay(attackCenter, transform.forward * radius, Color.green, 1f);
+    }
+
+    public void SetNearChest(bool value)
+    {
+        isNearChest = value;
     }
 }
