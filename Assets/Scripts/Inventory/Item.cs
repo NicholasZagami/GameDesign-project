@@ -11,15 +11,12 @@ public class Item : ScriptableObject
     [Header("Category")]
     public ItemCategory category = ItemCategory.Generic;
     
+    [Header("Item Properties")]
+    public bool isDroppable = true;
+    
     [Header("Description")]
     [TextArea(3, 6)]
     public string description;
-    
-    [Header("Stats (Optional)")]
-    public int value = 0;
-    public float weight = 1f;
-    public bool isStackable = false;
-    public int maxStackSize = 1;
     
     /// <summary>
     /// Ottiene il nome display della categoria di questo item
@@ -51,5 +48,13 @@ public class Item : ScriptableObject
     public (int startIndex, int endIndex) GetValidSlotRange()
     {
         return CategoryHelper.GetSlotRangeForCategory(category);
+    }
+    
+    /// <summary>
+    /// Verifica se questo item può essere droppato
+    /// </summary>
+    public bool CanBeDropped()
+    {
+        return isDroppable;
     }
 }

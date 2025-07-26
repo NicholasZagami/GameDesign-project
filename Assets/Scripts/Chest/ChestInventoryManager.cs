@@ -12,13 +12,18 @@ public class ChestInventoryManager : MonoBehaviour
     public InputActionReference interactAction;
     public int selectedSlotIndex = 0;
     
+    [Header("Audio")]
+    public AudioClip itemTransferBlockedSound; // Suono per trasferimento bloccato
+    
     private InventoryManager playerInventoryManager;
+    private AudioSource audioSource;
     private bool isActive = false;
     
     private void Awake()
     {
         FindInventoryManager();
         SetupInputAction();
+        InitializeAudioSource();
     }
     
     private void Start()
@@ -26,6 +31,15 @@ public class ChestInventoryManager : MonoBehaviour
         if (chestUISlots == null || chestUISlots.Length == 0)
         {
             AutoFindChestSlots();
+        }
+    }
+    
+    private void InitializeAudioSource()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
     
@@ -152,6 +166,34 @@ public class ChestInventoryManager : MonoBehaviour
         return false;
     }
     
+    /// <summary>
+    /// Verifica se un item può essere rimosso dalla chest
+    /// Nota: Gli item nella chest possono sempre essere presi, 
+    /// il controllo isDroppable si applica solo quando si vuole droppare dal player inventory
+    /// </summary>
+    public bool CanRemoveItemFromChest(Item item)
+    {
+        // Gli item nella chest possono sempre essere presi
+        return item != null;
+    }
+    
+    /// <summary>
+    /// Verifica se un item può essere depositato nella chest dal player inventory
+    /// </summary>
+    public bool CanDepositItemInChest(Item item)
+    {
+        if (item == null) return false;
+        
+        if (!item.CanBeDropped())
+        {
+            Debug.Log($"Item '{item.itemName}' non può essere depositato nella chest perché non è droppabile!");
+            PlaySound(itemTransferBlockedSound);
+            return false;
+        }
+        
+        return true;
+    }
+    
     public bool RemoveItemFromChest(Item item)
     {
         if (chestUISlots == null || item == null) return false;
@@ -166,6 +208,16 @@ public class ChestInventoryManager : MonoBehaviour
         }
         
         return false;
+    }
+    
+    /// <summary>
+    /// Rimuove un item dalla chest verificando se può essere rimosso
+    /// </summary>
+    public bool RemoveItemFromChestSafe(Item item)
+    {
+        if (!CanRemoveItemFromChest(item)) return false;
+        
+        return RemoveItemFromChest(item);
     }
     
     public List<Item> GetChestItems()
@@ -186,6 +238,39 @@ public class ChestInventoryManager : MonoBehaviour
         }
         
         return items;
+    }
+    
+    /// <summary>
+    /// Ottiene solo gli item che possono essere prelevati dalla chest
+    /// (tutti, dato che dalla chest si può sempre prendere)
+    /// </summary>
+    public List<Item> GetPickupableChestItems()
+    {
+        return GetChestItems(); // Tutti gli item nella chest possono essere presi
+    }
+    
+    /// <summary>
+    /// Ottiene gli item del player che possono essere depositati nella chest
+    /// </summary>
+    public List<Item> GetDepositablePlayerItems()
+    {
+        List<Item> depositableItems = new List<Item>();
+        
+        if (playerInventoryManager == null) return depositableItems;
+        
+        foreach (var slot in playerInventoryManager.bagSlots)
+        {
+            if (slot != null)
+            {
+                Item item = slot.GetItem();
+                if (item != null && CanDepositItemInChest(item))
+                {
+                    depositableItems.Add(item);
+                }
+            }
+        }
+        
+        return depositableItems;
     }
     
     public void ClearChest()
@@ -218,6 +303,13 @@ public class ChestInventoryManager : MonoBehaviour
         Item itemToPickup = chestSlot.GetItem();
         if (itemToPickup == null) return;
         
+        if (!CanRemoveItemFromChest(itemToPickup))
+        {
+            Debug.Log($"Non è possibile prelevare '{itemToPickup.itemName}' dalla chest!");
+            PlaySound(itemTransferBlockedSound);
+            return;
+        }
+        
         bool addedSuccessfully = playerInventoryManager.AddItemToBag(itemToPickup);
         
         if (addedSuccessfully)
@@ -225,7 +317,56 @@ public class ChestInventoryManager : MonoBehaviour
             chestSlot.ClearSlot();
             chestController.PlayPickupSound();
             
+            Debug.Log($"Prelevato '{itemToPickup.itemName}' dalla chest!");
             // Don't automatically move to next slot - let mouse hover control it
+        }
+        else
+        {
+            Debug.Log("Inventario pieno o impossibile aggiungere l'item!");
+        }
+    }
+    
+    /// <summary>
+    /// Metodo per depositare un item del player nella chest
+    /// </summary>
+    public bool DepositPlayerItemInChest(Item item, ChestController chestController)
+    {
+        if (playerInventoryManager == null || item == null) return false;
+        
+        if (!CanDepositItemInChest(item))
+        {
+            return false;
+        }
+        
+        // Rimuovi dall'inventario del player
+        bool removedFromPlayer = playerInventoryManager.RemoveItemFromBag(item);
+        if (!removedFromPlayer) return false;
+        
+        // Aggiungi alla chest
+        bool addedToChest = AddItemToChest(item);
+        if (addedToChest)
+        {
+            if (chestController != null)
+            {
+                chestController.PlayPickupSound(); // Riusa il suono del pickup
+            }
+            Debug.Log($"Depositato '{item.itemName}' nella chest!");
+            return true;
+        }
+        else
+        {
+            // Se non riesco ad aggiungere alla chest, rimetti nell'inventario del player
+            playerInventoryManager.AddItemToBag(item);
+            Debug.Log("Chest piena! Item rimesso nell'inventario.");
+            return false;
+        }
+    }
+    
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
     

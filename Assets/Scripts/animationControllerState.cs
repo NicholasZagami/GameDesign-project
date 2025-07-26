@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
@@ -25,13 +25,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking = false;
 
     public GameObject inventoryUI;
+    public GameObject chestUI;
     private bool isInventoryOpen = false;
+    private bool isChestOpen = false;
 
     [Header("Attack Settings")]
     public float attackRange = 2f;
     public float damageAmount = 20f;
     public LayerMask enemyLayer;
-
 
     void Awake()
     {
@@ -40,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         footstepAudio = GetComponent<AudioSource>();
 
-        // Settiamo l'inventario a false per non averlo di mezzo allo startup della partita
+        // Settiamo l'inventario e la chest a false per non averli di mezzo allo startup della partita
         inventoryUI.SetActive(false);
+        if (chestUI != null) chestUI.SetActive(false);
         Transform maceTransform = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/WeaponSocket/Mace");
 
         if (maceTransform == null)
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
+
 
     void Update()
     {
@@ -79,8 +82,26 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Se l'inventario è aperto, non permettere movimenti né rotazione
-        if (isInventoryOpen)
+        // Apertura/chiusura chest con tasto E (solo se siamo vicini)
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            isChestOpen = !isChestOpen;
+            if (chestUI != null) chestUI.SetActive(isChestOpen);
+
+            if (isChestOpen)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        // Se l'inventario è aperto O una chest è aperta, non permettere movimenti né rotazione
+        if (isInventoryOpen || isChestOpen)
         {
             animator.SetBool("isMoving", false);
             if (footstepAudio.isPlaying) footstepAudio.Stop();
@@ -137,7 +158,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float radius = 1f;
         Vector3 attackCenter = transform.position + transform.forward * 1.0f + Vector3.up * 1.2f;
-
 
         Collider[] hits = Physics.OverlapSphere(attackCenter, radius, enemyLayer);
         bool didHit = false;

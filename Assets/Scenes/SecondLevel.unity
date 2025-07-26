@@ -4542,12 +4542,13 @@ MonoBehaviour:
   chestUISlots:
   - {fileID: 1956054538}
   - {fileID: 679623381}
-  - {fileID: 103695131}
+  - {fileID: 478196280}
   - {fileID: 1991904366}
   - {fileID: 883679094}
   - {fileID: 219289714}
   interactAction: {fileID: -2703805079847720519, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   selectedSlotIndex: 0
+  itemTransferBlockedSound: {fileID: 0}
 --- !u!114 &583608387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5078,6 +5079,7 @@ MonoBehaviour:
   initialItems:
   - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
   - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
+  - {fileID: 11400000, guid: ab2f60af668bdf242a62a08d01367231, type: 2}
   chestInventoryUI: {fileID: 583608378}
   chestInventoryManager: {fileID: 583608386}
   openSound: {fileID: 0}
@@ -13913,6 +13915,7 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: bfd030b7cf6481041989312b76592354, type: 3}
   hitClip: {fileID: 0}
   inventoryUI: {fileID: 1971420350}
+  chestUI: {fileID: 583608378}
   attackRange: 2
   damageAmount: 20
   enemyLayer:
@@ -17250,8 +17253,12 @@ MonoBehaviour:
   OnInventoryFull:
     m_PersistentCalls:
       m_Calls: []
+  OnItemDropBlocked:
+    m_PersistentCalls:
+      m_Calls: []
   itemPickupSound: {fileID: 0}
   itemRejectedSound: {fileID: 0}
+  itemDropBlockedSound: {fileID: 0}
 --- !u!1 &1978916968
 GameObject:
   m_ObjectHideFlags: 0

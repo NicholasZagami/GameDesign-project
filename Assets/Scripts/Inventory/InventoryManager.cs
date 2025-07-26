@@ -16,10 +16,12 @@ public class InventoryManager : MonoBehaviour
     public UnityEvent<Item> OnItemRemoved;
     public UnityEvent<Item> OnItemDropped;
     public UnityEvent OnInventoryFull;
+    public UnityEvent<Item> OnItemDropBlocked;
     
     [Header("Audio")]
     public AudioClip itemPickupSound;
     public AudioClip itemRejectedSound;
+    public AudioClip itemDropBlockedSound;
     
     private AudioSource audioSource;
     
@@ -145,12 +147,44 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
     
+    /// <summary>
+    /// Verifica se un item può essere droppato dallo slot
+    /// </summary>
+    public bool CanDropItemFromSlot(InventorySlot slot)
+    {
+        if (slot == null) return false;
+        
+        Item item = slot.GetItem();
+        if (item == null) return false;
+        
+        return item.CanBeDropped();
+    }
+    
+    /// <summary>
+    /// Verifica se un item può essere droppato dall'indice dello slot
+    /// </summary>
+    public bool CanDropItemFromSlotIndex(int slotIndex)
+    {
+        if (bagSlots == null || slotIndex < 0 || slotIndex >= bagSlots.Length)
+            return false;
+            
+        return CanDropItemFromSlot(bagSlots[slotIndex]);
+    }
+    
     public GameObject DropItemFromSlot(InventorySlot slot)
     {
         if (slot == null) return null;
         
         Item item = slot.GetItem();
         if (item == null) return null;
+        
+        if (!item.CanBeDropped())
+        {
+            Debug.Log($"Item '{item.itemName}' non può essere droppato!");
+            PlaySound(itemDropBlockedSound);
+            OnItemDropBlocked?.Invoke(item);
+            return null;
+        }
         
         if (item.itemPrefab == null) return null;
         
