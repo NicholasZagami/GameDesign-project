@@ -17,6 +17,7 @@ public class DoorInteraction : MonoBehaviour
 
     public AudioClip openSound;
     public AudioClip closeSound;
+    public AudioClip lockedSound;
     private AudioSource audioSource;
 
     [Header("Blocco porta con chiave")]
@@ -57,6 +58,11 @@ public class DoorInteraction : MonoBehaviour
                 else
                 {
                     Debug.Log("Porta bloccata. Chiave mancante: " + (requiredKey != null ? requiredKey.itemName : "Nessuna"));
+
+                    // Riproduce il suono della porta bloccata
+                    if (lockedSound != null && audioSource != null)
+                        audioSource.PlayOneShot(lockedSound);
+
                     return;
                 }
             }
