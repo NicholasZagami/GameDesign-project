@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
     private AudioSource audioSource;       // L'audio source da cui farlo partire
 
     private Animator animator;
-    public int totalAttackAnimations = 9;
+    public int totalAttackAnimations = 8;
 
     private void Start()
     {

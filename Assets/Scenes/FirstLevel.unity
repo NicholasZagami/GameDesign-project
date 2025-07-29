@@ -75354,7 +75354,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hitSound: {fileID: 8300000, guid: 688d6c4a62f56774ba878f175d0ba80b, type: 3}
-  totalAttackAnimations: 9
+  totalAttackAnimations: 8
 --- !u!195 &2113642294
 NavMeshAgent:
   m_ObjectHideFlags: 0
