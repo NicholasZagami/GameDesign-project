@@ -6,18 +6,20 @@ namespace Unity.Behavior
 {
     [Serializable, GeneratePropertyBag]
     [NodeDescription(
-        name: "Trigger Random Attack",
-        description: "Sets random attack index and triggers attack with cooldown.",
-        story: "Trigger random attack on [Animator] with trigger [TriggerName] and [AttackCooldown] seconds cooldown",
+        name: "Trigger Random Attack Delayed",
+        description: "Sets random attack index, waits one frame, then triggers attack with cooldown.",
+        story: "Trigger random attack on [Animator] with trigger [TriggerName] after delay with [AttackCooldown] seconds cooldown",
         category: "Action/Animation",
-        id: "33f8bb6a3f9bc4606c6613be45ad708f")]
-    internal partial class TriggerRandomAttackAction : Action
+        id: "33f8bb6a3f9bc4606c6613be45ad709f")]
+    internal partial class TriggerRandomAttackDelayedAction : Action
     {
         [SerializeReference] public BlackboardVariable<string> TriggerName;
         [SerializeReference] public BlackboardVariable<Animator> Animator;
         [SerializeReference] public BlackboardVariable<float> AttackCooldown = new BlackboardVariable<float>(1.0f);
-
-        private static float lastAttackTime = 0f;
+        
+        private bool hasSetIndex = false;
+        private int selectedAttackIndex = 0;
+        private static float lastAttackTime = -999f;
 
         protected override Status OnStart()
         {
@@ -27,23 +29,45 @@ namespace Unity.Behavior
                 return Status.Failure;
             }
 
-            // Check if enough time has passed since last attack
-            if (Time.time - lastAttackTime < AttackCooldown.Value)
+            // Check cooldown first
+            float timeSinceLastAttack = Time.time - lastAttackTime;
+            if (timeSinceLastAttack < AttackCooldown.Value)
             {
-                return Status.Failure; // Attack is on cooldown
+                Debug.Log($"Attack on cooldown. Time remaining: {AttackCooldown.Value - timeSinceLastAttack:F1}s");
+                return Status.Success; // Changed to Success - cooldown is not a failure
             }
 
-            // Set random attack index (1-8)
-            int randomAttackIndex = UnityEngine.Random.Range(1, 9);
-            Animator.Value.SetInteger("AttackIndex", randomAttackIndex);
+            // Select and set attack index on first frame (only once per attack)
+            selectedAttackIndex = UnityEngine.Random.Range(0, 8);
+            Animator.Value.SetInteger("AttackIndex", selectedAttackIndex);
+            hasSetIndex = true;
+            
+            Debug.Log($"Set AttackIndex to: {selectedAttackIndex}");
+            
+            return Status.Running;
+        }
 
-            // Trigger the attack
-            Animator.Value.SetTrigger(TriggerName.Value);
+        protected override Status OnUpdate()
+        {
+            if (hasSetIndex)
+            {
+                // Trigger attack on next frame
+                Animator.Value.SetTrigger(TriggerName.Value);
+                Debug.Log($"Triggered: {TriggerName.Value}");
+                
+                // Update cooldown timer
+                lastAttackTime = Time.time;
+                
+                return Status.Success;
+            }
+            
+            return Status.Running;
+        }
 
-            // Update last attack time
-            lastAttackTime = Time.time;
-
-            return Status.Success;
+        protected override void OnEnd()
+        {
+            hasSetIndex = false;
+            selectedAttackIndex = 0;
         }
     }
 }
