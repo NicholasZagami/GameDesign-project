@@ -34,11 +34,27 @@ public class EnemyAttack : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    private bool hasAlreadyHit = false; // Aggiungi questo sopra
+
     public void ApplyAttackDamage()
     {
+        if (hasAlreadyHit)
+            return;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Assicurati che l'attacco venga eseguito SOLO durante un'animazione con tag "Attack"
+        if (!stateInfo.IsTag("Attack"))
+        {
+            Debug.LogWarning($"[BLOCCATO] ApplyAttackDamage chiamato mentre non in stato Attack → stato attuale: {stateInfo.fullPathHash}");
+            return;
+        }
+
+        hasAlreadyHit = true;
+
         Vector3 origin = transform.position + Vector3.up * 1.2f;
         float radius = 1f;
-        float maxAttackAngle = 60f; // <-- angolo massimo per colpire (in gradi)
+        float maxAttackAngle = 60f;
 
         Collider[] hits = Physics.OverlapSphere(origin, attackRange, playerLayer);
         foreach (Collider hit in hits)
@@ -50,7 +66,6 @@ public class EnemyAttack : MonoBehaviour
                 float distance = direction.magnitude;
                 direction.Normalize();
 
-                // 🔄 Nuovo controllo: direzione dell'attacco
                 float angle = Vector3.Angle(transform.forward, direction);
                 if (angle > maxAttackAngle)
                 {
@@ -58,7 +73,6 @@ public class EnemyAttack : MonoBehaviour
                     continue;
                 }
 
-                // Raycast per verificare che non ci siano ostacoli
                 int mask = ~LayerMask.GetMask("Enemy");
 
                 if (Physics.Raycast(origin, direction, out RaycastHit rayHit, distance, mask))
@@ -70,11 +84,9 @@ public class EnemyAttack : MonoBehaviour
                         if (hitSound != null && audioSource != null)
                             audioSource.PlayOneShot(hitSound);
 
+                        Debug.Log($"{gameObject.name} ha colpito {hit.name}");
+
                         break;
-                    }
-                    else
-                    {
-                        Debug.Log("Attacco bloccato da: " + rayHit.collider.name);
                     }
                 }
             }
@@ -90,5 +102,10 @@ public class EnemyAttack : MonoBehaviour
         animator.SetTrigger("Attack");
 
         Debug.Log($"{gameObject.name} → AttackIndex impostato a {index}");
+    }
+
+    public void ResetHitFlag()
+    {
+        hasAlreadyHit = false;
     }
 }

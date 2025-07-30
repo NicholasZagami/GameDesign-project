@@ -45,16 +45,13 @@ public class ChestInventoryManager : MonoBehaviour
     
     private void Update()
     {
-        // Disable automatic F key handling since ChestInputHandler handles it
-        // Only keep this if you want fallback sequential pickup
-        /*
+        
         if (!isActive) return;
         
         if (interactAction != null && interactAction.action.WasPressedThisFrame())
         {
             HandlePickupInput();
         }
-        */
     }
     
     private void SetupInputAction()
