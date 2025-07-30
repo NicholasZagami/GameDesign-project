@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 1893436720120305855, guid: 8f7f18f75d9247b41b8d50beea9e6f33, type: 3}
       propertyPath: managedReferences[7731703599518974722].m_Value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1846233481}
     - target: {fileID: 1893436720120305855, guid: 8f7f18f75d9247b41b8d50beea9e6f33, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[4]'
       value: 8125894078180622419
@@ -11958,7 +11958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1003212866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19099,7 +19099,7 @@ RectTransform:
   m_Father: {fileID: 368598092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
