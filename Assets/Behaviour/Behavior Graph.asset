@@ -26,6 +26,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[Unity.Behavior.ConditionOperator, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -34,6 +51,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -42,6 +76,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -50,6 +101,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -58,6 +126,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -66,6 +151,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -74,6 +176,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -82,6 +201,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[Unity.Behavior.NavigateToTargetAction/TargetPositionMode, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -90,6 +226,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -98,6 +251,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -106,6 +276,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -114,6 +301,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -122,6 +326,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -130,6 +351,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -138,6 +376,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -146,6 +401,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -154,6 +426,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[Unity.Behavior.ConditionOperator, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -162,6 +451,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -170,6 +476,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -178,6 +501,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -186,6 +526,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -194,9 +551,26 @@ MonoBehaviour:
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         AuthoringAssetID:
+          m_Hash128:
+            'bytes[0]': 176
+            'bytes[1]': 117
+            'bytes[2]': 234
+            'bytes[3]': 76
+            'bytes[4]': 48
+            'bytes[5]': 62
+            'bytes[6]': 28
+            'bytes[7]': 116
+            'bytes[8]': 57
+            'bytes[9]': 104
+            'bytes[10]': 142
+            'bytes[11]': 192
+            'bytes[12]': 232
+            'bytes[13]': 62
+            'bytes[14]': 97
+            'bytes[15]': 229
           m_Value0: 8366630584917325232
           m_Value1: 16528561276810324025
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -4057880544913701896}
         BlackboardReference:
           rid: 1758083497929212348
         BlackboardGroupReferences: []
@@ -208,7 +582,10 @@ MonoBehaviour:
           rid: 1758083497929212350
         m_EndedNodes:
           rid: 1758083497929212351
+        <IsEndingBranch>k__BackingField: 0
+        m_NodesChanged: 0
         m_VersionTimestamp: 638894744740200607
+        <GameObject>k__BackingField: {fileID: 0}
     - rid: 1758083497929212348
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -218,7 +595,26 @@ MonoBehaviour:
     - rid: 1758083497929212349
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Graph:
@@ -230,10 +626,17 @@ MonoBehaviour:
         - rid: 1758083497929212354
     - rid: 1758083497929212350
       type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
-      data: 
+      data:
+        _size: 0
+        _version: 0
     - rid: 1758083497929212351
       type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
-      data: 
+      data:
+        _buckets: 
+        _count: 0
+        _lastIndex: 0
+        _freeList: -1
+        _version: 0
     - rid: 1758083497929212352
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -248,7 +651,26 @@ MonoBehaviour:
     - rid: 1758083497929212353
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 160
+            'bytes[1]': 101
+            'bytes[2]': 14
+            'bytes[3]': 234
+            'bytes[4]': 20
+            'bytes[5]': 6
+            'bytes[6]': 230
+            'bytes[7]': 35
+            'bytes[8]': 26
+            'bytes[9]': 79
+            'bytes[10]': 12
+            'bytes[11]': 55
+            'bytes[12]': 80
+            'bytes[13]': 148
+            'bytes[14]': 72
+            'bytes[15]': 100
           m_Value0: 2586761722866853280
           m_Value1: 7226188674357808922
         Graph:
@@ -259,10 +681,31 @@ MonoBehaviour:
           rid: 1758083497929212362
         Repeat: 1
         AllowMultipleRepeatsPerTick: 0
+        m_CurrentFrame: 0
+        m_FrameDelta: 0
     - rid: 1758083497929212354
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 167
+            'bytes[1]': 144
+            'bytes[2]': 222
+            'bytes[3]': 95
+            'bytes[4]': 243
+            'bytes[5]': 156
+            'bytes[6]': 123
+            'bytes[7]': 255
+            'bytes[8]': 52
+            'bytes[9]': 113
+            'bytes[10]': 182
+            'bytes[11]': 246
+            'bytes[12]': 53
+            'bytes[13]': 172
+            'bytes[14]': 162
+            'bytes[15]': 163
           m_Value0: 18409480470906441895
           m_Value1: 11791176122181775668
         Graph:
@@ -273,10 +716,29 @@ MonoBehaviour:
           rid: 1758083497929212363
         Repeat: 1
         AllowMultipleRepeatsPerTick: 0
+        m_CurrentFrame: 0
+        m_FrameDelta: 0
     - rid: 1758083497929212355
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 1
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 1
           m_Value1: 0
         Name: Self
@@ -285,6 +747,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 188
+            'bytes[1]': 214
+            'bytes[2]': 184
+            'bytes[3]': 243
+            'bytes[4]': 201
+            'bytes[5]': 159
+            'bytes[6]': 59
+            'bytes[7]': 20
+            'bytes[8]': 96
+            'bytes[9]': 120
+            'bytes[10]': 245
+            'bytes[11]': 131
+            'bytes[12]': 78
+            'bytes[13]': 60
+            'bytes[14]': 58
+            'bytes[15]': 42
           m_Value0: 1457934594110707388
           m_Value1: 3042810806161209440
         Name: Target
@@ -293,6 +772,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 154
+            'bytes[1]': 106
+            'bytes[2]': 31
+            'bytes[3]': 150
+            'bytes[4]': 217
+            'bytes[5]': 165
+            'bytes[6]': 6
+            'bytes[7]': 224
+            'bytes[8]': 75
+            'bytes[9]': 98
+            'bytes[10]': 200
+            'bytes[11]': 100
+            'bytes[12]': 124
+            'bytes[13]': 130
+            'bytes[14]': 251
+            'bytes[15]': 242
           m_Value0: 16142772268301249178
           m_Value1: 17508731447111344715
         Name: AttackingRange
@@ -301,6 +797,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[RangeDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 27
+            'bytes[1]': 51
+            'bytes[2]': 186
+            'bytes[3]': 202
+            'bytes[4]': 190
+            'bytes[5]': 161
+            'bytes[6]': 2
+            'bytes[7]': 93
+            'bytes[8]': 169
+            'bytes[9]': 122
+            'bytes[10]': 151
+            'bytes[11]': 231
+            'bytes[12]': 127
+            'bytes[13]': 156
+            'bytes[14]': 212
+            'bytes[15]': 166
           m_Value0: 6702097036297777947
           m_Value1: 12021405378518940329
         Name: New Range Detector
@@ -309,6 +822,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 19
+            'bytes[1]': 7
+            'bytes[2]': 112
+            'bytes[3]': 235
+            'bytes[4]': 162
+            'bytes[5]': 108
+            'bytes[6]': 112
+            'bytes[7]': 230
+            'bytes[8]': 146
+            'bytes[9]': 188
+            'bytes[10]': 243
+            'bytes[11]': 247
+            'bytes[12]': 88
+            'bytes[13]': 199
+            'bytes[14]': 30
+            'bytes[15]': 157
           m_Value0: 16604891273105508115
           m_Value1: 11321705698187000978
         Name: New Line Of Sight Detector
@@ -317,6 +847,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 7
+            'bytes[1]': 61
+            'bytes[2]': 113
+            'bytes[3]': 232
+            'bytes[4]': 117
+            'bytes[5]': 57
+            'bytes[6]': 37
+            'bytes[7]': 64
+            'bytes[8]': 42
+            'bytes[9]': 52
+            'bytes[10]': 82
+            'bytes[11]': 52
+            'bytes[12]': 7
+            'bytes[13]': 153
+            'bytes[14]': 19
+            'bytes[15]': 149
           m_Value0: 4622163771139374343
           m_Value1: 10742097792430388266
         Name: TargetDetected
@@ -325,6 +872,23 @@ MonoBehaviour:
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 246
+            'bytes[1]': 107
+            'bytes[2]': 226
+            'bytes[3]': 56
+            'bytes[4]': 84
+            'bytes[5]': 91
+            'bytes[6]': 48
+            'bytes[7]': 251
+            'bytes[8]': 40
+            'bytes[9]': 181
+            'bytes[10]': 229
+            'bytes[11]': 180
+            'bytes[12]': 139
+            'bytes[13]': 181
+            'bytes[14]': 31
+            'bytes[15]': 223
           m_Value0: 18100067319691766774
           m_Value1: 16077768806375994664
         Name: PatrolPoints
@@ -332,7 +896,26 @@ MonoBehaviour:
     - rid: 1758083497929212362
       type: {class: AbortModifier, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 172
+            'bytes[1]': 93
+            'bytes[2]': 90
+            'bytes[3]': 39
+            'bytes[4]': 144
+            'bytes[5]': 148
+            'bytes[6]': 53
+            'bytes[7]': 13
+            'bytes[8]': 160
+            'bytes[9]': 154
+            'bytes[10]': 147
+            'bytes[11]': 224
+            'bytes[12]': 88
+            'bytes[13]': 131
+            'bytes[14]': 179
+            'bytes[15]': 71
           m_Value0: 951830243115163052
           m_Value1: 5166617615272221344
         Graph:
@@ -347,7 +930,26 @@ MonoBehaviour:
     - rid: 1758083497929212363
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 184
+            'bytes[1]': 238
+            'bytes[2]': 35
+            'bytes[3]': 85
+            'bytes[4]': 38
+            'bytes[5]': 153
+            'bytes[6]': 172
+            'bytes[7]': 217
+            'bytes[8]': 116
+            'bytes[9]': 49
+            'bytes[10]': 144
+            'bytes[11]': 109
+            'bytes[12]': 247
+            'bytes[13]': 224
+            'bytes[14]': 67
+            'bytes[15]': 12
           m_Value0: 15685079992140820152
           m_Value1: 883797305194459508
         Graph:
@@ -357,10 +959,30 @@ MonoBehaviour:
         m_Children:
         - rid: 1758083497929212366
         - rid: 1758083497929212367
+        m_CurrentChild: 0
     - rid: 1758083497929212364
       type: {class: BranchingConditionComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 13
+            'bytes[1]': 190
+            'bytes[2]': 194
+            'bytes[3]': 194
+            'bytes[4]': 206
+            'bytes[5]': 120
+            'bytes[6]': 33
+            'bytes[7]': 112
+            'bytes[8]': 12
+            'bytes[9]': 242
+            'bytes[10]': 21
+            'bytes[11]': 22
+            'bytes[12]': 205
+            'bytes[13]': 213
+            'bytes[14]': 204
+            'bytes[15]': 53
           m_Value0: 8079872035905519117
           m_Value1: 3876708456074703372
         Graph:
@@ -386,10 +1008,30 @@ MonoBehaviour:
           rid: 1758083497929212347
         Variable:
           rid: 1758083497929212360
+        m_HasVariableChanged: 0
     - rid: 1758083497929212366
       type: {class: RangeDetectorAction, ns: , asm: Assembly-CSharp}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 184
+            'bytes[1]': 238
+            'bytes[2]': 35
+            'bytes[3]': 85
+            'bytes[4]': 38
+            'bytes[5]': 153
+            'bytes[6]': 172
+            'bytes[7]': 217
+            'bytes[8]': 116
+            'bytes[9]': 49
+            'bytes[10]': 144
+            'bytes[11]': 109
+            'bytes[12]': 247
+            'bytes[13]': 224
+            'bytes[14]': 67
+            'bytes[15]': 12
           m_Value0: 15685079992140820152
           m_Value1: 883797305194459508
         Graph:
@@ -403,7 +1045,26 @@ MonoBehaviour:
     - rid: 1758083497929212367
       type: {class: BranchingConditionComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 64
+            'bytes[1]': 12
+            'bytes[2]': 110
+            'bytes[3]': 127
+            'bytes[4]': 182
+            'bytes[5]': 106
+            'bytes[6]': 108
+            'bytes[7]': 192
+            'bytes[8]': 99
+            'bytes[9]': 54
+            'bytes[10]': 54
+            'bytes[11]': 87
+            'bytes[12]': 253
+            'bytes[13]': 146
+            'bytes[14]': 87
+            'bytes[15]': 25
           m_Value0: 13865574684821425216
           m_Value1: 1826089790709577315
         Graph:
@@ -425,7 +1086,26 @@ MonoBehaviour:
     - rid: 1758083497929212368
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 69
+            'bytes[1]': 197
+            'bytes[2]': 168
+            'bytes[3]': 217
+            'bytes[4]': 58
+            'bytes[5]': 194
+            'bytes[6]': 5
+            'bytes[7]': 105
+            'bytes[8]': 189
+            'bytes[9]': 21
+            'bytes[10]': 140
+            'bytes[11]': 115
+            'bytes[12]': 212
+            'bytes[13]': 12
+            'bytes[14]': 12
+            'bytes[15]': 88
           m_Value0: 7567668306881594693
           m_Value1: 6344460081669346749
         Graph:
@@ -435,10 +1115,30 @@ MonoBehaviour:
         m_Children:
         - rid: 1758083497929212374
         - rid: 1758083497929212375
+        m_CurrentChild: 0
     - rid: 1758083497929212369
       type: {class: ParallelAllSuccess, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 226
+            'bytes[1]': 166
+            'bytes[2]': 190
+            'bytes[3]': 234
+            'bytes[4]': 120
+            'bytes[5]': 117
+            'bytes[6]': 143
+            'bytes[7]': 74
+            'bytes[8]': 134
+            'bytes[9]': 224
+            'bytes[10]': 27
+            'bytes[11]': 183
+            'bytes[12]': 173
+            'bytes[13]': 201
+            'bytes[14]': 70
+            'bytes[15]': 25
           m_Value0: 5372642042671179490
           m_Value1: 1821364847256526982
         Graph:
@@ -462,7 +1162,26 @@ MonoBehaviour:
     - rid: 1758083497929212371
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 115
+            'bytes[1]': 204
+            'bytes[2]': 205
+            'bytes[3]': 142
+            'bytes[4]': 172
+            'bytes[5]': 134
+            'bytes[6]': 139
+            'bytes[7]': 77
+            'bytes[8]': 228
+            'bytes[9]': 78
+            'bytes[10]': 96
+            'bytes[11]': 176
+            'bytes[12]': 86
+            'bytes[13]': 247
+            'bytes[14]': 39
+            'bytes[15]': 86
           m_Value0: 5587707838371581043
           m_Value1: 6208202563051867876
         Graph:
@@ -472,10 +1191,30 @@ MonoBehaviour:
         m_Children:
         - rid: 1758083497929212378
         - rid: 1758083497929212379
+        m_CurrentChild: 0
     - rid: 1758083497929212372
       type: {class: SetVariableValueAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 109
+            'bytes[1]': 5
+            'bytes[2]': 132
+            'bytes[3]': 200
+            'bytes[4]': 53
+            'bytes[5]': 253
+            'bytes[6]': 174
+            'bytes[7]': 188
+            'bytes[8]': 219
+            'bytes[9]': 166
+            'bytes[10]': 10
+            'bytes[11]': 45
+            'bytes[12]': 244
+            'bytes[13]': 76
+            'bytes[14]': 242
+            'bytes[15]': 8
           m_Value0: 13596082732517295469
           m_Value1: 644662308278806235
         Graph:
@@ -498,7 +1237,26 @@ MonoBehaviour:
     - rid: 1758083497929212374
       type: {class: NavigateToTargetAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 69
+            'bytes[1]': 197
+            'bytes[2]': 168
+            'bytes[3]': 217
+            'bytes[4]': 58
+            'bytes[5]': 194
+            'bytes[6]': 5
+            'bytes[7]': 105
+            'bytes[8]': 189
+            'bytes[9]': 21
+            'bytes[10]': 140
+            'bytes[11]': 115
+            'bytes[12]': 212
+            'bytes[13]': 12
+            'bytes[14]': 12
+            'bytes[15]': 88
           m_Value0: 7567668306881594693
           m_Value1: 6344460081669346749
         Graph:
@@ -519,10 +1277,37 @@ MonoBehaviour:
           rid: 1758083497929212032
         m_TargetPositionMode:
           rid: 1758083497929212033
+        m_NavMeshAgent: {fileID: 0}
+        m_Animator: {fileID: 0}
+        m_LastTargetPosition: {x: 0, y: 0, z: 0}
+        m_ColliderAdjustedTargetPosition: {x: 0, y: 0, z: 0}
+        m_OriginalStoppingDistance: -1
+        m_OriginalSpeed: -1
+        m_ColliderOffset: 0
+        m_CurrentSpeed: 0
     - rid: 1758083497929212375
       type: {class: BranchingConditionComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 73
+            'bytes[1]': 52
+            'bytes[2]': 49
+            'bytes[3]': 228
+            'bytes[4]': 72
+            'bytes[5]': 171
+            'bytes[6]': 92
+            'bytes[7]': 188
+            'bytes[8]': 247
+            'bytes[9]': 238
+            'bytes[10]': 203
+            'bytes[11]': 29
+            'bytes[12]': 196
+            'bytes[13]': 99
+            'bytes[14]': 51
+            'bytes[15]': 33
           m_Value0: 13572911706542257225
           m_Value1: 2392365521028509431
         Graph:
@@ -543,7 +1328,26 @@ MonoBehaviour:
     - rid: 1758083497929212376
       type: {class: PatrolAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 66
+            'bytes[1]': 113
+            'bytes[2]': 197
+            'bytes[3]': 180
+            'bytes[4]': 180
+            'bytes[5]': 191
+            'bytes[6]': 193
+            'bytes[7]': 67
+            'bytes[8]': 47
+            'bytes[9]': 180
+            'bytes[10]': 161
+            'bytes[11]': 167
+            'bytes[12]': 165
+            'bytes[13]': 123
+            'bytes[14]': 72
+            'bytes[15]': 159
           m_Value0: 4882394253894185282
           m_Value1: 11477559601765921839
         Graph:
@@ -564,10 +1368,38 @@ MonoBehaviour:
           rid: 1758083497929212039
         PreserveLatestPatrolPoint:
           rid: 1758083497929212040
+        m_NavMeshAgent: {fileID: 0}
+        m_Animator: {fileID: 0}
+        m_CurrentTarget: {x: 0, y: 0, z: 0}
+        m_OriginalStoppingDistance: -1
+        m_OriginalSpeed: -1
+        m_WaypointWaitTimer: 0
+        m_CurrentSpeed: 0
+        m_CurrentPatrolPoint: 0
+        m_Waiting: 0
     - rid: 1758083497929212377
       type: {class: RepeatUntilFailModifier, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 81
+            'bytes[1]': 152
+            'bytes[2]': 75
+            'bytes[3]': 73
+            'bytes[4]': 190
+            'bytes[5]': 13
+            'bytes[6]': 13
+            'bytes[7]': 69
+            'bytes[8]': 99
+            'bytes[9]': 68
+            'bytes[10]': 35
+            'bytes[11]': 113
+            'bytes[12]': 178
+            'bytes[13]': 173
+            'bytes[14]': 216
+            'bytes[15]': 132
           m_Value0: 4975648274238904401
           m_Value1: 9572591989889909859
         Graph:
@@ -577,10 +1409,31 @@ MonoBehaviour:
         m_Child:
           rid: 1758083497929212382
         m_AllowMultipleRepeatsPerTick: 0
+        m_CurrentFrame: 0
+        m_FrameDelta: 0
     - rid: 1758083497929212378
       type: {class: SetVariableValueAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 115
+            'bytes[1]': 204
+            'bytes[2]': 205
+            'bytes[3]': 142
+            'bytes[4]': 172
+            'bytes[5]': 134
+            'bytes[6]': 139
+            'bytes[7]': 77
+            'bytes[8]': 228
+            'bytes[9]': 78
+            'bytes[10]': 96
+            'bytes[11]': 176
+            'bytes[12]': 86
+            'bytes[13]': 247
+            'bytes[14]': 39
+            'bytes[15]': 86
           m_Value0: 5587707838371581043
           m_Value1: 6208202563051867876
         Graph:
@@ -594,7 +1447,26 @@ MonoBehaviour:
     - rid: 1758083497929212379
       type: {class: SetAnimatorTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 194
+            'bytes[1]': 46
+            'bytes[2]': 139
+            'bytes[3]': 36
+            'bytes[4]': 2
+            'bytes[5]': 30
+            'bytes[6]': 152
+            'bytes[7]': 94
+            'bytes[8]': 47
+            'bytes[9]': 179
+            'bytes[10]': 250
+            'bytes[11]': 154
+            'bytes[12]': 164
+            'bytes[13]': 247
+            'bytes[14]': 139
+            'bytes[15]': 129
           m_Value0: 6816231030577114818
           m_Value1: 9334826939002303279
         Graph:
@@ -610,7 +1482,26 @@ MonoBehaviour:
     - rid: 1758083497929212380
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 231
+            'bytes[1]': 175
+            'bytes[2]': 152
+            'bytes[3]': 218
+            'bytes[4]': 3
+            'bytes[5]': 90
+            'bytes[6]': 117
+            'bytes[7]': 17
+            'bytes[8]': 143
+            'bytes[9]': 196
+            'bytes[10]': 45
+            'bytes[11]': 188
+            'bytes[12]': 91
+            'bytes[13]': 217
+            'bytes[14]': 133
+            'bytes[15]': 200
           m_Value0: 1258010643518762983
           m_Value1: 14449193967510471823
         Graph:
@@ -636,7 +1527,26 @@ MonoBehaviour:
     - rid: 1758083497929212382
       type: {class: SetAnimatorTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 210
+            'bytes[1]': 162
+            'bytes[2]': 13
+            'bytes[3]': 212
+            'bytes[4]': 135
+            'bytes[5]': 243
+            'bytes[6]': 143
+            'bytes[7]': 94
+            'bytes[8]': 208
+            'bytes[9]': 164
+            'bytes[10]': 49
+            'bytes[11]': 140
+            'bytes[12]': 241
+            'bytes[13]': 116
+            'bytes[14]': 220
+            'bytes[15]': 109
           m_Value0: 6813932525938647762
           m_Value1: 7916330825798493392
         Graph:
@@ -653,16 +1563,54 @@ MonoBehaviour:
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212355
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212384
       type: {class: SetAnimatorTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 224
+            'bytes[1]': 114
+            'bytes[2]': 52
+            'bytes[3]': 136
+            'bytes[4]': 42
+            'bytes[5]': 147
+            'bytes[6]': 203
+            'bytes[7]': 56
+            'bytes[8]': 144
+            'bytes[9]': 117
+            'bytes[10]': 157
+            'bytes[11]': 141
+            'bytes[12]': 105
+            'bytes[13]': 50
+            'bytes[14]': 174
+            'bytes[15]': 222
           m_Value0: 4092526497279275744
           m_Value1: 16045817951296517520
         Graph:
@@ -678,7 +1626,26 @@ MonoBehaviour:
     - rid: 1758083497929212385
       type: {class: TriggerRandomAttackDelayedAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
+        <CurrentStatus>k__BackingField: 0
+        <IsRunning>k__BackingField: 0
         ID:
+          m_Hash128:
+            'bytes[0]': 137
+            'bytes[1]': 0
+            'bytes[2]': 96
+            'bytes[3]': 49
+            'bytes[4]': 237
+            'bytes[5]': 213
+            'bytes[6]': 163
+            'bytes[7]': 167
+            'bytes[8]': 92
+            'bytes[9]': 24
+            'bytes[10]': 36
+            'bytes[11]': 152
+            'bytes[12]': 202
+            'bytes[13]': 1
+            'bytes[14]': 35
+            'bytes[15]': 42
           m_Value0: 12079733840250142857
           m_Value1: 3036272543425370204
         Graph:
@@ -691,50 +1658,145 @@ MonoBehaviour:
           rid: 1758083497929212391
         AttackCooldown:
           rid: 1758083497929212392
+        hasSetIndex: 0
+        selectedAttackIndex: 0
     - rid: 1758083497929212386
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212355
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212387
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212356
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212388
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212355
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212389
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212355
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212390
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -743,16 +1805,52 @@ MonoBehaviour:
       type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 1758083497929212355
+        m_LinkedObject: {fileID: 0}
+        m_CallbackRegistered: 0
     - rid: 1758083497929212392
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
+          m_Hash128:
+            'bytes[0]': 0
+            'bytes[1]': 0
+            'bytes[2]': 0
+            'bytes[3]': 0
+            'bytes[4]': 0
+            'bytes[5]': 0
+            'bytes[6]': 0
+            'bytes[7]': 0
+            'bytes[8]': 0
+            'bytes[9]': 0
+            'bytes[10]': 0
+            'bytes[11]': 0
+            'bytes[12]': 0
+            'bytes[13]': 0
+            'bytes[14]': 0
+            'bytes[15]': 0
           m_Value0: 0
           m_Value1: 0
         Name: 
@@ -894,7 +1992,7 @@ MonoBehaviour:
   - rid: 4158738430567645699
   - rid: 1758083497929212094
   - rid: 1758083497929212344
-  m_VersionTimestamp: 638894744740200607
+  m_VersionTimestamp: 638894904164285877
   m_DebugInfo: {fileID: -4057880544913701896}
   m_RuntimeGraph: {fileID: -6368811403890187249}
   AssetID:
@@ -1406,7 +2504,7 @@ MonoBehaviour:
         - rid: 1758083497929212095
         - rid: 1758083497929212096
         NodeType:
-          m_SerializableType: Unity.Behavior.TriggerRandomAttackDelayedAction, Unity.Behavior,
+          m_SerializableType: Unity.Behavior.TriggerRandomAttackDelayedAction, Assembly-CSharp,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         NodeTypeID:
           m_Value0: 6972868819752319027
