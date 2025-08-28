@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -12,7 +12,6 @@ public class EnemyAttack : MonoBehaviour
     private AudioSource audioSource;       // L'audio source da cui farlo partire
 
     private Animator animator;
-    public int totalAttackAnimations = 8;
 
     private void Start()
     {
@@ -38,17 +37,17 @@ public class EnemyAttack : MonoBehaviour
 
     public void ApplyAttackDamage()
     {
-        if (hasAlreadyHit)
-            return;
+        //if (hasAlreadyHit)
+        //    return;
 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        // Assicurati che l'attacco venga eseguito SOLO durante un'animazione con tag "Attack"
-        if (!stateInfo.IsTag("Attack"))
-        {
-            Debug.LogWarning($"[BLOCCATO] ApplyAttackDamage chiamato mentre non in stato Attack → stato attuale: {stateInfo.fullPathHash}");
-            return;
-        }
+         //Assicurati che l'attacco venga eseguito SOLO durante un'animazione con tag "Attack"
+        //if (!stateInfo.IsTag("Attack"))
+        //{
+        //    Debug.LogWarning($"[BLOCCATO] ApplyAttackDamage chiamato mentre non in stato Attack → stato attuale: {stateInfo.fullPathHash}");
+        //    return;
+        //}
 
         hasAlreadyHit = true;
 
@@ -91,17 +90,6 @@ public class EnemyAttack : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void TriggerRandomAttack()
-    {
-        if (animator == null) return;
-
-        int index = Random.Range(0, totalAttackAnimations);
-        animator.SetInteger("AttackIndex", index);
-        animator.SetTrigger("Attack");
-
-        Debug.Log($"{gameObject.name} → AttackIndex impostato a {index}");
     }
 
     public void ResetHitFlag()

@@ -48,6 +48,15 @@ MonoBehaviour:
   openAngle: 90
   openSpeed: 2
   isOpen: 0
+  interactionDistance: 2.5
+  player: {fileID: 0}
+  interactionPrompt: {fileID: 0}
+  openSound: {fileID: 0}
+  closeSound: {fileID: 0}
+  lockedSound: {fileID: 0}
+  requiredKey: {fileID: 0}
+  isLocked: 0
+  consumeKeyOnUse: 0
 --- !u!1001 &3975040967368602747
 PrefabInstance:
   m_ObjectHideFlags: 0
