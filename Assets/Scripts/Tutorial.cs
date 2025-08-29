@@ -27,6 +27,12 @@ public class Tutorial : MonoBehaviour
     public float interactTriggerRadius = 2.5f;
     private bool interactionPanelShown = false;
 
+    [Header("Trigger stanza finale")]
+    public Transform finalTriggerPoint;
+    public float finalTriggerRadius = 2.5f;
+    private bool finalPanelShown = false;
+
+
 
     [Header("Audio passi")]
     public AudioSource footstepAudio;  // assegna da Inspector
@@ -99,6 +105,22 @@ public class Tutorial : MonoBehaviour
                 Debug.Log("▶️ Trigger interazione attivato, pannello mostrato");
             }
         }
+
+        // ▶️ Trigger ultima stanza (es. pannello index 3)
+        if (!finalPanelShown && currentPanelIndex == 3 && finalTriggerPoint != null)
+        {
+            float distance = Vector3.Distance(playerMovement.transform.position, finalTriggerPoint.position);
+            if (distance <= finalTriggerRadius)
+            {
+                finalPanelShown = true;
+                ShowCurrentPanel();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                playerMovement.enabled = false;
+                Debug.Log("▶️ Trigger finale attivato, pannello mostrato");
+            }
+        }
+
     }
 
     public void OnContinueClicked()
@@ -123,9 +145,20 @@ public class Tutorial : MonoBehaviour
             return;
         }
 
-        // Altri pannelli normali
+        // Avanza di uno
         currentPanelIndex++;
 
+        // Se il prossimo step è "a trigger", non mostrare subito il pannello: abilita il player e attendi il trigger
+        // (0->1 movimento->attacco, 1->2 attacco->interazione, 2->3 interazione->finale)
+        if (currentPanelIndex == 1 || currentPanelIndex == 2 || currentPanelIndex == 3)
+        {
+            // per 1 e 2 avevi già la logica; includiamo anche 3
+            EnablePlayerTemporarily();
+            continueButton.interactable = false;
+            return;
+        }
+
+        // Se non è a trigger, gestiscilo normalmente
         if (currentPanelIndex >= tutorialPanels.Count)
         {
             EndTutorial();
