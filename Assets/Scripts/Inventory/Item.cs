@@ -13,6 +13,12 @@ public class Item : ScriptableObject
     
     [Header("Item Properties")]
     public bool isDroppable = true;
+    public bool isConsumable = false;
+    
+    [Header("Consumable Properties")]
+    [SerializeField] private float healAmount = 10f;
+    [SerializeField] private AudioClip consumeSound;
+    [SerializeField] private GameObject consumeEffect;
     
     [Header("Description")]
     [TextArea(3, 6)]
@@ -56,5 +62,37 @@ public class Item : ScriptableObject
     public bool CanBeDropped()
     {
         return isDroppable;
+    }
+    
+    /// <summary>
+    /// Verifica se questo item può essere consumato
+    /// </summary>
+    public bool CanBeConsumed()
+    {
+        return isConsumable && (category == ItemCategory.Potion || healAmount > 0);
+    }
+    
+    /// <summary>
+    /// Ottiene la quantità di cura di questo item
+    /// </summary>
+    public float GetHealAmount()
+    {
+        return healAmount;
+    }
+    
+    /// <summary>
+    /// Ottiene il suono di consumo
+    /// </summary>
+    public AudioClip GetConsumeSound()
+    {
+        return consumeSound;
+    }
+    
+    /// <summary>
+    /// Ottiene l'effetto di consumo
+    /// </summary>
+    public GameObject GetConsumeEffect()
+    {
+        return consumeEffect;
     }
 }

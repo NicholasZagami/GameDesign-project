@@ -13,6 +13,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool showCategoryColors = true;
     public float categoryColorAlpha = 0.3f;
     
+    [Header("Consumable Visual Settings")]
+    public Color consumableHighlightColor = new Color(0.2f, 1f, 0.2f, 0.5f);
+    
     private Item currentItem;
     private bool isMouseOver = false;
     private ItemCategory slotCategory;
@@ -75,6 +78,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         iconImage.sprite = newItem.icon;
         iconImage.enabled = true;
         
+        // Aggiorna l'aspetto visivo per gli item consumabili
+        UpdateConsumableVisual();
+        
         return true;
     }
 
@@ -100,6 +106,28 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         inventoryManager.DropItemFromSlot(this);
     }
     
+    /// <summary>
+    /// Tenta di consumare l'item in questo slot
+    /// </summary>
+    public void TriggerConsume()
+    {
+        if (currentItem == null || !currentItem.CanBeConsumed())
+        {
+            Debug.Log("Nessun item consumabile in questo slot");
+            return;
+        }
+        
+        ItemConsumer consumer = ItemConsumer.Instance;
+        if (consumer != null)
+        {
+            consumer.ConsumeItem(currentItem, this);
+        }
+        else
+        {
+            Debug.LogError("ItemConsumer non trovato! Assicurati che sia presente nella scena.");
+        }
+    }
+    
     public void SetCategoryVisual(ItemCategory category)
     {
         slotCategory = category;
@@ -111,6 +139,41 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         backgroundImage.color = categoryColor;
         
         originalBackgroundColor = categoryColor;
+    }
+    
+    /// <summary>
+    /// Aggiorna l'aspetto visivo per gli item consumabili
+    /// </summary>
+    private void UpdateConsumableVisual()
+    {
+        if (currentItem == null || backgroundImage == null) return;
+        
+        if (currentItem.CanBeConsumed())
+        {
+            // Verifica se l'item può essere consumato ora
+            ItemConsumer consumer = ItemConsumer.Instance;
+            if (consumer != null && consumer.CanConsumeItemNow(currentItem))
+            {
+                // Evidenzia con colore verde se può essere consumato
+                Color highlightColor = consumableHighlightColor;
+                backgroundImage.color = Color.Lerp(originalBackgroundColor, highlightColor, 0.6f);
+            }
+            else if (consumer != null)
+            {
+                // Colore più tenue se non può essere consumato ora (es. salute piena)
+                Color dimmedColor = new Color(0.8f, 0.8f, 0.8f, categoryColorAlpha);
+                backgroundImage.color = dimmedColor;
+            }
+        }
+    }
+    
+    private void Update()
+    {
+        // Aggiorna costantemente l'aspetto visivo degli item consumabili
+        if (currentItem != null && currentItem.CanBeConsumed())
+        {
+            UpdateConsumableVisual();
+        }
     }
     
     private void ShowIncompatibleFeedback()
@@ -139,9 +202,19 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right && currentItem != null)
+        if (currentItem == null) return;
+        
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             TriggerDrop();
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            // Click sinistro per consumare gli item consumabili
+            if (currentItem.CanBeConsumed())
+            {
+                TriggerConsume();
+            }
         }
     }
     
@@ -169,8 +242,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         string categoryName = slotIndex >= 0 ? CategoryHelper.GetCategoryDisplayName(slotCategory) : "Unknown";
         string itemName = currentItem != null ? currentItem.itemName : "Empty";
+        string consumableInfo = currentItem != null && currentItem.CanBeConsumed() ? " [CONSUMABLE]" : "";
         string hoverStatus = isMouseOver ? " [HOVERED]" : "";
-        return $"Slot {slotIndex} ({categoryName}): {itemName}{hoverStatus}";
+        return $"Slot {slotIndex} ({categoryName}): {itemName}{consumableInfo}{hoverStatus}";
     }
     
     public void DisplayItem(Item item)
