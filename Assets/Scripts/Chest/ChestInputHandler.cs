@@ -53,6 +53,9 @@ public class ChestInputHandler : MonoBehaviour
         
         inputProcessedThisFrame = false;
         
+        // Aggiorna continuamente lo slot selezionato basato sull'hover del mouse
+        UpdateSelectedSlotFromMouse();
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             HandlePickup();
@@ -94,19 +97,42 @@ public class ChestInputHandler : MonoBehaviour
         return null;
     }
     
-    private void HandlePickup()
+    private void UpdateSelectedSlotFromMouse()
     {
-        if (inputProcessedThisFrame || chestController == null || chestInventoryManager == null) return;
+        if (chestInventoryManager == null) return;
         
         InventorySlot slotUnderMouse = GetSlotUnderMouseWithRaycast();
         
-        if (slotUnderMouse != null && slotUnderMouse.GetItem() != null)
+        if (slotUnderMouse != null)
         {
             int slotIndex = GetSlotIndex(slotUnderMouse);
             if (slotIndex >= 0)
             {
-                chestInventoryManager.OnChestSlotClicked(slotIndex, chestController);
+                // Aggiorna lo slot selezionato nel ChestInventoryManager
+                chestInventoryManager.selectedSlotIndex = slotIndex;
+            }
+        }
+    }
+    
+    private void HandlePickup()
+    {
+        if (inputProcessedThisFrame || chestController == null || chestInventoryManager == null) return;
+        
+        // Controlla se ChestInventoryManager ha già processato input questo frame
+        if (chestInventoryManager.IsInputProcessedThisFrame()) return;
+        
+        // Usa selectedSlotIndex che viene aggiornato dall'hover del mouse
+        int slotIndex = chestInventoryManager.selectedSlotIndex;
+        
+        if (slotIndex >= 0 && slotIndex < chestInventoryManager.chestUISlots.Length)
+        {
+            InventorySlot slot = chestInventoryManager.chestUISlots[slotIndex];
+            if (slot != null && slot.GetItem() != null)
+            {
+                // true = keyboard input (F key), usa selectedSlotIndex
+                chestInventoryManager.OnChestSlotClicked(slotIndex, chestController, true);
                 inputProcessedThisFrame = true;
+                Debug.Log($"F key pressed - pickup da slot {slotIndex}");
             }
         }
     }
