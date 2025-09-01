@@ -8,6 +8,10 @@ public class InventoryInputHandler : MonoBehaviour
     public Canvas inventoryCanvas;
     public Camera uiCamera;
     
+    [Header("Input Settings")]
+    public KeyCode dropKey = KeyCode.Q;
+    public KeyCode consumeKey = KeyCode.C;
+    
     private bool inputProcessedThisFrame = false;
     
     private void Awake()
@@ -41,9 +45,14 @@ public class InventoryInputHandler : MonoBehaviour
     {
         inputProcessedThisFrame = false;
         
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(dropKey))
         {
             HandleDrop();
+        }
+        
+        if (Input.GetKeyDown(consumeKey))
+        {
+            HandleConsume();
         }
     }
     
@@ -120,6 +129,57 @@ public class InventoryInputHandler : MonoBehaviour
             slotUnderMouse.TriggerDrop();
             inputProcessedThisFrame = true;
         }
+    }
+    
+    /// <summary>
+    /// Gestisce il consumo degli item tramite tastiera
+    /// </summary>
+    private void HandleConsume()
+    {
+        if (inputProcessedThisFrame) return;
+        
+        InventorySlot slotUnderMouse = GetSlotUnderMouse();
+        
+        if (slotUnderMouse != null && slotUnderMouse.GetItem() != null)
+        {
+            Item item = slotUnderMouse.GetItem();
+            if (item.CanBeConsumed())
+            {
+                slotUnderMouse.TriggerConsume();
+                inputProcessedThisFrame = true;
+            }
+            else
+            {
+                Debug.Log($"L'item '{item.itemName}' non può essere consumato");
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Cerca e consuma la prima pozione disponibile nell'inventario
+    /// </summary>
+    public void ConsumeFirstAvailablePotion()
+    {
+        if (inventoryManager?.bagSlots == null) return;
+        
+        foreach (InventorySlot slot in inventoryManager.bagSlots)
+        {
+            if (slot?.GetItem() != null)
+            {
+                Item item = slot.GetItem();
+                if (item.CanBeConsumed() && item.category == ItemCategory.Potion)
+                {
+                    ItemConsumer consumer = ItemConsumer.Instance;
+                    if (consumer != null && consumer.CanConsumeItemNow(item))
+                    {
+                        slot.TriggerConsume();
+                        return;
+                    }
+                }
+            }
+        }
+        
+        Debug.Log("Nessuna pozione consumabile trovata nell'inventario");
     }
     
     public bool IsInputProcessedThisFrame()

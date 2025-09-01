@@ -25,9 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking = false;
 
     public GameObject inventoryUI;
-    public GameObject chestUI;
     private bool isInventoryOpen = false;
-    private bool isChestOpen = false;
 
     [Header("Attack Settings")]
     public float attackRange = 2f;
@@ -35,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask enemyLayer;
 
     private bool isNearChest = false;
+    private ChestController nearbyChestController;
 
     void Awake()
     {
@@ -45,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Settiamo l'inventario e la chest a false per non averli di mezzo allo startup della partita
         inventoryUI.SetActive(false);
-        if (chestUI != null) chestUI.SetActive(false);
         Transform maceTransform = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/WeaponSocket/Mace");
 
         if (maceTransform == null)
@@ -62,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
-
 
     void Update()
     {
@@ -84,18 +81,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Apertura/chiusura chest con tasto E (solo se siamo vicini)
-        if (Keyboard.current.eKey.wasPressedThisFrame && isNearChest)
-        {
-            isChestOpen = !isChestOpen;
-            if (chestUI != null) chestUI.SetActive(isChestOpen);
-
-            Cursor.lockState = isChestOpen ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = isChestOpen;
-        }
+        // Controlla se una chest è aperta tramite il ChestController
+        bool isAnyChestOpen = IsAnyChestOpen();
 
         // Se l'inventario è aperto O una chest è aperta, non permettere movimenti né rotazione
-        if (isInventoryOpen || isChestOpen)
+        if (isInventoryOpen || isAnyChestOpen)
         {
             animator.SetBool("isMoving", false);
             if (footstepAudio.isPlaying) footstepAudio.Stop();
@@ -139,6 +129,23 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(AttackCooldown());
         }
+    }
+
+    /// <summary>
+    /// Controlla se c'è una chest aperta nella scena
+    /// </summary>
+    private bool IsAnyChestOpen()
+    {
+        ChestController[] allChests = FindObjectsOfType<ChestController>();
+        foreach (ChestController chest in allChests)
+        {
+            if (chest.IsOpen())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private IEnumerator AttackCooldown()
@@ -203,5 +210,29 @@ public class PlayerMovement : MonoBehaviour
     public void SetNearChest(bool value)
     {
         isNearChest = value;
+        
+        // Trova il ChestController vicino quando entriamo nel range
+        if (value)
+        {
+            ChestController[] allChests = FindObjectsOfType<ChestController>();
+            float closestDistance = float.MaxValue;
+            ChestController closestChest = null;
+
+            foreach (ChestController chest in allChests)
+            {
+                float distance = Vector3.Distance(transform.position, chest.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestChest = chest;
+                }
+            }
+
+            nearbyChestController = closestChest;
+        }
+        else
+        {
+            nearbyChestController = null;
+        }
     }
 }

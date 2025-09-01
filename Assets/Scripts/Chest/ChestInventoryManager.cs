@@ -21,6 +21,8 @@ public class ChestInventoryManager : MonoBehaviour
 
     public System.Action<Item> onItemTaken;
 
+    private bool inputProcessedThisFrame = false; // Aggiunto per evitare input duplicati
+    
     private void Awake()
     {
         FindInventoryManager();
@@ -47,6 +49,7 @@ public class ChestInventoryManager : MonoBehaviour
     
     private void Update()
     {
+        inputProcessedThisFrame = false; // Reset del flag ad ogni frame
         
         if (!isActive) return;
         
@@ -78,31 +81,64 @@ public class ChestInventoryManager : MonoBehaviour
         if (active)
         {
             selectedSlotIndex = 0;
+            inputProcessedThisFrame = false; // Reset quando si attiva
         }
     }
     
     private void HandlePickupInput()
     {
+        if (inputProcessedThisFrame) return; // Previeni input multipli nello stesso frame
+        
         ChestController chestController = FindObjectOfType<ChestController>();
         if (chestController == null) return;
         
-        OnChestSlotClicked(selectedSlotIndex, chestController);
+        // Usa selectedSlotIndex per input da tastiera (ora controllato dall'hover)
+        OnChestSlotClicked(selectedSlotIndex, chestController, true); // true = keyboard input
+        inputProcessedThisFrame = true; // Marca l'input come processato
         
-        MoveToNextSlot(chestController);
+        // NON muovere automaticamente - l'hover controlla la selezione
     }
     
-    private void MoveToNextSlot(ChestController chestController)
+    // Metodo modificato: ora non cambia automaticamente lo slot selezionato
+    private void MoveToNextSlotWithItem()
     {
-        for (int i = 0; i < chestUISlots.Length; i++)
+        int startIndex = selectedSlotIndex;
+        
+        // Cerca il prossimo slot con un item, partendo da quello attuale + 1
+        for (int i = 1; i < chestUISlots.Length; i++)
         {
-            if (chestUISlots[i] != null && chestUISlots[i].GetItem() != null)
+            int nextIndex = (startIndex + i) % chestUISlots.Length;
+            if (chestUISlots[nextIndex] != null && chestUISlots[nextIndex].GetItem() != null)
             {
-                selectedSlotIndex = i;
+                selectedSlotIndex = nextIndex;
                 return;
             }
         }
         
-        selectedSlotIndex = 0;
+        // Se non trova nessun slot con item, mantieni quello corrente
+        // selectedSlotIndex rimane invariato
+    }
+    
+    // Metodo per muoversi manualmente al prossimo slot (può essere chiamato da input esterni)
+    public void MoveToNextSlot()
+    {
+        MoveToNextSlotWithItem();
+    }
+    
+    // Metodo per muoversi al precedente slot con item
+    public void MoveToPreviousSlot()
+    {
+        int startIndex = selectedSlotIndex;
+        
+        for (int i = 1; i < chestUISlots.Length; i++)
+        {
+            int prevIndex = (startIndex - i + chestUISlots.Length) % chestUISlots.Length;
+            if (chestUISlots[prevIndex] != null && chestUISlots[prevIndex].GetItem() != null)
+            {
+                selectedSlotIndex = prevIndex;
+                return;
+            }
+        }
     }
     
     // Legacy method for compatibility (if still called somewhere)
@@ -285,8 +321,10 @@ public class ChestInventoryManager : MonoBehaviour
         }
     }
     
-    public void OnChestSlotClicked(int slotIndex, ChestController chestController)
+    public void OnChestSlotClicked(int slotIndex, ChestController chestController, bool isKeyboardInput = false)
     {
+        if (inputProcessedThisFrame) return; // Previeni chiamate multiple nello stesso frame
+        
         if (playerInventoryManager == null)
         {
             FindInventoryManager();
@@ -316,8 +354,10 @@ public class ChestInventoryManager : MonoBehaviour
             chestSlot.ClearSlot();
             chestController.PlayPickupSound();
             
-            Debug.Log($"Prelevato '{itemToPickup.itemName}' dalla chest!");
-            // Don't automatically move to next slot - let mouse hover control it
+            Debug.Log($"Prelevato '{itemToPickup.itemName}' dalla chest (slot {slotIndex})!");
+            inputProcessedThisFrame = true; // Marca l'input come processato
+            
+            // selectedSlotIndex viene gestito dall'hover, non lo cambiamo qui
         }
         else
         {
@@ -393,6 +433,12 @@ public class ChestInventoryManager : MonoBehaviour
         // Input action handling is done in Update() method
     }
     
+    // Metodo per verificare se l'input è già stato processato questo frame
+    public bool IsInputProcessedThisFrame()
+    {
+        return inputProcessedThisFrame;
+    }
+    
     [ContextMenu("Auto Setup Chest Slots")]
     public void AutoSetupChestSlots()
     {
@@ -419,3 +465,4 @@ public class ChestInventoryManager : MonoBehaviour
         return count;
     }
 }
+

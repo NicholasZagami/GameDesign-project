@@ -89,7 +89,7 @@ public class HealthBar : MonoBehaviour
 
         if (animator != null)
         {
-            string deathParam = isBoss ? "IsDied" : (hasUI ? "PlayerIsDied" : "IsDied");
+            string deathParam = isBoss ? "isDied" : (hasUI ? "PlayerIsDied" : "isDied");
 
             if (HasParameter(animator, deathParam))
             {
