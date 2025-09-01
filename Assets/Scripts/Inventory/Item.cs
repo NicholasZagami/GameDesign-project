@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
+    [Header("IDs")]
+    public string itemId;
+
     [Header("Basic Info")]
     public string itemName;
     public Sprite icon;

@@ -5,20 +5,26 @@ using System.Collections.Generic;
 public class ChestController : MonoBehaviour
 {
     [Header("Chest Configuration")]
-    public Item[] initialItems; // Items to load into chest slots on start
-    
+    public Item[] initialItems;
+
+    [Header("World Event")]
+    [Tooltip("ID stabile e univoco per questo baule, es: L1_Chest_A")]
+    public string uniqueEventId;
+    [Tooltip("Se true, il baule consegna i suoi oggetti una sola volta")]
+    public bool oneShot = true;
+
     [Header("UI References")]
     public GameObject chestInventoryUI;
     public ChestInventoryManager chestInventoryManager;
-    
+
     [Header("Audio")]
     public AudioClip openSound;
     public AudioClip closeSound;
     public AudioClip pickupItemSound;
-    
+
     [Header("Input System")]
     public InputActionReference interactAction;
-    
+
     private bool isPlayerNear = false;
     private bool isChestOpen = false;
     private GameObject playerObject;
@@ -31,71 +37,63 @@ public class ChestController : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
     }
-    
-    private void LoadInitialItemsOnce()
+
+    private void OnEnable()
     {
-        if (initialItems != null && initialItems.Length > 0)
+        // Se questo evento è già completato: non ricaricare gli oggetti e mostrare lo stato giusto
+        if (SaveManager.Instance != null && SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
         {
-            // Find or create chest inventory manager
-            if (chestInventoryManager == null)
-            {
-                GameObject chestUI = GameObject.Find("ChestInventory");
-                if (chestUI != null)
-                {
-                    chestInventoryManager = chestUI.GetComponent<ChestInventoryManager>();
-                    if (chestInventoryManager == null)
-                    {
-                        chestInventoryManager = chestUI.AddComponent<ChestInventoryManager>();
-                    }
-                }
-            }
-            
-            if (chestInventoryManager != null)
-            {
-                chestInventoryManager.LoadItemsIntoChest(initialItems);
-            }
+            // Non caricare initialItems, assicura chest vuoto e visual aperta (o disabilitata)
+            if (chestInventoryManager != null) chestInventoryManager.ClearChest();
+            SetOpenedVisuals(true);
+            // opzionale: disattiva interazione
+            var col = GetComponent<Collider>();
+            if (col) col.enabled = false;
         }
     }
-    
+
     private void Start()
     {
-        inventoryManager = InventoryManager.Instance;
-        if (inventoryManager == null)
-            inventoryManager = FindObjectOfType<InventoryManager>();
-        
+        inventoryManager = InventoryManager.Instance ?? FindObjectOfType<InventoryManager>();
+
         if (chestInventoryManager == null && chestInventoryUI != null)
-        {
             chestInventoryManager = chestInventoryUI.GetComponent<ChestInventoryManager>();
-            if (chestInventoryManager == null)
-            {
-                chestInventoryManager = chestInventoryUI.AddComponent<ChestInventoryManager>();
-            }
-        }
-        
+
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        
-        if (chestInventoryUI != null)
+
+        if (chestInventoryUI == null)
         {
-            chestInventoryUI.SetActive(false);
+            var foundChestUI = GameObject.Find("ChestInventory");
+            if (foundChestUI != null) chestInventoryUI = foundChestUI;
         }
-        else
-        {
-            GameObject foundChestUI = GameObject.Find("ChestInventory");
-            if (foundChestUI != null)
-            {
-                chestInventoryUI = foundChestUI;
-                chestInventoryUI.SetActive(false);
-            }
-        }
-        
+        if (chestInventoryUI != null) chestInventoryUI.SetActive(false);
+
         SetupInputAction();
-        LoadInitialItemsOnce(); // Load items only once
+
+        // Carica gli oggetti SOLO se l’evento non è completato
+        if (SaveManager.Instance == null || !SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
+            LoadInitialItemsOnce();
+
+        // (FACOLTATIVO) Se vuoi ricevere callback quando un item viene preso dalla UI:
+        // Assicurati che ChestInventoryManager esponga un evento; vedi nota più sotto.
+        if (chestInventoryManager != null)
+            chestInventoryManager.onItemTaken += OnItemTakenFromChest;
     }
-    
+
+    private void OnDestroy()
+    {
+        if (interactAction != null)
+        {
+            interactAction.action.performed -= OnInteractPerformed;
+            interactAction.action.Disable();
+        }
+
+        if (chestInventoryManager != null)
+            chestInventoryManager.onItemTaken -= OnItemTakenFromChest;
+    }
+
     private void SetupInputAction()
     {
         if (interactAction != null)
@@ -104,123 +102,122 @@ public class ChestController : MonoBehaviour
             interactAction.action.performed += OnInteractPerformed;
         }
     }
-    
-    private void OnDestroy()
+
+    private void LoadInitialItemsOnce()
     {
-        if (interactAction != null)
+        if (initialItems == null || initialItems.Length == 0) return;
+
+        if (chestInventoryManager == null)
         {
-            interactAction.action.performed -= OnInteractPerformed;
-            interactAction.action.Disable();
+            GameObject chestUI = GameObject.Find("ChestInventory");
+            if (chestUI != null)
+                chestInventoryManager = chestUI.GetComponent<ChestInventoryManager>() ?? chestUI.AddComponent<ChestInventoryManager>();
         }
+
+        if (chestInventoryManager != null)
+            chestInventoryManager.LoadItemsIntoChest(initialItems);
     }
-    
+
     private void Update()
     {
         CheckPlayerProximity();
     }
-    
+
     private void CheckPlayerProximity()
     {
         if (playerObject == null) return;
-        
+
         float distance = Vector3.Distance(transform.position, playerObject.transform.position);
         bool wasPlayerNear = isPlayerNear;
         isPlayerNear = distance <= interactionRange;
-        
-        if (isPlayerNear && !wasPlayerNear)
-        {
-            // Player entered range
-        }
-        else if (!isPlayerNear && wasPlayerNear)
-        {
+
+        if (!isPlayerNear && wasPlayerNear)
             CloseChest();
-        }
     }
-    
+
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
         if (!isPlayerNear) return;
-        
         HandleInteraction();
     }
-    
+
     private void HandleInteraction()
     {
-        if (isChestOpen)
-        {
-            CloseChest();
-        }
-        else
-        {
-            OpenChest();
-        }
+        if (isChestOpen) CloseChest();
+        else OpenChest();
     }
-    
+
     private void OpenChest()
     {
         if (isChestOpen) return;
-        
+        // Se già completato e oneShot, ignora
+        if (oneShot && SaveManager.Instance != null && SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
+            return;
+
         isChestOpen = true;
-        
         PlaySound(openSound);
-        
+
         if (chestInventoryUI != null)
         {
             chestInventoryUI.SetActive(true);
-            
             if (chestInventoryManager != null)
             {
                 chestInventoryManager.SetupChestSlotClickHandlers(this);
                 chestInventoryManager.SetActive(true);
             }
         }
-        
+
         TriggerChestAnimation(true);
     }
-    
+
     private void CloseChest()
     {
         if (!isChestOpen) return;
-        
         isChestOpen = false;
-        
         PlaySound(closeSound);
-        
+
         if (chestInventoryUI != null)
         {
             chestInventoryUI.SetActive(false);
-            
-            if (chestInventoryManager != null)
-            {
-                chestInventoryManager.SetActive(false);
-            }
+            chestInventoryManager?.SetActive(false);
         }
-        
+
         TriggerChestAnimation(false);
-    }
-    
-    public void PlayPickupSound()
-    {
-        PlaySound(pickupItemSound);
-    }
-    
-    private void PlaySound(AudioClip clip)
-    {
-        if (clip != null && audioSource != null)
+
+        // Se il baule è vuoto e oneShot, marca evento come completato
+        if (oneShot && chestInventoryManager != null && chestInventoryManager.GetChestItems().Count == 0)
         {
-            audioSource.PlayOneShot(clip);
+            SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
+
+            // Opzionale: disabilita interazione per sempre
+            var col = GetComponent<Collider>();
+            if (col) col.enabled = false;
+
+            // Mantieni il baule “aperto” come feedback, se vuoi
+            SetOpenedVisuals(true);
         }
     }
-    
+
+    public void PlayPickupSound() => PlaySound(pickupItemSound);
+    private void PlaySound(AudioClip clip) { if (clip != null && audioSource != null) audioSource.PlayOneShot(clip); }
+
     private void TriggerChestAnimation(bool isOpening)
     {
         Animator animator = GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.SetBool("IsOpen", isOpening);
-        }
+        if (animator != null) animator.SetBool("IsOpen", isOpening);
     }
-    
+
+    // Callback quando un item viene preso dalla UI del baule
+    private void OnItemTakenFromChest(Item item)
+    {
+        // Se vuoi completare l’evento al primo prelievo:
+        // SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
+
+        // Oppure: completa quando il baule è completamente svuotato:
+        if (oneShot && chestInventoryManager != null && chestInventoryManager.GetChestItems().Count == 0)
+            SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
+    }
+
     public bool AddItemToChest(Item item)
     {
         if (chestInventoryManager != null)
@@ -302,5 +299,12 @@ public class ChestController : MonoBehaviour
             if (interactPromptUI != null)
                 interactPromptUI.SetActive(false);
         }
+    }
+
+    private void SetOpenedVisuals(bool opened)
+    {
+        var animator = GetComponent<Animator>();
+        if (animator != null) animator.SetBool("IsOpen", opened);
+        // Qui puoi anche cambiare mesh/material, ecc.
     }
 }

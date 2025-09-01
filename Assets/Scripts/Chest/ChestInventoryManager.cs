@@ -18,7 +18,9 @@ public class ChestInventoryManager : MonoBehaviour
     private InventoryManager playerInventoryManager;
     private AudioSource audioSource;
     private bool isActive = false;
-    
+
+    public System.Action<Item> onItemTaken;
+
     private void Awake()
     {
         FindInventoryManager();
@@ -395,5 +397,25 @@ public class ChestInventoryManager : MonoBehaviour
     public void AutoSetupChestSlots()
     {
         AutoFindChestSlots();
+    }
+
+    // Utility comode per sapere lo stato della chest
+    public bool IsEmpty()
+    {
+        if (chestUISlots == null) return true;
+        for (int i = 0; i < chestUISlots.Length; i++)
+            if (chestUISlots[i] != null && chestUISlots[i].GetItem() != null)
+                return false;
+        return true;
+    }
+
+    public int ItemCount()
+    {
+        int count = 0;
+        if (chestUISlots == null) return 0;
+        for (int i = 0; i < chestUISlots.Length; i++)
+            if (chestUISlots[i] != null && chestUISlots[i].GetItem() != null)
+                count++;
+        return count;
     }
 }

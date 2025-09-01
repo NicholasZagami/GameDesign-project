@@ -140,6 +140,7 @@ public class HealthBar : MonoBehaviour
         }
 
         GetComponent<PlayerDetector>()?.OnDeath();
+        GetComponent<EnemySave>()?.OnDeath();
     }
 
 

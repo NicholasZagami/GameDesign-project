@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PatrolPoints
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

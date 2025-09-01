@@ -328,4 +328,30 @@ public class InventoryManager : MonoBehaviour
         }
         return -1;
     }
+
+    public void ClearAll()
+    {
+        if (bagSlots != null)
+            foreach (var s in bagSlots) s?.ClearSlot();
+
+        if (equipmentSlots != null)
+            foreach (var s in equipmentSlots) s?.ClearSlot();
+    }
+
+    public IEnumerable<Item> GetAllItems()
+    {
+        if (bagSlots != null)
+            foreach (var s in bagSlots)
+            {
+                var it = s?.GetItem();
+                if (it != null) yield return it;
+            }
+
+        if (equipmentSlots != null)
+            foreach (var s in equipmentSlots)
+            {
+                var it = s?.GetItem();
+                if (it != null) yield return it;
+            }
+    }
 }
