@@ -711,6 +711,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &58268802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &80744618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,6 +1725,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &139980201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1647169714640754362, guid: aa8522de51c0a8d4eab62f3656e008d0, type: 3}
@@ -2016,6 +2019,8 @@ MonoBehaviour:
   initialItems:
   - {fileID: 11400000, guid: 8ea7129212726534aa0617009ca2be25, type: 2}
   - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
+  uniqueEventId: 
+  oneShot: 1
   chestInventoryUI: {fileID: 536449258}
   chestInventoryManager: {fileID: 536449259}
   openSound: {fileID: 8300000, guid: 1f5a437def982034785d7427abbe0555, type: 3}
@@ -3590,6 +3595,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 172249192}
+  playerInput: {fileID: 0}
+  gameplayActionMap: Player
+  uiActionMap: UI
+  scriptsToDisable: []
 --- !u!1 &279333942
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,6 +3918,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &307395510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6236426318531405140, guid: 54288052f361a2048888ef97d8bf8558, type: 3}
@@ -4126,6 +4136,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &319496322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4336,6 +4347,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   isBoss: 0
+  dissolveMaterial: {fileID: 0}
+  dissolveSpeed: 1
+  useDissolveEffect: 1
   gameOverPanel: {fileID: 0}
   combatMusic: {fileID: 0}
   backgroundMusic: {fileID: 0}
@@ -6169,6 +6183,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &500757872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8642643834467091105, guid: 54288052f361a2048888ef97d8bf8558, type: 3}
@@ -6645,6 +6660,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &556103930
 GameObject:
   m_ObjectHideFlags: 0
@@ -7184,6 +7200,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &600494661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7541,6 +7558,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &621669972
 GameObject:
   m_ObjectHideFlags: 0
@@ -7672,6 +7690,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   isBoss: 0
+  dissolveMaterial: {fileID: 0}
+  dissolveSpeed: 1
+  useDissolveEffect: 1
   gameOverPanel: {fileID: 0}
   combatMusic: {fileID: 0}
   backgroundMusic: {fileID: 0}
@@ -7887,6 +7908,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &664766846
 GameObject:
   m_ObjectHideFlags: 0
@@ -7981,6 +8003,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1001 &668709217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8571,6 +8594,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &679850266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9097,6 +9121,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!224 &704323462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10394,6 +10419,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &786872138
 GameObject:
   m_ObjectHideFlags: 0
@@ -10450,6 +10476,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &786872141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11171,6 +11198,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &914471225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11303,6 +11331,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &925072289
 GameObject:
   m_ObjectHideFlags: 0
@@ -12002,6 +12031,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &981114400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12125,6 +12155,8 @@ MonoBehaviour:
   inventoryManager: {fileID: 1003212867}
   inventoryCanvas: {fileID: 1003212870}
   uiCamera: {fileID: 1851318370}
+  dropKey: 113
+  consumeKey: 99
 --- !u!114 &1003212867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12343,6 +12375,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -15.24
       objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_Height
+      value: 2.9353478
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_Radius
+      value: 0.8964707
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_Center.x
+      value: 6.126494e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5323266
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_Center.z
+      value: -0.026938856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440623543636854790, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5703681940168980765, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.85
@@ -12391,6 +12447,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8532190357626410266, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: dissolveSpeed
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532190357626410266, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
+      propertyPath: dissolveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 99b365e64c4f285408a7348edc3a59cc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14075,6 +14139,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1218879441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14381,6 +14446,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1244706963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14768,6 +14834,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &1301790639
 GameObject:
   m_ObjectHideFlags: 0
@@ -16702,6 +16769,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1425559795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16834,6 +16902,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &1473021353
 GameObject:
   m_ObjectHideFlags: 0
@@ -17319,6 +17388,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &1524935916
 GameObject:
   m_ObjectHideFlags: 0
@@ -17450,6 +17520,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1534990656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17524,6 +17595,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!224 &1540246061
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17913,6 +17985,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &1614846235
 GameObject:
   m_ObjectHideFlags: 0
@@ -19054,6 +19127,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1679976764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19204,6 +19278,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1001 &1689883154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20289,6 +20364,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &1743566714
 GameObject:
   m_ObjectHideFlags: 0
@@ -21198,6 +21274,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1773209083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21371,6 +21448,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1778179209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22432,6 +22510,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1837583492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22681,6 +22760,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   isBoss: 0
+  dissolveMaterial: {fileID: 0}
+  dissolveSpeed: 1
+  useDissolveEffect: 1
   gameOverPanel: {fileID: 1951623974}
   combatMusic: {fileID: 0}
   backgroundMusic: {fileID: 0}
@@ -22848,7 +22930,6 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: bfd030b7cf6481041989312b76592354, type: 3}
   hitClip: {fileID: 8300000, guid: 84fc4672179199849955e04c357a4f07, type: 3}
   inventoryUI: {fileID: 1003212865}
-  chestUI: {fileID: 536449258}
   attackRange: 2
   damageAmount: 20
   enemyLayer:
@@ -23538,6 +23619,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1918145729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23904,6 +23986,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!114 &1929644561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25125,6 +25208,7 @@ MonoBehaviour:
   borderImage: {fileID: 0}
   showCategoryColors: 1
   categoryColorAlpha: 0.3
+  consumableHighlightColor: {r: 0.2, g: 1, b: 0.2, a: 0.5}
 --- !u!1 &2034596257
 GameObject:
   m_ObjectHideFlags: 0
