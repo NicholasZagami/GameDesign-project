@@ -39591,6 +39591,8 @@ MonoBehaviour:
   collectionRange: 2
   requireInteraction: 1
   interactionKey: 101
+  interactPromptUI: {fileID: 2128658518}
+  showPromptOnlyWhenRequireInteraction: 1
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
 --- !u!1 &1131227845 stripped
@@ -41512,7 +41514,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 72e4a743464c4b26857b460ca6ade400, type: 3}
       propertyPath: m_Name
-      value: Potion_Red_01 (1)
+      value: Potion_2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 72e4a743464c4b26857b460ca6ade400, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41584,6 +41586,8 @@ MonoBehaviour:
   collectionRange: 2
   requireInteraction: 1
   interactionKey: 101
+  interactPromptUI: {fileID: 2128658518}
+  showPromptOnlyWhenRequireInteraction: 1
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
 --- !u!1 &1198840148 stripped
@@ -63128,6 +63132,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 4c6162d38e65d8a4799cff4497a7eb3c, type: 3}
     - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
+      propertyPath: promptText
+      value: 
+      objectReference: {fileID: 1418444176}
+    - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
+      propertyPath: interactPromptUI
+      value: 
+      objectReference: {fileID: 920805460}
+    - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
+      propertyPath: sharedPromptText
+      value: 
+      objectReference: {fileID: 2128658520}
+    - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
       propertyPath: interactionPrompt
       value: 
       objectReference: {fileID: 920805460}
@@ -77923,6 +77939,8 @@ MonoBehaviour:
   collectionRange: 3
   requireInteraction: 0
   interactionKey: 101
+  interactPromptUI: {fileID: 0}
+  showPromptOnlyWhenRequireInteraction: 1
   pickupSound: {fileID: 0}
   pickupEffect: {fileID: 0}
 --- !u!1 &2063689939

@@ -14,51 +14,80 @@ public class CollectableItem : MonoBehaviour
     public bool requireInteraction = false;
     public KeyCode interactionKey = KeyCode.E;
 
+    [Header("Prompt UI")]
+    [Tooltip("Canvas/Panel da mostrare quando il player ï¿½ nel range (es. 'Premi [E] per interagire')")]
+    public GameObject interactPromptUI;
+    [Tooltip("Se true: mostra il prompt solo se requireInteraction ï¿½ abilitato")]
+    public bool showPromptOnlyWhenRequireInteraction = true;
+
     [Header("Audio & Effects")]
     public AudioClip pickupSound;
     public GameObject pickupEffect;
 
     private bool isCollected = false;
-    private GameObject player;
+    private Transform player;
 
-    private void Start()
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        var pObj = GameObject.FindGameObjectWithTag("Player");
+        if (pObj) player = pObj.transform;
+
+        // Assicurati che il prompt parta nascosto
+        SetPromptVisible(false);
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
-        // Se già raccolta in un salvataggio precedente, rimuovi subito
+        // Se giï¿½ raccolta in un salvataggio precedente, rimuovi subito
         var s = SaveManager.Instance?.CurrentSave;
         if (s != null && !string.IsNullOrEmpty(uniqueInstanceId) &&
             s.collectedItems.Contains(uniqueInstanceId))
         {
+            SetPromptVisible(false);
             Destroy(gameObject);
         }
     }
 
-    private void Update()
+    void OnDisable()
     {
-        if (!enabled || isCollected || itemData == null) return;
+        // Sicurezza: se questo oggetto viene disattivato, nascondi il prompt
+        SetPromptVisible(false);
+    }
 
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && rb.linearVelocity.magnitude > 0.1f) return;
-
-        if (player != null)
+    void Update()
+    {
+        if (!enabled || isCollected || itemData == null || player == null)
         {
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance <= collectionRange)
-            {
-                if (requireInteraction)
-                {
-                    if (Input.GetKeyDown(interactionKey))
-                        CollectItem();
-                }
-                else
-                {
-                    CollectItem();
-                }
-            }
+            SetPromptVisible(false);
+            return;
+        }
+
+        // Se l'oggetto sta ancora cadendo/rotolando, evita la raccolta automatica
+        var rb = GetComponent<Rigidbody>();
+        if (rb != null && rb.linearVelocity.magnitude > 0.1f)
+        {
+            SetPromptVisible(false);
+            return;
+        }
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        bool inRange = distance <= collectionRange;
+
+        // Gestione prompt
+        bool allowPrompt = (!showPromptOnlyWhenRequireInteraction) || (requireInteraction);
+        SetPromptVisible(inRange && allowPrompt);
+
+        // Raccolta
+        if (!inRange) return;
+
+        if (requireInteraction)
+        {
+            if (Input.GetKeyDown(interactionKey))
+                CollectItem();
+        }
+        else
+        {
+            CollectItem();
         }
     }
 
@@ -80,19 +109,28 @@ public class CollectableItem : MonoBehaviour
             if (pickupEffect != null)
                 Instantiate(pickupEffect, transform.position, transform.rotation);
 
+            // Nascondi prompt prima di distruggere
+            SetPromptVisible(false);
+
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isCollected && !requireInteraction)
             CollectItem();
     }
 
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, collectionRange);
+    }
+
+    private void SetPromptVisible(bool visible)
+    {
+        if (interactPromptUI != null && interactPromptUI.activeSelf != visible)
+            interactPromptUI.SetActive(visible);
     }
 }
