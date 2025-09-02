@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class HealthBar : MonoBehaviour
 {
@@ -15,8 +16,16 @@ public class HealthBar : MonoBehaviour
     [Header("Boss Settings")]
     public bool isBoss = false;
 
+    [Header("Dissolve Effect")]
+    public Material dissolveMaterial;
+    public float dissolveSpeed = 1f;
+    public bool useDissolveEffect = true;
+
     private Animator animator;
     private bool isDead = false;
+    private Renderer objectRenderer;
+    private Material[] originalMaterials;
+    private Material[] materialsWithDissolve;
 
     public GameObject gameOverPanel;
 
@@ -37,12 +46,44 @@ public class HealthBar : MonoBehaviour
             healthSlider.value = health;
 
             if (isBoss)
-                SetUIVisible(false); // barra visivamente nascosta ma attiva
+                SetUIVisible(false); // barra visualmente nascosta ma attiva
         }
 
         animator = GetComponent<Animator>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        // Setup per l'effetto dissolve
+        if (useDissolveEffect && dissolveMaterial != null)
+        {
+            SetupDissolveEffect();
+        }
+    }
+
+    private void SetupDissolveEffect()
+    {
+        objectRenderer = GetComponent<Renderer>();
+        if (objectRenderer == null)
+            objectRenderer = GetComponentInChildren<Renderer>();
+
+        if (objectRenderer != null)
+        {
+            originalMaterials = objectRenderer.materials;
+            
+            // Crea un'istanza del material dissolve per questo oggetto
+            Material dissolveInstance = new Material(dissolveMaterial);
+            
+            // Sostituisce tutti i materiali con quello di dissolve
+            materialsWithDissolve = new Material[] { dissolveInstance };
+            
+            // Aggiorna il riferimento al material dissolve
+            dissolveMaterial = dissolveInstance;
+            
+            // Inizializza il dissolve amount a 0 (completamente visibile)
+            dissolveMaterial.SetFloat("_DissolveAmount", 0.3f);
+            
+            Debug.Log($"Dissolve setup completato per {gameObject.name}");
+        }
     }
 
     void Update()
@@ -52,6 +93,21 @@ public class HealthBar : MonoBehaviour
         if (hasUI && healthSlider != null)
         {
             healthSlider.value = health;
+        }
+        
+        // TEST: Premi T per testare dissolve manualmente
+        if (Input.GetKeyDown(KeyCode.T) && dissolveMaterial != null)
+        {
+            float testValue = 0.8f; // Valore alto per vedere l'effetto
+            dissolveMaterial.SetFloat("_DissolveAmount", testValue);
+            Debug.Log($"Test dissolve applicato: {testValue}");
+        }
+        
+        // TEST: Premi Y per resettare
+        if (Input.GetKeyDown(KeyCode.Y) && dissolveMaterial != null)
+        {
+            dissolveMaterial.SetFloat("_DissolveAmount", 0f);
+            Debug.Log("Dissolve resettato a 0");
         }
     }
 
@@ -97,6 +153,12 @@ public class HealthBar : MonoBehaviour
             }
         }
 
+        // Avvia l'effetto dissolve
+        if (useDissolveEffect && dissolveMaterial != null && objectRenderer != null)
+        {
+            StartDissolveEffect();
+        }
+
         // Musica: stop combat, resume background
         if (isBoss)
         {
@@ -129,7 +191,11 @@ public class HealthBar : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject, 3f);
+            // Se non usa dissolve, distruggi normalmente
+            if (!useDissolveEffect)
+            {
+                Destroy(gameObject, 3f);
+            }
         }
 
         if (hasUI && healthSlider != null)
@@ -143,6 +209,40 @@ public class HealthBar : MonoBehaviour
         GetComponent<EnemySave>()?.OnDeath();
     }
 
+    private void StartDissolveEffect()
+    {
+        // Applica tutti i materiali (originali + dissolve)
+        objectRenderer.materials = materialsWithDissolve;
+        
+        // Avvia la coroutine di dissolve
+        StartCoroutine(DissolveCoroutine());
+    }
+
+    private IEnumerator DissolveCoroutine()
+    {
+        float dissolveAmount = 0f;
+        
+        Debug.Log($"Iniziando dissolve per {gameObject.name}");
+        
+        while (dissolveAmount < 1f)
+        {
+            dissolveAmount += Time.deltaTime * dissolveSpeed;
+            dissolveAmount = Mathf.Clamp01(dissolveAmount);
+            
+            // Aggiorna il parametro dissolve nel material
+            dissolveMaterial.SetFloat("_DissolveAmount", dissolveAmount);
+            
+            // Debug per verificare che il material riceva il valore
+            if (dissolveAmount % 0.1f < 0.01f) // Log ogni 0.1
+                Debug.Log($"Dissolve amount: {dissolveAmount}");
+            
+            yield return null;
+        }
+        
+        // Dissolve completato, distruggi l'oggetto
+        Debug.Log($"Dissolve completato per {gameObject.name}");
+        Destroy(gameObject);
+    }
 
     private System.Collections.IEnumerator ShowGameOverPanelAfterDelay(float delay)
     {
@@ -162,7 +262,6 @@ public class HealthBar : MonoBehaviour
             movement.enabled = false;
         }
     }
-
 
     private bool HasParameter(Animator animator, string paramName)
     {
@@ -194,6 +293,22 @@ public class HealthBar : MonoBehaviour
             Transform handle = healthSlider.transform.Find("Handle Slide Area/Handle");
             if (handle != null)
                 handle.gameObject.SetActive(visible);
+        }
+    }
+
+    void OnDestroy()
+    {
+        // Pulisci l'istanza del material per evitare memory leak
+        if (dissolveMaterial != null && materialsWithDissolve != null)
+        {
+            for (int i = 0; i < materialsWithDissolve.Length; i++)
+            {
+                if (materialsWithDissolve[i] == dissolveMaterial)
+                {
+                    DestroyImmediate(dissolveMaterial);
+                    break;
+                }
+            }
         }
     }
 
