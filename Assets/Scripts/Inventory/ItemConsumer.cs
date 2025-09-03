@@ -93,9 +93,10 @@ public class ItemConsumer : MonoBehaviour
         
         // Applica la cura
         ApplyHealing(healAmount);
-        
+
         // Riproduci suono
-        PlayConsumeSound(item);
+        audioSource.Play();
+        //PlayConsumeSound(item);
         
         // Crea effetto visivo
         CreateConsumeEffect(item);
