@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class HealthBar : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class HealthBar : MonoBehaviour
     [Header("Muri da aprire alla morte del boss")]
     public LootOpening[] lootEntrances;
 
+    public event Action<float, float> OnHealthChanged; // (current, max)
+
     void Start()
     {
         health = maxHealth;
@@ -48,6 +51,9 @@ public class HealthBar : MonoBehaviour
             if (isBoss)
                 SetUIVisible(false); // barra visualmente nascosta ma attiva
         }
+
+        // Notifica stato iniziale
+        OnHealthChanged?.Invoke(health, maxHealth);
 
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -131,6 +137,9 @@ public class HealthBar : MonoBehaviour
             {
                 animator.SetFloat("SpeedMagnitude", 0.01f);
             }
+
+            // Notifica
+            OnHealthChanged?.Invoke(health, maxHealth);
         }
 
         if (health <= 0)
