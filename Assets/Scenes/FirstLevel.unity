@@ -66717,8 +66717,8 @@ MonoBehaviour:
   maxHealth: 150
   health: 0
   isBoss: 1
-  dissolveMaterial: {fileID: 0}
-  dissolveSpeed: 1
+  dissolveMaterial: {fileID: -876546973899608171, guid: 3bd9bdc0a0ffbc74da0671f3b1da8dcf, type: 3}
+  dissolveSpeed: 0.35
   useDissolveEffect: 1
   gameOverPanel: {fileID: 0}
   combatMusic: {fileID: 646221403}
@@ -67023,9 +67023,9 @@ MonoBehaviour:
   chestUISlots:
   - {fileID: 1099840141}
   - {fileID: 1703823015}
-  - {fileID: 227247109}
-  - {fileID: 1620688218}
-  - {fileID: 1439215376}
+  - {fileID: 1463657139}
+  - {fileID: 947772108}
+  - {fileID: 478825491}
   - {fileID: 108083148}
   interactAction: {fileID: -2703805079847720519, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   selectedSlotIndex: 0
@@ -81249,7 +81249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialItems:
   - {fileID: 11400000, guid: c797cb9046e5adc4e95b351aaec17df2, type: 2}
-  - {fileID: 11400000, guid: b2eb1a068723d0d46aaa28f20a5f1a04, type: 2}
   uniqueEventId: L1_Chest_3
   oneShot: 1
   chestInventoryUI: {fileID: 1776873180}

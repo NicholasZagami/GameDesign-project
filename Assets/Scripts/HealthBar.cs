@@ -142,6 +142,19 @@ public class HealthBar : MonoBehaviour
     private void Die()
     {
         isDead = true;
+        // Remove colliders when the monster dies
+        Collider[] colliders = GetComponents<Collider>();
+        foreach (Collider col in colliders)
+        {
+            col.enabled = false;
+        }
+        
+        // Also check for colliders in children
+        Collider[] childColliders = GetComponentsInChildren<Collider>();
+        foreach (Collider col in childColliders)
+        {
+            col.enabled = false;
+        }
 
         if (animator != null)
         {
