@@ -1,56 +1,58 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 public class ItemConsumer : MonoBehaviour
 {
     public static ItemConsumer Instance { get; private set; }
-    
+
     [Header("Events")]
     public UnityEvent<Item, float> OnItemConsumed;
     public UnityEvent<Item> OnConsumptionFailed;
-    
+
     [Header("Audio")]
     public AudioSource audioSource;
-    
+
     private HealthBar playerHealthBar;
-    
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // <— ascolta i cambi scena
         }
-        else if (Instance != this)
+        else
         {
             Destroy(gameObject);
-            return;
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
     {
-        InitializeComponents();
-    }
-    
-    private void InitializeComponents()
-    {
-        // Trova la HealthBar del player
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            playerHealthBar = player.GetComponent<HealthBar>();
-        }
-        
-        // Inizializza AudioSource se non assegnato
+        RefreshPlayerRefs();
         if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-            if (audioSource == null)
-                audioSource = gameObject.AddComponent<AudioSource>();
-        }
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
-    
+
+    private void OnSceneLoaded(Scene s, LoadSceneMode m)
+    {
+        RefreshPlayerRefs();
+    }
+
+    private void RefreshPlayerRefs()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        playerHealthBar = player ? player.GetComponent<HealthBar>() : null;
+    }
+
     /// <summary>
     /// Consuma un item dal sistema di inventario
     /// </summary>

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 
@@ -29,8 +29,8 @@ public class DoorInteraction : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("Blocco porta con chiave")]
-    public Item requiredKey;           // ScriptableObject della chiave
-    public bool isLocked = false;      // Se la porta parte bloccata
+    public Item requiredKey; // ScriptableObject della chiave
+    public bool isLocked = false; // Se la porta parte bloccata
     public bool consumeKeyOnUse = false; // Se vuoi rimuovere la chiave dopo l'uso
 
     void Awake()
@@ -77,27 +77,33 @@ public class DoorInteraction : MonoBehaviour
         // Interazione
         if (distance <= interactionDistance && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            // Se � bloccata, verifica chiave
+            // Se è bloccata, verifica chiave
             if (isLocked)
             {
                 if (PlayerHasRequiredKey())
                 {
                     isLocked = false;
-                    Debug.Log("Porta sbloccata con la chiave: " + (requiredKey ? requiredKey.itemId : "(no id)"));
+                    Debug.Log("Porta sbloccata con la chiave: " +
+                              (requiredKey ? requiredKey.itemId : "(no id)"));
 
                     if (consumeKeyOnUse && requiredKey != null)
                         RemoveKeyById(requiredKey.itemId);
                 }
                 else
                 {
-                    Debug.Log("Porta bloccata. Chiave mancante: " + (requiredKey ? requiredKey.itemId : "Nessuna"));
+                    Debug.Log("Porta bloccata. Chiave mancante: " +
+                              (requiredKey ? requiredKey.itemId : "Nessuna"));
+
                     if (lockedSound != null && audioSource != null)
                         audioSource.PlayOneShot(lockedSound);
+
                     return;
                 }
             }
 
-            if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+            if (_currentCoroutine != null)
+                StopCoroutine(_currentCoroutine);
+
             _currentCoroutine = StartCoroutine(ToggleDoor());
         }
     }
@@ -116,17 +122,24 @@ public class DoorInteraction : MonoBehaviour
         // Animazione
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.unscaledDeltaTime * openSpeed);
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                targetRotation,
+                Time.unscaledDeltaTime * openSpeed
+            );
             yield return null;
         }
+
         transform.rotation = targetRotation;
         isOpen = targetOpen;
 
         // Persistenza stato
         if (!string.IsNullOrEmpty(uniqueID) && SaveManager.Instance != null)
         {
-            if (isOpen) SaveManager.Instance.RegisterDoorOpened(uniqueID);
-            else SaveManager.Instance.UnregisterDoorOpened(uniqueID);
+            if (isOpen)
+                SaveManager.Instance.RegisterDoorOpened(uniqueID);
+            else
+                SaveManager.Instance.UnregisterDoorOpened(uniqueID);
         }
     }
 
@@ -154,8 +167,10 @@ public class DoorInteraction : MonoBehaviour
         // Allinea la persistenza (utile se chiamato manualmente)
         if (!string.IsNullOrEmpty(uniqueID) && SaveManager.Instance != null)
         {
-            if (isOpen) SaveManager.Instance.RegisterDoorOpened(uniqueID);
-            else SaveManager.Instance.UnregisterDoorOpened(uniqueID);
+            if (isOpen)
+                SaveManager.Instance.RegisterDoorOpened(uniqueID);
+            else
+                SaveManager.Instance.UnregisterDoorOpened(uniqueID);
         }
     }
 
