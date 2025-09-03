@@ -15,9 +15,9 @@ public class CollectableItem : MonoBehaviour
     public KeyCode interactionKey = KeyCode.E;
 
     [Header("Prompt UI")]
-    [Tooltip("Canvas/Panel da mostrare quando il player � nel range (es. 'Premi [E] per interagire')")]
+    [Tooltip("Canvas/Panel da mostrare quando il player è nel range (es. 'Premi [E] per interagire')")]
     public GameObject interactPromptUI;
-    [Tooltip("Se true: mostra il prompt solo se requireInteraction � abilitato")]
+    [Tooltip("Se true: mostra il prompt solo se requireInteraction è abilitato")]
     public bool showPromptOnlyWhenRequireInteraction = true;
 
     [Header("Audio & Effects")]
@@ -38,7 +38,7 @@ public class CollectableItem : MonoBehaviour
 
     void OnEnable()
     {
-        // Se gi� raccolta in un salvataggio precedente, rimuovi subito
+        // Se già raccolta in un salvataggio precedente, rimuovi subito
         var s = SaveManager.Instance?.CurrentSave;
         if (s != null && !string.IsNullOrEmpty(uniqueInstanceId) &&
             s.collectedItems.Contains(uniqueInstanceId))
