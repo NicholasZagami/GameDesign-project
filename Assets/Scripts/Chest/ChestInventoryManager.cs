@@ -141,7 +141,6 @@ public class ChestInventoryManager : MonoBehaviour
         }
     }
     
-    // Legacy method for compatibility (if still called somewhere)
     public void DisplayChestItems(List<Item> chestItems)
     {
         if (chestUISlots == null) return;
@@ -157,7 +156,6 @@ public class ChestInventoryManager : MonoBehaviour
         }
     }
     
-    // Legacy method for compatibility
     public void ClearAllChestSlots()
     {
         ClearChest();
