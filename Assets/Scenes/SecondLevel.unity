@@ -13809,6 +13809,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 323ecdb37cae45a295637dab9aff065f, type: 3}
+--- !u!114 &266558715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81166110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &268816286 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3664433505323765883, guid: 5361c1d6e8e359c4daf9be9f26da0b61, type: 3}
@@ -15524,7 +15544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6390603047003815964, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6390603047004183612, guid: 583c70f346f42664b9ed5e4c9919a4bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23822,6 +23842,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 323ecdb37cae45a295637dab9aff065f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 266558711}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 323ecdb37cae45a295637dab9aff065f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 266558715}
   m_SourcePrefab: {fileID: 100100000, guid: 323ecdb37cae45a295637dab9aff065f, type: 3}
 --- !u!1 &446806039 stripped
 GameObject:
@@ -87081,9 +87104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21d63338f8b9f040a88e66330066a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 1636910293}
   inventorySlider: {fileID: 1570946942}
-  inventoryPanel: {fileID: 0}
+  inventoryPanel: {fileID: 1570946939}
   enforceWhileVisible: 0
 --- !u!114 &1570946942
 MonoBehaviour:
@@ -108935,7 +108958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7583770647536371050, guid: d795ecf62053eb745964b087aeb03184, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 31.62
       objectReference: {fileID: 0}
     - target: {fileID: 7583770647536371050, guid: d795ecf62053eb745964b087aeb03184, type: 3}
       propertyPath: m_LocalPosition.y
@@ -108943,7 +108966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7583770647536371050, guid: d795ecf62053eb745964b087aeb03184, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -58.6
+      value: -58.11
       objectReference: {fileID: 0}
     - target: {fileID: 7583770647536371050, guid: d795ecf62053eb745964b087aeb03184, type: 3}
       propertyPath: m_LocalRotation.w

@@ -3,21 +3,21 @@ using UnityEngine;
 public class PortalInteraction : MonoBehaviour
 {
     [Header("UI")]
-    public GameObject interactionPrompt; // "Premi E per interagire"
+    public GameObject interactionPrompt; 
 
     [Header("Scene Management")]
-    public SceneManagement sceneManager; // Assegna via Inspector
-    public int sceneIndexToLoad = 1;     // Indice scena "next level"
+    public SceneManagement sceneManager; 
+    public int sceneIndexToLoad = 1;     
 
     [Header("Final Portal")]
-    public bool isFinalPortal = false;   // ✅ spunta se questo è il portale finale
-    public GameObject finalLorePanel;    // ✅ pannello con la lore finale (disattivo all'avvio)
-    public bool pauseOnFinalPanel = true;         // Pausa il gioco quando compare la lore
-    public bool unlockCursorOnFinalPanel = true;  // Mostra il cursore
-    public int mainMenuSceneIndex = 0;            // Indice del menu principale
+    public bool isFinalPortal = false;   
+    public GameObject finalLorePanel;    
+    public bool pauseOnFinalPanel = true;         
+    public bool unlockCursorOnFinalPanel = true;  
+    public int mainMenuSceneIndex = 0;           
 
     private bool isPlayerInRange = false;
-    private bool hasActivated = false; // impedisce doppi trigger
+    private bool hasActivated = false; 
 
     void Start()
     {
@@ -86,8 +86,6 @@ public class PortalInteraction : MonoBehaviour
         }
     }
 
-    // ==== Metodi da agganciare ai bottoni nel pannello finale ====
-
     // Bottone: "Torna al menu"
     public void ReturnToMainMenu()
     {
@@ -113,10 +111,6 @@ public class PortalInteraction : MonoBehaviour
             finalLorePanel.SetActive(false);
 
         if (pauseOnFinalPanel) Time.timeScale = 1f;
-
-        // Se vuoi ri-bloccare il cursore dopo la chiusura, fallo qui
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
 
         // Permetti una nuova attivazione se desideri
         hasActivated = false;

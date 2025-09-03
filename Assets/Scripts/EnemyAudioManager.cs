@@ -41,8 +41,8 @@ public class EnemyAudioManager : MonoBehaviour
             ScheduleNextAmbient();
         }
 
-        // Suono attacco se "attack" è diventato true
-        bool isAttacking = animator.GetBool("Attack");
+        // Suono attacco se "attack" ï¿½ diventato true
+        bool isAttacking = animator.GetBool("isAttacking");
         if (isAttacking && !lastAttackState)
         {
             PlayAttackSound();

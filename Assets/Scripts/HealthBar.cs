@@ -100,21 +100,7 @@ public class HealthBar : MonoBehaviour
         {
             healthSlider.value = health;
         }
-        
-        // TEST: Premi T per testare dissolve manualmente
-        if (Input.GetKeyDown(KeyCode.T) && dissolveMaterial != null)
-        {
-            float testValue = 0.8f; // Valore alto per vedere l'effetto
-            dissolveMaterial.SetFloat("_DissolveAmount", testValue);
-            Debug.Log($"Test dissolve applicato: {testValue}");
-        }
-        
-        // TEST: Premi Y per resettare
-        if (Input.GetKeyDown(KeyCode.Y) && dissolveMaterial != null)
-        {
-            dissolveMaterial.SetFloat("_DissolveAmount", 0f);
-            Debug.Log("Dissolve resettato a 0");
-        }
+    
     }
 
     public void TakeDamage(float damage)
