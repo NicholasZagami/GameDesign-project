@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 public class ItemConsumer : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ItemConsumer : MonoBehaviour
     public AudioSource audioSource;
 
     private HealthBar playerHealthBar;
+    public event Action<float, float> OnHealthChanged; // (current, max)
 
     private void Awake()
     {
@@ -127,7 +129,10 @@ public class ItemConsumer : MonoBehaviour
         {
             float oldHealth = playerHealthBar.health;
             playerHealthBar.health = Mathf.Min(playerHealthBar.health + amount, playerHealthBar.maxHealth);
-            
+
+            // Forza aggiornamento immediato dell'inventario se è aperto
+            InventoryHealthBinder.Instance?.ForceSyncFrom(playerHealthBar);
+
             Debug.Log($"Salute: {oldHealth} -> {playerHealthBar.health} (+{playerHealthBar.health - oldHealth})");
         }
     }
