@@ -56378,8 +56378,8 @@ MonoBehaviour:
   dissolveSpeed: 0.35
   useDissolveEffect: 1
   gameOverPanel: {fileID: 0}
-  combatMusic: {fileID: 0}
-  backgroundMusic: {fileID: 0}
+  combatMusic: {fileID: 539864015}
+  backgroundMusic: {fileID: 1003661452}
   lootEntrances:
   - {fileID: 2043460781}
   - {fileID: 1356832557}
@@ -56421,8 +56421,8 @@ MonoBehaviour:
   attackRange: 2
   attackCooldown: 2
   player: {fileID: 1636910292}
-  backgroundMusic: {fileID: 0}
-  combatMusic: {fileID: 0}
+  backgroundMusic: {fileID: 1003661452}
+  combatMusic: {fileID: 539864015}
 --- !u!64 &1054570586
 MeshCollider:
   m_ObjectHideFlags: 0
