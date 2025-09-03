@@ -5,7 +5,7 @@ public class PatrollState : StateMachineBehaviour
 {
     float timer;
     [SerializeField] float chaseRange = 3f;
-    [SerializeField] float waitAtPoint = 0.2f;  // piccolo delay per stabilità
+    [SerializeField] float waitAtPoint = 0.2f;  // piccolo delay per stabilitï¿½
     [SerializeField] bool startFromNearest = true;
 
     Transform player;
@@ -50,12 +50,12 @@ public class PatrollState : StateMachineBehaviour
 
         if (patrolPositions.Count == 0)
         {
-            Debug.LogWarning($"{animator.name}: 'PatrolPoints' è vuoto.");
+            Debug.LogWarning($"{animator.name}: 'PatrolPoints' ï¿½ vuoto.");
             animator.SetBool("isPatrolling", false);
             return;
         }
 
-        // Opzionale: parti dal punto più vicino
+        // Opzionale: parti dal punto piï¿½ vicino
         if (startFromNearest)
         {
             float best = float.MaxValue;
@@ -75,7 +75,7 @@ public class PatrollState : StateMachineBehaviour
 
     void MoveToCurrent()
     {
-        // Se il punto non è su NavMesh, prova a "snapparlo" alla NavMesh
+        // Se il punto non ï¿½ su NavMesh, prova a "snapparlo" alla NavMesh
         if (UnityEngine.AI.NavMesh.SamplePosition(patrolPositions[currentIndex], out var hit, 2f, UnityEngine.AI.NavMesh.AllAreas))
             agent.SetDestination(hit.position);
         else
@@ -86,14 +86,14 @@ public class PatrollState : StateMachineBehaviour
     {
         if (agent == null || patrolPositions.Count == 0) return;
 
-        // Avanza in ordine, non più random
+        // Avanza in ordine, non piï¿½ random
         if (!agent.pathPending)
         {
             // Considera anche una tolleranza per arresto
             if (agent.remainingDistance <= agent.stoppingDistance + 0.05f)
             {
                 if (arrivedTime < 0f) arrivedTime = Time.time; // appena arrivato
-                // aspetta un attimo per stabilità
+                // aspetta un attimo per stabilitï¿½
                 if (Time.time - arrivedTime >= waitAtPoint)
                 {
                     arrivedTime = -1f;
@@ -108,7 +108,7 @@ public class PatrollState : StateMachineBehaviour
         if (timer > 10f)
             animator.SetBool("isPatrolling", false);
 
-        // Passaggio a chase se il player è vicino
+        // Passaggio a chase se il player ï¿½ vicino
         if (player != null)
         {
             float distance = Vector3.Distance(player.position, animator.transform.position);
