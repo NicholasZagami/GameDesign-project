@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                Cursor.visible = true;
             }
         }
 
