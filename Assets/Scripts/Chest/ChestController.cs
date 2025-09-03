@@ -32,6 +32,9 @@ public class ChestController : MonoBehaviour
     private InventoryManager inventoryManager;
     private float interactionRange = 3f;
 
+    private CursorLockMode previousCursorLockMode;
+    private bool previousCursorVisible;
+
     [Header("UI Interazione")]
     public GameObject interactPromptUI;
 
@@ -42,7 +45,7 @@ public class ChestController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Se questo evento è già completato: non ricaricare gli oggetti e mostrare lo stato giusto
+        // Se questo evento Ã¨ giÃ  completato: non ricaricare gli oggetti e mostrare lo stato giusto
         if (SaveManager.Instance != null && SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
         {
             // Non caricare initialItems, assicura chest vuoto e visual aperta (o disabilitata)
@@ -72,12 +75,10 @@ public class ChestController : MonoBehaviour
 
         SetupInputAction();
 
-        // Carica gli oggetti SOLO se l’evento non è completato
+        // Carica gli oggetti SOLO se l'evento non Ã¨ completato
         if (SaveManager.Instance == null || !SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
             LoadInitialItemsOnce();
 
-        // (FACOLTATIVO) Se vuoi ricevere callback quando un item viene preso dalla UI:
-        // Assicurati che ChestInventoryManager esponga un evento; vedi nota più sotto.
         if (chestInventoryManager != null)
             chestInventoryManager.onItemTaken += OnItemTakenFromChest;
     }
@@ -150,12 +151,20 @@ public class ChestController : MonoBehaviour
     private void OpenChest()
     {
         if (isChestOpen) return;
-        // Se già completato e oneShot, ignora
+        // Se giÃ  completato e oneShot, ignora
         if (oneShot && SaveManager.Instance != null && SaveManager.Instance.IsWorldEventCompleted(uniqueEventId))
             return;
 
         isChestOpen = true;
         PlaySound(openSound);
+
+        // Store current cursor state before changing it
+        previousCursorLockMode = Cursor.lockState;
+        previousCursorVisible = Cursor.visible;
+
+        // Enable cursor for chest interaction
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         if (chestInventoryUI != null)
         {
@@ -168,6 +177,7 @@ public class ChestController : MonoBehaviour
         }
 
         TriggerChestAnimation(true);
+        DisablePlayerControls();
     }
 
     private void CloseChest()
@@ -175,6 +185,10 @@ public class ChestController : MonoBehaviour
         if (!isChestOpen) return;
         isChestOpen = false;
         PlaySound(closeSound);
+
+        // Restore previous cursor state
+        Cursor.lockState = previousCursorLockMode;
+        Cursor.visible = previousCursorVisible;
 
         if (chestInventoryUI != null)
         {
@@ -184,7 +198,10 @@ public class ChestController : MonoBehaviour
 
         TriggerChestAnimation(false);
 
-        // Se il baule è vuoto e oneShot, marca evento come completato
+        // Re-enable player controls
+        EnablePlayerControls();
+
+        // Se il baule Ã¨ vuoto e oneShot, marca evento come completato
         if (oneShot && chestInventoryManager != null && chestInventoryManager.GetChestItems().Count == 0)
         {
             SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
@@ -193,8 +210,62 @@ public class ChestController : MonoBehaviour
             var col = GetComponent<Collider>();
             if (col) col.enabled = false;
 
-            // Mantieni il baule “aperto” come feedback, se vuoi
+            // Mantieni il baule "aperto" come feedback, se vuoi
             SetOpenedVisuals(true);
+        }
+    }
+
+    private void DisablePlayerControls()
+    {
+        // Disable player movement
+        var playerMovement = playerObject?.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        // For First Person Controller camera
+        var fpsCameraController = playerObject?.GetComponentInChildren<MonoBehaviour>();
+        if (fpsCameraController != null)
+        {
+            // Check for common camera script names and disable them
+            var cameraScripts = playerObject.GetComponentsInChildren<MonoBehaviour>();
+            foreach (var script in cameraScripts)
+            {
+                if (script.GetType().Name.Contains("Camera") || 
+                    script.GetType().Name.Contains("Look") || 
+                    script.GetType().Name.Contains("Mouse"))
+                {
+                    script.enabled = false;
+                }
+            }
+        }
+    }
+
+    private void EnablePlayerControls()
+    {
+        // Re-enable player movement
+        var playerMovement = playerObject?.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
+
+        // Re-enable camera controls
+        var fpsCameraController = playerObject?.GetComponentInChildren<MonoBehaviour>();
+        if (fpsCameraController != null)
+        {
+            // Re-enable common camera script names
+            var cameraScripts = playerObject.GetComponentsInChildren<MonoBehaviour>();
+            foreach (var script in cameraScripts)
+            {
+                if (script.GetType().Name.Contains("Camera") || 
+                    script.GetType().Name.Contains("Look") || 
+                    script.GetType().Name.Contains("Mouse"))
+                {
+                    script.enabled = true;
+                }
+            }
         }
     }
 
@@ -210,10 +281,7 @@ public class ChestController : MonoBehaviour
     // Callback quando un item viene preso dalla UI del baule
     private void OnItemTakenFromChest(Item item)
     {
-        // Se vuoi completare l’evento al primo prelievo:
-        // SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
-
-        // Oppure: completa quando il baule è completamente svuotato:
+        // Oppure: completa quando il baule Ã¨ completamente svuotato:
         if (oneShot && chestInventoryManager != null && chestInventoryManager.GetChestItems().Count == 0)
             SaveManager.Instance?.RegisterWorldEventCompleted(uniqueEventId);
     }

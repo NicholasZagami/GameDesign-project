@@ -33,26 +33,10 @@ public class EnemyAttack : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    private bool hasAlreadyHit = false; // Aggiungi questo sopra
-
     public void ApplyAttackDamage()
     {
-        //if (hasAlreadyHit)
-        //    return;
-
-        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-         //Assicurati che l'attacco venga eseguito SOLO durante un'animazione con tag "Attack"
-        //if (!stateInfo.IsTag("Attack"))
-        //{
-        //    Debug.LogWarning($"[BLOCCATO] ApplyAttackDamage chiamato mentre non in stato Attack → stato attuale: {stateInfo.fullPathHash}");
-        //    return;
-        //}
-
-        hasAlreadyHit = true;
 
         Vector3 origin = transform.position + Vector3.up * 1.2f;
-        float radius = 1f;
         float maxAttackAngle = 60f;
 
         Collider[] hits = Physics.OverlapSphere(origin, attackRange, playerLayer);
@@ -90,10 +74,5 @@ public class EnemyAttack : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void ResetHitFlag()
-    {
-        hasAlreadyHit = false;
     }
 }
