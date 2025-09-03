@@ -12895,7 +12895,6 @@ GameObject:
   m_Component:
   - component: {fileID: 353063528}
   - component: {fileID: 353063530}
-  - component: {fileID: 353063529}
   - component: {fileID: 353063531}
   m_Layer: 5
   m_Name: HealthBar
@@ -12925,30 +12924,6 @@ RectTransform:
   m_AnchoredPosition: {x: -192.75366, y: 237.62982}
   m_SizeDelta: {x: 552.5525, y: 72.0942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &353063529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353063527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad1a21fb15168a4790e7c41400df689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 353063530}
-  hasUI: 1
-  maxHealth: 100
-  health: 0
-  isBoss: 0
-  dissolveMaterial: {fileID: 0}
-  dissolveSpeed: 1
-  useDissolveEffect: 1
-  gameOverPanel: {fileID: 0}
-  combatMusic: {fileID: 0}
-  backgroundMusic: {fileID: 0}
-  lootEntrances: []
 --- !u!114 &353063530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13014,6 +12989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1352580270}
   inventorySlider: {fileID: 353063530}
+  inventoryPanel: {fileID: 0}
+  enforceWhileVisible: 0
 --- !u!1 &354866010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6103457581531654869, guid: 6cd864a52d684284a92e4d38cbb1d681, type: 3}
