@@ -1980,8 +1980,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7399483, y: 0.6928241, z: 1.3544433}
-  m_Center: {x: 0.018968582, y: 0.346412, z: 0.170483}
+  m_Size: {x: 1.6192651, y: 0.69282407, z: 1.1077801}
+  m_Center: {x: 0.07931006, y: 0.34641203, z: 0.047151405}
 --- !u!64 &152272922
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15248,7 +15248,11 @@ PrefabInstance:
     - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
       propertyPath: interactionPrompt
       value: 
-      objectReference: {fileID: 797376837}
+      objectReference: {fileID: 1969541704}
+    - target: {fileID: 8357048152877540552, guid: f920c9f02fcac544ba6ec6e185f8ce6f, type: 3}
+      propertyPath: interactionDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -21040,7 +21044,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Premi [E] per aprire
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aca7c653f293d21478c9743cc459ea51, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -21106,7 +21110,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1750684071
@@ -23490,7 +23494,7 @@ MonoBehaviour:
     affronterai nemici oscuri e scoprirai  tesori nascosti  tra  le rovine del passato.\n\nInizia
     il tuo viaggio imparando a muoverti:\n* Usa W A S D per esplorare l\u2019ambiente.\n*
     Muovi il mouse per guardarti attorno.\n* Premi V per passare alla prima persona
-    o per tornare in terza persona\n\n"
+    o per tornare in terza persona\n* Premi ESC per aprire il menu\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aca7c653f293d21478c9743cc459ea51, type: 2}
   m_sharedMaterial: {fileID: 5588216260674261637, guid: aca7c653f293d21478c9743cc459ea51, type: 2}
